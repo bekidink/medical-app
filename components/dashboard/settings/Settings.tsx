@@ -64,15 +64,14 @@ export default function Settings() {
   <TabsList>
     {
         tabs.map((item,i)=>(
-            <TabsTrigger value={item.value}>{item.label}</TabsTrigger>
+            <TabsTrigger value={item.value} key={i}>{item.label}</TabsTrigger>
         ))
     }
    
   </TabsList>
   {tabs.map((item,i)=>{
-    const Component=item.component;
     return (
-        <TabsContent className="w-full" value={`${item.value}`}> 
+        <TabsContent className="w-full" value={`${item.value}`} key={i}> 
        {item.component}
       </TabsContent>  
     )
