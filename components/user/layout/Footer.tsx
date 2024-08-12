@@ -142,7 +142,7 @@ export default function Footer ()  {
                         {socialLinks.map((item,i)=>{
                             const Icon=item.icon
                             return(
-                                <li className="w-10 h-10 border rounded-full flex items-center justify-center">
+                                <li key={i} className="w-10 h-10 border rounded-full flex items-center justify-center">
                                 <a href={item.herf} className={`${item.color}`}>
                                     <Icon className="w-6 h-6"/>
                                 </a>
