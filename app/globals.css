@@ -68,3 +68,9 @@
     min-height: 100vh;
   }
 }
+.linear-bg{
+  background-image: url("/doctor.jfif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
