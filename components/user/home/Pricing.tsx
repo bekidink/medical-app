@@ -1,5 +1,7 @@
 import { Check, HelpCircle } from "lucide-react";
 import { CustomTooltip } from "../shared/CustomToolTip";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Pricing ()  {
 
@@ -10,6 +12,7 @@ export default function Pricing ()  {
             price: 0,
             fee:5,
             isMostPop: false,
+            path:'/register?role=DOCTOR&plan=free',
             features: [
                 "Curabitur faucibus",
                 "massa ut pretium maximus",
@@ -27,6 +30,7 @@ export default function Pricing ()  {
             price: 35,
             fee:5,
             isMostPop: true,
+            path:'/register?role=DOCTOR&plan=professional',
             features: [
                 "Curabitur faucibus",
                 "massa ut pretium maximus",
@@ -43,6 +47,7 @@ export default function Pricing ()  {
             price: 60,
             fee:5,
             isMostPop: false,
+            path:'/register?role=DOCTOR&plan=enterprise',
             features: [
                 "Curabitur faucibus",
                 "massa ut pretium maximus",
@@ -59,11 +64,11 @@ export default function Pricing ()  {
         <section className='py-14'>
             <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8">
                 <div className='relative max-w-xl mx-auto sm:text-center'>
-                    <h3 className='text-gray-800 text-3xl font-semibold sm:text-4xl'>
+                    <h3 className='scroll-m-20  tracking-tight text-gray-800 dark:text-gray-200 text-3xl font-semibold sm:text-4xl'>
                         Pricing for all sizes
                     </h3>
                     <div className='mt-3 max-w-xl'>
-                        <p>
+                        <p className="leading-7 [&:not(:first-child)]:mt-6">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur consequat nunc.
                         </p>
                     </div>
@@ -84,23 +89,26 @@ export default function Pricing ()  {
                                     <div className='text-gray-800 text-3xl font-semibold'>
                                         ${item.price} <span className="text-xl text-gray-600 font-normal">/mo</span>
                                     </div>
-                                    <p>
+                                    <p className="leading-7 [&:not(:first-child)]:mt-6">
                                         {item.desc}
                                     </p>
                                     <div className="flex">
-                                        <p className="text-xs">+5% transaction fee</p>
+                                        <p className="text-xs leading-7 [&:not(:first-child)]:mt-6">+5% transaction fee</p>
                                         {/* <button>
                                             <HelpCircle className="w-4 h-4 ms-2"/>
                                         </button> */}
                                         <CustomTooltip title="" className="w-4 h-4 ms-2"  hover="Paypal/Stripe will charge their regular transaction Fee" Icon={HelpCircle}/>
                                     </div>
-                                    <button className='px-3 py-3 rounded-lg w-full font-semibold text-sm duration-150 text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700'>
+                                    <Button asChild>
+                                    <Link href={item.path} className='px-3 py-3 block text-center  rounded-lg w-full font-semibold text-sm duration-150 text-white dark:bg-gray-900 bg-indigo-600 dark:bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700'>
                                         Get Started
-                                    </button>
+                                    </Link>
+                                    </Button>
+                                    
                                 </div>
                                 <ul className='p-8 space-y-3'>
-                                    <li className="pb-2 text-gray-800 font-medium">
-                                        <p>Features</p>
+                                    <li className="pb-2 text-gray-800 dark:text-gray-200 font-medium">
+                                        <p className="leading-7 [&:not(:first-child)]:mt-6 ">Features</p>
                                     </li>
                                     {
                                         item.features.map((featureItem, idx) => (

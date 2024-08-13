@@ -71,11 +71,11 @@ export default function page() {
         }
       ];
   return (
-    <div className='min-h-screen'>
+    <div className='min-h-screen bg-blue-50 dark:bg-slate-900'>
         <section className='py-12 px-4'>
             <div className="max-w-6xl gap-4 mx-auto grid grid-cols-1 md:grid-cols-2">
                <div className="">
-                <h2 className='md:text-[3rem] text-[1.5rem] leading-[3.5rem]'>
+                <h2 className='scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 md:text-[3rem] text-[1.5rem] leading-[3.5rem]'>
                     Build a thriving 
                     <span className='text-blue-600 font-semibold'>
                     direct-pay
@@ -85,7 +85,7 @@ export default function page() {
                <p>
                EthioMedic is a full-service platform to help you build and run your practice and care for patients for virtual care,in-person care,or both.
                </p>
-               <CustomButton title='List your Service' href='#' className='bg-blue-600 hover:bg-blue-800'/>
+               <CustomButton title='List your Service' href='#' className='bg-blue-600 dark:bg-slate-200 hover:bg-blue-800'/>
               
               <p className="py-6">
               {features.map((item,i)=>{
@@ -130,14 +130,14 @@ export default function page() {
                 {
                     cards.map((item,i)=>{
                         return (
-                            <div key={i} className="bg-blue-900 p-4 rounded-lg shadow-2xl">
-                    <h3 className="text-2xl font-semibold text-white">
+                            <div key={i} className="bg-blue-900 dark:bg-slate-700 p-4 rounded-lg shadow-2xl">
+                    <h3 className="scroll-m-20  tracking-tight text-2xl font-semibold text-white">
                       {item.title}
                     </h3>
                     <p className="text-gray-200 text-xs">
                        {item.description}
                     </p>
-                    <CustomButton title={item.linkTitle} href={item.link} className='bg-blue-600 hover:bg-blue-800 mr-2'/>
+                    <CustomButton title={item.linkTitle} href={item.link} className='bg-blue-600 dark:bg-slate-200 hover:bg-blue-800 mr-2'/>
                 </div>
                         )
                     })

@@ -8,6 +8,7 @@ import {
   DollarSign,
   LogIn,
   Menu,
+  Microscope,
   Package2,
   Search,
   Users,
@@ -40,8 +41,10 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useState } from "react"
 import ModeToggle from "../ModeToggle"
 import { Session } from "next-auth"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { signOut, useSession } from "next-auth/react"
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 // const products = [
 //   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
 //   { name: 'Engagement', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
@@ -59,50 +62,75 @@ export default function Navbar() {
   const {data:session,status}=useSession()
   const user=session?.user;
   const router=useRouter()
+  const pathname=usePathname()
   async function handleLogout(){
     await signOut()
     router.push('/login')
   }
+  const navlinks=[
+    {
+      name:"Home",
+      path:'/',
+
+    },
+    {
+      name:"Find",
+      path:'/find-doctor',
+
+    },
+    {
+      name:"Telehealth ",
+      path:'/tele-health',
+
+    },
+    {
+      name:"Inperson ",
+      path:'/inperson',
+
+    },
+    
+    {
+      name:"About",
+      path:'/about',
+      
+    },
+    {
+      name:"Services",
+      path:'/services',
+      
+    },
+    
+    
+
+  ]
   return (
     <header className="sticky z-50 top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-        <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-          <Link
+         <Link
             href="#"
             className="flex items-center gap-2 text-lg font-semibold md:text-base"
           >
-            <Package2 className="h-6 w-6" />
-            <span className="sr-only">Acme Inc</span>
+            <Microscope className="h-6 w-6" />
+            <span className="hidden font-bold sm:inline-block">
+              {siteConfig.name}
+            </span>
           </Link>
-          <Link
-            href="#"
-            className="text-foreground transition-colors hover:text-foreground"
-          >
-            Dashboard
-          </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Orders
-          </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Products
-          </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Customers
-          </Link>
-          <Link
-            href="#"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Analytics
-          </Link>
+        <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+        {
+          navlinks.map((item,i)=>{
+            return (
+              <Link
+              key={i}
+              href={item.path}
+              className={cn(" transition-colors hover:text-foreground/80",pathname== item.path ?" text-foreground":"text-foreground/60")}
+            >
+              {item.name}
+            </Link>
+            )
+          })
+        }
+         
+         
+         
         </nav>
         <Sheet>
           <SheetTrigger asChild>
@@ -116,41 +144,32 @@ export default function Navbar() {
             </Button>
           </SheetTrigger>
           <SheetContent side="left">
-            <nav className="grid gap-6 text-lg font-medium">
-              <Link
+          <Link
                 href="#"
                 className="flex items-center gap-2 text-lg font-semibold"
               >
-                <Package2 className="h-6 w-6" />
-                <span className="sr-only">Acme Inc</span>
+                <Microscope className="h-6 w-6" />
+            <span className="hidden font-bold sm:inline-block">
+              {siteConfig.name}
+            </span>
               </Link>
-              <Link href="#" className="hover:text-foreground">
-                Dashboard
-              </Link>
+            <nav className="grid gap-6 text-lg font-medium">
+            {
+          navlinks.map((item,i)=>{
+            return (
               <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Orders
-              </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Products
-              </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Customers
-              </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Analytics
-              </Link>
+              key={i}
+              href={item.path}
+              className={cn("flex items-center gap-2 text-lg font-semibold transition-colors hover:text-foreground/80",pathname== item.path ?" text-foreground":"text-foreground/60")}
+            >
+              {item.name}
+            </Link>
+            )
+          })
+        }
+
+              
+              
             </nav>
           </SheetContent>
         </Sheet>

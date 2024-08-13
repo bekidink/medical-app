@@ -1,5 +1,5 @@
 "use client"
-import { Badge, BarChart, Bell, Folder, Grid2X2, Home, LineChart, Package, Package2, Plus, Settings, ShoppingCart, Users } from "lucide-react";
+import { Badge, BarChart, Bell, Folder, Globe, Grid2X2, Home, LineChart, Package, Package2, Plus, Settings, ShoppingCart, Users } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
@@ -40,9 +40,9 @@ const sideBarLinks=[
     icon:Settings
   },
   {
-    name:"Logout",
-    path:"/dashboard/logout",
-    icon:Bell
+    name:"Online",
+    path:"/",
+    icon:Globe
   },
 
 ]

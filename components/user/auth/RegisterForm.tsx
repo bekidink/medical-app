@@ -8,7 +8,18 @@ import SubmitButton from '../shared/Forms/SubmitButton'
 import { createUser } from '@/Actions/users'
 import { UserRole } from '@prisma/client'
 import toast from 'react-hot-toast'
-
+import Link from "next/link"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 export default function RegisterForm({role="USER"}:{role?:UserRole}) {
   const[isloading,setLoading]=useState(false)
   const {register,handleSubmit,reset,formState:{errors}}=useForm<RegisterInputProps>()
@@ -31,59 +42,72 @@ export default function RegisterForm({role="USER"}:{role?:UserRole}) {
 }
   }
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            alt="Your Company"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            className="mx-auto h-10 w-auto"
-          />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign up to your account
-          </h2>
-        </div>
-
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleSubmit(onSubmit)} action="#" method="POST" className="space-y-6">
-          <TextInput label='User Name' register={register} name='name' errors={errors}/>
-            
-            <TextInput label='Email Address' register={register} name='email' errors={errors} type='email'/>
-            <TextInput label='Phone Number' register={register} name='phone' errors={errors} type='tel'/>
-            <div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                  Password
-                </label>
-                <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
-                </div>
-              </div>
-              <div className="mt-2">
-                <input
-                {...register("password",{required:true})}
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  autoComplete="current-password"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-                 {errors.password && <span className='text-red-600 text-sm'>This field is required</span>}
-              </div>
+    <div className="w-full lg:grid lg:min-h-[500px] lg:grid-cols-2 xl:min-h-[700px]">
+      <Card className="mx-auto max-w-sm max-h-[600px]">
+      <CardHeader>
+        <CardTitle className="text-xl">Sign Up</CardTitle>
+        <CardDescription>
+          Enter your information to create an account
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="grid gap-4">
+        <form onSubmit={handleSubmit(onSubmit)}  className="space-y-6">
+            <div className="grid gap-2">
+              <Label htmlFor="first-name">Full Name</Label>
+              <Input id="first-name" placeholder="Max"   {...register("name",{required:true})}  />
+              {errors.name && <span className='text-red-600 text-sm'>Name is required</span>}
             </div>
-
-            <SubmitButton title='Sign Up' loadingTitle='Creating please wait...' isLoading={isloading}  />
+            {/* <div className="grid gap-2">
+              <Label htmlFor="last-name">Last name</Label>
+              <Input id="last-name" placeholder="Robinson" required />
+            </div> */}
+          
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="m@example.com"
+              {...register("email",{required:true})}
+            />
+             {errors.email && <span className='text-red-600 text-sm'>Email is required</span>}
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="password">Password</Label>
+            <Input id="password" type="password"  {...register("password",{required:true})} />
+            {errors.password && <span className='text-red-600 text-sm'>Password is required</span>}
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="phone">Phone Number</Label>
+            <Input id="phone" type="tel"  {...register("phone",{required:true})} />
+            {errors.password && <span className='text-red-600 text-sm'>Password is required</span>}
+          </div>
+          <Button type="submit" className="w-full">
+            Create an account
+          </Button>
           </form>
-
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Already have Account ?{' '}
-            <a href="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-              Sign In
-            </a>
-          </p>
+          <Button variant="outline" className="w-full">
+            Sign up with GitHub
+          </Button>
         </div>
+        <div className="mt-4 text-center text-sm">
+          Already have an account?{" "}
+          <Link href="/login" className="underline">
+            Sign in
+          </Link>
+        </div>
+      </CardContent>
+    </Card>
+      <div className="hidden bg-muted lg:block">
+        <Image
+          src="/doctor.jfif"
+          alt="Image"
+          width="1420"
+          height="780"
+          className=" object-cover dark:brightness-[0.2] dark:grayscale"
+        />
       </div>
+    </div>
   )
 }
