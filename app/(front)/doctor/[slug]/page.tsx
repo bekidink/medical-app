@@ -6,8 +6,8 @@ import React from 'react'
 
 export default function page() {
   return (
-    <div className='bg-blue-50 py-50 min-h-screen'>
-        <div className="bg-white mx-auto shadow-2xl max-w-4xl border border-gray-200 rounded-md">
+    <div className='bg-blue-50 dark:bg-slate-800 py-50 min-h-screen'>
+        <div className="bg-white dark:bg-slate-950 mx-auto shadow-2xl max-w-4xl border border-gray-200 dark:border-slate-600 rounded-md">
   <div className="py-6 px-8">
     <div className="flex items-center justify-between">
     <div className="">

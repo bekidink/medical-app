@@ -13,7 +13,7 @@ export default function Home() {
 <Brands/>
 <Service/>
 <DoctorsList title="Telehealth visit" isInPerson={false}/>
-<DoctorsList className="'bg-white px-10 py-8 lg:py-24 '" title="In-person Doctor visit" isInPerson={true}/>
+<DoctorsList className="bg-white px-10 py-8 lg:py-24 dark:bg-slate-950" title="In-person Doctor visit" isInPerson={true}/>
     </section>
   );
 }

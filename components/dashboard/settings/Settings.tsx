@@ -14,6 +14,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 
 import { Input } from "@/components/ui/input"
 import GeneralSettings from "./GeneralSettings"
+import { PlusCircle } from "lucide-react"
 
 export default function Settings() {
     const tabs=[
@@ -60,7 +61,8 @@ export default function Settings() {
         
 
           <div className="">
-          <Tabs defaultValue="general" className="w-[400px]">
+          <Tabs defaultValue="general" >
+          <div className="flex items-center justify-between">
   <TabsList>
     {
         tabs.map((item,i)=>(
@@ -69,6 +71,17 @@ export default function Settings() {
     }
    
   </TabsList>
+  <div className="ml-auto flex items-center gap-2">
+                
+                
+                <Button size="sm" className="h-8 gap-1">
+                  <PlusCircle className="h-3.5 w-3.5" />
+                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                    Add Product
+                  </span>
+                </Button>
+              </div>
+              </div>
   {tabs.map((item,i)=>{
     return (
         <TabsContent className="w-full" value={`${item.value}`} key={i}> 

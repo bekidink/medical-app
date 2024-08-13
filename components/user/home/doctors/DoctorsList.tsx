@@ -3,10 +3,11 @@ import SectionHeading from '../../shared/SectionHeading'
 import Toggle from '../../shared/Toggle'
 import Link from 'next/link'
 import DoctorCard from './DoctorCard'
-import { Map } from 'lucide-react'
+import { ArrowUpRight, Map } from 'lucide-react'
 import DoctorsCarousel from './DoctorsCarousel'
+import { Button } from '@/components/ui/button'
 
-export default function DoctorsList({title,isInPerson=false,className='bg-pink-100 px-10 py-8 lg:py-24 '}:{title:string,isInPerson:boolean,className?:string}) {
+export default function DoctorsList({title,isInPerson=false,className='bg-pink-100 px-10 py-8 lg:py-24 dark:bg-slate-900'}:{title:string,isInPerson:boolean,className?:string}) {
  const doctros=[
     {
         name:"james,john",
@@ -53,8 +54,12 @@ export default function DoctorsList({title,isInPerson=false,className='bg-pink-1
        ):(
         <Toggle title='2 hours'/>
        )}
-      
-        <Link className='py-3 px-6 border border-blue-600 bg-white' href="">See All</Link>
+      <Button asChild>
+      <Link href="">See All
+      <ArrowUpRight className='h-4 w-4 ms-2'/>
+      </Link>
+      </Button>
+        
 
       </div>
       <div className="py-6">
