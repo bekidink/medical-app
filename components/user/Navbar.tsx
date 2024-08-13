@@ -6,6 +6,7 @@ import {
   CircleUser,
   CreditCard,
   DollarSign,
+  LogIn,
   Menu,
   Package2,
   Search,
@@ -38,6 +39,9 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 import { useState } from "react"
 import ModeToggle from "../ModeToggle"
+import { Session } from "next-auth"
+import { useRouter } from "next/navigation"
+import { signOut, useSession } from "next-auth/react"
 // const products = [
 //   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
 //   { name: 'Engagement', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
@@ -52,7 +56,13 @@ import ModeToggle from "../ModeToggle"
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
+  const {data:session,status}=useSession()
+  const user=session?.user;
+  const router=useRouter()
+  async function handleLogout(){
+    await signOut()
+    router.push('/login')
+  }
   return (
     <header className="sticky z-50 top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
         <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
@@ -156,22 +166,41 @@ export default function Navbar() {
             </div>
           </form>
           <ModeToggle/>
-          <DropdownMenu>
+          {session && user && user?.email ? (
+            <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
+              <Avatar className="cursor-pointer">
+                {user?.image?(
+                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn"/>
+                ):(
+                  <AvatarFallback>BD</AvatarFallback>
+                )}
+              </Avatar>
+              
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel className="text-center font-light text-sm text-slate-500">
+                {user?.email}
+
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
+              <DropdownMenuItem >
+                <Link href={'/dashboard'}>Dashboard</Link>
+              </DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          ):(
+           <Button asChild>
+            <Link href={'/login'}>
+            <LogIn className="mr-2 h-4 w-4"/>Login
+            </Link>
+
+           </Button>
+          )}
+          
         </div>
       </header>
   )
