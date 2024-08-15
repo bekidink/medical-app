@@ -63,7 +63,7 @@ console.log(currentStep)
 {
     steps.map((item,i)=>{
         return (
-            <Link href={`/onboarding/${id}?page=${item.page}`} className={cn('block py-3 px-4 bg-slate-300 text-slate-100 shadow-inner',item.page===page?" bg-teal-900 text-xs shadow-inner uppercase py-3 px-4":"")}>{item.title}
+            <Link key={i} href={`/onboarding/${id}?page=${item.page}`} className={cn('block py-3 px-4 bg-slate-300 text-slate-100 shadow-inner',item.page===page?" bg-teal-900 text-xs shadow-inner uppercase py-3 px-4":"")}>{item.title}
        </Link> 
         )
     })

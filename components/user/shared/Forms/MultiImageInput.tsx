@@ -36,7 +36,7 @@ export default function MultiImageInput({
        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {imageUrls.map((imageUrl,i)=>{
           return(
-            <div className="relative">
+            <div className="relative" key={i}>
               <button onClick={()=>handleImageRemove(i)} className="absolute -top-4 -right-2 bg-slate-100 text-slate-900 rounded-full">
                 <XCircle/>
               </button>
