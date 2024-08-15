@@ -3,7 +3,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "@/utils/Providers";
-
+import {NextSSRPlugin} from "@uploadthing/react/next-ssr-plugin"
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "./api/uploadthing/core";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,8 +23,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
-        
-            {children}
+        <NextSSRPlugin
+          
+          routerConfig={extractRouterConfig(ourFileRouter)}
+        />
+           <EdgeStoreProvider>{children}</EdgeStoreProvider>
         
         </Providers>
         </body>

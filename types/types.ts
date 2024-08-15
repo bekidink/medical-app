@@ -27,3 +27,20 @@ export type ToolTip={
     Icon:any;
     className:string;
 }
+export type BioDataFormProps={
+    firstName:string;
+    lastName:string;
+    middleName?:string;
+    dob?:Date;
+    gender:string;
+    profilePicture?:string;
+    bio:string;
+    medicalLicense:string;
+    medicalLicenseExpiry?:Date;
+    page:string;
+}
+export type StepFormProps={
+    title:string;
+    page:string;
+    description:string;
+}

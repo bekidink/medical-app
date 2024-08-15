@@ -36,9 +36,11 @@ const FormSchema = z.object({
 export default function VerifyTokenForm({
   userToken,
   id,
+  role
 }: {
   userToken: any;
   id: string;
+  role:any
 }) {
   const [loading, setLoading] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
@@ -61,7 +63,13 @@ export default function VerifyTokenForm({
         setLoading(false);
         // reset();
         toast.success("Account Verified");
-        router.push("/login");
+        if(role==="DOCTOR"){
+          router.push(`/onboarding/${id}`)
+          
+        }else{
+          router.push("/login");
+        }
+        // router.push("/login");
       } catch (error) {
         setLoading(false);
         console.log(error);

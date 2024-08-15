@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss"
-
-const config = {
+import { withUt } from "uploadthing/tw";
+ 
+export default withUt({
   darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -77,6 +78,10 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate"),require('@tailwindcss/forms'),require('flowbite/plugin'),],
-} satisfies Config
+});
+// const config =
+//  {
+  
+// } satisfies Config
 
-export default config
+// export default config

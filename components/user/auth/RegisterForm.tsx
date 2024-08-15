@@ -20,9 +20,11 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-export default function RegisterForm({role="USER"}:{role?:UserRole}) {
+import { useRouter } from "next/navigation";
+export default function RegisterForm({role="USER",plan=""}:{role?:undefined| UserRole,plan?:string| string[]| undefined}) {
   const[isloading,setLoading]=useState(false)
   const {register,handleSubmit,reset,formState:{errors}}=useForm<RegisterInputProps>()
+  const router = useRouter();
   async function onSubmit(data:RegisterInputProps){
     setLoading(true)
     data.role=role
@@ -32,6 +34,7 @@ export default function RegisterForm({role="USER"}:{role?:UserRole}) {
  const user= await createUser(data);
  if(user && user.status===200){
   toast.success("User Created Successfully")
+  router.push(`/verify-account/${user.data?.id}`)
  }else{
   // toast.error(${user.error})
  }
