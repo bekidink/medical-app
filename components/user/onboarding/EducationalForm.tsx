@@ -32,7 +32,7 @@ import { MultiFileInput } from '../shared/Forms/MultiFileInput'
 import { FileState } from '../shared/Forms/MultiFileDropzone'
 import MultiFileUploader, { File } from '../shared/Forms/MultiFileUploader'
 
-export default function ProfessionForm({page,title,description}:StepFormProps) {
+export default function EducationalForm({page,title,description}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
     const[imageUrl,setImageUrl]=useState("")
     const[imageUrls,setImageUrls]=useState<File[]>([])
@@ -113,7 +113,7 @@ console.log(fileStates)
         
         
        </div>
-       <ItemsInput setItems={setItems} items={items} itemTitle={'Add Other Specialties'} />
+       <ItemsInput setItems={setItems} items={items} itemTitle={' Other Specialties'} />
         <MultiFileUploader label={'Upload your Academic Documents (max 4)'} files={imageUrls} setFiles={setImageUrls} className={''} endpoint={''}/>
         {/* <MultiFileInput fileStates={fileStates} setFileStates={setFileStates}/> */}
         <div className="flex justify-center items-center">

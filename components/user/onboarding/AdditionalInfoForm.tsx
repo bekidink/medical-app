@@ -1,7 +1,7 @@
 "use client"
-import { BioDataFormProps, LoginInputProps, RegisterInputProps, StepFormProps } from '@/types/types'
+import { additionalFormProps, BioDataFormProps, LoginInputProps, RegisterInputProps, StepFormProps } from '@/types/types'
 import { Span } from 'next/dist/trace'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import TextInput from '../shared/Forms/TextInput'
 import SubmitButton from '../shared/Forms/SubmitButton'
@@ -25,30 +25,17 @@ import { DatePickerInput } from '../shared/Forms/DatePickerInput'
 import { TextAreaInput } from '../shared/Forms/TextAreaInput'
 import { ToggleGroupInput } from '../shared/Forms/ToggleGroup'
 import ImageInput from '../shared/Forms/ImageInput'
-import SelectInput from '../shared/Forms/SelectInput'
-import ItemsInput from '../shared/Forms/ItemsInput'
-import MultiImageInput from '../shared/Forms/MultiImageInput'
-import { MultiFileInput } from '../shared/Forms/MultiFileInput'
-import { FileState } from '../shared/Forms/MultiFileDropzone'
 import MultiFileUploader, { File } from '../shared/Forms/MultiFileUploader'
 
-export default function ContactInfo({page,title,description}:StepFormProps) {
+export default function AdditionalInfoForm({page,title,description}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
     const[imageUrl,setImageUrl]=useState("")
-    const[imageUrls,setImageUrls]=useState<File[]>([])
-    const [fileStates, setFileStates] = useState<FileState[]>([]);
-    const[items,setItems]=useState<string[]>([
-        
-
-    ])
-  const {register,handleSubmit,reset,formState:{errors}}=useForm<BioDataFormProps>()
+    const[docs,setDocs]=useState<File[]>([])
+  const {register,handleSubmit,reset,formState:{errors}}=useForm<additionalFormProps>()
   const router = useRouter();
   const [dob, setDob] = React.useState<Date>()
   const [expiry, setExpiry] = React.useState<Date>()
-  useEffect(()=>{
-console.log(fileStates)
-  },[fileStates])
-  async function onSubmit(data:BioDataFormProps){
+  async function onSubmit(data:additionalFormProps){
     if(!dob){
         toast.error("Please select your date of birth")
         return;
@@ -57,8 +44,7 @@ console.log(fileStates)
         toast.error("Please select your medical license expiry")
     }
     setLoading(true)
-    data.dob=dob;
-    data.medicalLicenseExpiry=expiry;
+  
     data.page=page
     // data.role=role
 
@@ -89,19 +75,10 @@ console.log(fileStates)
     <CardContent>
       <div className="grid gap-4">
       <form onSubmit={handleSubmit(onSubmit)}  className="space-y-6">
-      <TextInput name={'email'} register={register} label={'Email Address'} errors={errors} type='email'/>
-       <div className="grid grid-cols-2 gap-2">
-       <TextInput type='tel' name={'phone'} register={register} label={'Phone'} errors={errors}/>
-       {/* <TextAreaInput name='medicalLicense' label='Medical-License' placeholder='Enter Medical License' register={register} errors={errors} /> */}
-       <TextInput  name={'country'} register={register} label={'Country'} errors={errors}/>
-       <TextInput  name={'city'} register={register} label={'City'} errors={errors}/>
-       <TextInput   name={'state'} register={register} label={'State'} errors={errors}/>
-        
-        
-        
-        
-       </div>
-       
+      <TextAreaInput name='educationHistory' label='Education History' placeholder='Enter your education History' register={register} errors={errors} />
+      <TextAreaInput name='research' label='Published Work or Research' placeholder='Enter your Published Work or Research' register={register} errors={errors} />
+      <TextAreaInput name='acoomplisments' label='Any Special Acoomplisments or Awards' placeholder='Enter your Acoomplisments or Awards' register={register} errors={errors} />
+      <MultiFileUploader label={'Upload your Academic Documents (max 4)'} files={docs} setFiles={setDocs} className={''} endpoint={''}/>
         <div className="flex justify-center items-center">
         <Button  variant={'outline'} type="submit" className=" bg-slate-900 text-center text-slate-50">
           Save and Continue

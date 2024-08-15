@@ -5,8 +5,10 @@ import { useSearchParams } from 'next/navigation'
 import React from 'react'
 import BioData from './BioData'
 import ContactInfo from './ContactInfo'
-import ProfessionForm from './ProfessionForm'
 import ProfileForm from './ProfileForm'
+import EducationalForm from './EducationalForm'
+import PracticeForm from './PracticeForm'
+import AdditionalInfoForm from './AdditionalInfoForm'
 
 export default function OnboaringForm({id}:{id:string}) {
     const params=useSearchParams()
@@ -25,28 +27,25 @@ export default function OnboaringForm({id}:{id:string}) {
         {
             title:"Contact Information",
             page:"contact",
-            component:<ContactInfo/>
+            component:<ContactInfo page={page} title="Contact Information" description="Please fill in your contact Info"/>
         },
-        {
-            title:"Profession Information",
-            page:"profession",
-            component:<ProfessionForm page={page} title="Professional Info" description="Please fill in your Professional Info"/>
-        },
-        
         {
             title:"Educational Information",
             page:"educational",
-            component:<></>
+            component:<EducationalForm page={page} title="Education Info" description="Please fill in your education Info"/>
         },
         {
             title:"Practice Information",
-            page:'practice',
-            component:<></>
+            page:"practice",
+            component:<PracticeForm page={page} title="Professional Info" description="Please fill in your Professional Info"/>
         },
+        
+        
+        
         {
             title:"Additional Information",
             page:"additional",
-            component:<></>
+            component:<AdditionalInfoForm page={page} title="Additional Info" description="Please fill in your Additional Info"/>
         },
         {
             title:"Availability",
@@ -57,7 +56,7 @@ export default function OnboaringForm({id}:{id:string}) {
 const currentStep=steps.find((step)=>step.page===page)
 console.log(currentStep)
   return (
-    <div className='grid grid-cols-12 mx-auto rounded-lg shadow-inner bg-teal-950 overflow-hidden border border-slate-200'>
+    <div className='grid grid-cols-12 mx-auto rounded-lg shadow-inner bg-blue-50 overflow-hidden border border-slate-200'>
       <div className="col-span-full sm:col-span-2 divide-y-2 divide-gray-100">
       
 {
@@ -70,7 +69,7 @@ console.log(currentStep)
 }
       
       </div>
-      <div className="col-span-full sm:col-span-10 bg-slate-100">
+      <div className="col-span-full sm:col-span-10 bg-white">
      {currentStep?.component}
       </div>
     </div>

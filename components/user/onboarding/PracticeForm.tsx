@@ -1,5 +1,5 @@
 "use client"
-import { BioDataFormProps, LoginInputProps, RegisterInputProps, StepFormProps } from '@/types/types'
+import { BioDataFormProps, LoginInputProps, PracticeFormProps, RegisterInputProps, StepFormProps } from '@/types/types'
 import { Span } from 'next/dist/trace'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -31,24 +31,36 @@ import MultiImageInput from '../shared/Forms/MultiImageInput'
 import { MultiFileInput } from '../shared/Forms/MultiFileInput'
 import { FileState } from '../shared/Forms/MultiFileDropzone'
 import MultiFileUploader, { File } from '../shared/Forms/MultiFileUploader'
+import { SelectScrollable } from '../shared/Forms/ScrollableSelect'
 
-export default function ContactInfo({page,title,description}:StepFormProps) {
+export default function PracticeForm({page,title,description}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
     const[imageUrl,setImageUrl]=useState("")
     const[imageUrls,setImageUrls]=useState<File[]>([])
     const [fileStates, setFileStates] = useState<FileState[]>([]);
-    const[items,setItems]=useState<string[]>([
-        
-
+    const[services,setServices]=useState<string[]>([
     ])
-  const {register,handleSubmit,reset,formState:{errors}}=useForm<BioDataFormProps>()
+    const[langs,setLangs]=useState<string[]>([
+    ])
+  const {register,handleSubmit,reset,formState:{errors}}=useForm<PracticeFormProps>()
   const router = useRouter();
   const [dob, setDob] = React.useState<Date>()
   const [expiry, setExpiry] = React.useState<Date>()
+  const [insuranceAccepted,setInsuranceAccepted]=useState("")
+  const insuranceOptions=[
+    {
+      title:"Yes",
+      value:"yes"
+    },
+    {
+      title:"No",
+      value:"no"
+    }
+  ]
   useEffect(()=>{
 console.log(fileStates)
   },[fileStates])
-  async function onSubmit(data:BioDataFormProps){
+  async function onSubmit(data:PracticeFormProps){
     if(!dob){
         toast.error("Please select your date of birth")
         return;
@@ -57,8 +69,7 @@ console.log(fileStates)
         toast.error("Please select your medical license expiry")
     }
     setLoading(true)
-    data.dob=dob;
-    data.medicalLicenseExpiry=expiry;
+    
     data.page=page
     // data.role=role
 
@@ -78,7 +89,7 @@ console.log(fileStates)
 // }
   }
   return (
-    <div className="w-full mx-auto px-4 py-3     bg-blue-50 ">
+    <div className="w-full mx-auto px-4 py-3     bg-white ">
     <Card className="mx-auto  min-h-screen bg-white text-slate-800">
     <CardHeader className='items-center'>
       <CardTitle className="text-xl">{title}</CardTitle>
@@ -89,19 +100,26 @@ console.log(fileStates)
     <CardContent>
       <div className="grid gap-4">
       <form onSubmit={handleSubmit(onSubmit)}  className="space-y-6">
-      <TextInput name={'email'} register={register} label={'Email Address'} errors={errors} type='email'/>
+      
        <div className="grid grid-cols-2 gap-2">
-       <TextInput type='tel' name={'phone'} register={register} label={'Phone'} errors={errors}/>
+       <TextInput name={'hospitalName'} register={register} label={'Hospital Name'} errors={errors}/>
+       <TextInput name={'hospitalAddress'} register={register} label={'Hospital Address'} errors={errors}/>
+       <TextInput name={'hospitalContactNumber'} register={register} label={'Hospital ContactNumber'} errors={errors}/>
+       <TextInput name={'hospitalEmailAddress'} register={register} label={'Hospital Email Address'} errors={errors}/>
+       <TextInput name={'hospitalWebsite'} register={register} label={'Hospital Website'} errors={errors} required={false}/>
+       <TextInput name={'hospitalHoursOfOperation'} register={register} label={'Hospital Hours Of Operation'} errors={errors}/>
+       <TextInput type='tel' name={'gc-yr'} register={register} label={'Graduation Year'} errors={errors}/>
        {/* <TextAreaInput name='medicalLicense' label='Medical-License' placeholder='Enter Medical License' register={register} errors={errors} /> */}
-       <TextInput  name={'country'} register={register} label={'Country'} errors={errors}/>
-       <TextInput  name={'city'} register={register} label={'City'} errors={errors}/>
-       <TextInput   name={'state'} register={register} label={'State'} errors={errors}/>
+     
+        
         
         
         
         
        </div>
-       
+       <ItemsInput setItems={setServices} items={services} itemTitle={' Your Services'} />
+       <ItemsInput setItems={setLangs} items={langs} itemTitle={' Languages You Spoke'} />
+       <SelectScrollable title={'Insurance Acceptable'} options={insuranceOptions} selectedOption={insuranceAccepted} setSelectedOption={setInsuranceAccepted}/>
         <div className="flex justify-center items-center">
         <Button  variant={'outline'} type="submit" className=" bg-slate-900 text-center text-slate-50">
           Save and Continue

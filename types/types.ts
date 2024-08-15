@@ -44,3 +44,30 @@ export type StepFormProps={
     page:string;
     description:string;
 }
+export type EducationFormProps={
+    medicalSchool:string;
+    graduationYear:string;
+    primarySpecialization:string;
+    otherSpecialties:string[];
+    boardCertificates:string[];
+    page:string;
+}
+export type PracticeFormProps={
+    hospitalName:string;
+    hospitalAddress:string;
+    hospitalContactNumber:string;
+    hospitalEmailAddress:string;
+    hospitalWebsite?:string;
+    hospitalHoursOfOperation:string;
+    servicesOffered:string[];
+    insuranceAccepted:boolean;
+    langaugesSpoken:string[];
+    page:string;
+}
+export type additionalFormProps={
+    educationHistory:string;
+    research:string;
+    acoomplisments:string;
+    additionalDocs:string[];
+    page:string;
+}
