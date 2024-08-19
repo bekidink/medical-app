@@ -29,7 +29,7 @@ export default function page() {
             title:"Resume Application",
             description:'Pick up where you left off and complete your onboarding process.Schedule for Physical Approval',
 
-            link:"/",
+            link:"/onboarding/resume",
             linkTitle:'Continue your Application'
         },
         
@@ -130,7 +130,7 @@ export default function page() {
                 {
                     cards.map((item,i)=>{
                         return (
-                            <div key={i} className="bg-blue-900 dark:bg-slate-700 p-4 rounded-lg shadow-2xl">
+                            <Link href={item.link} key={i} className="bg-blue-900 dark:bg-slate-700 p-4 rounded-lg shadow-2xl">
                     <h3 className="scroll-m-20  tracking-tight text-2xl font-semibold text-white">
                       {item.title}
                     </h3>
@@ -138,7 +138,7 @@ export default function page() {
                        {item.description}
                     </p>
                     <CustomButton title={item.linkTitle} href={item.link} className='bg-blue-600 dark:bg-slate-200 hover:bg-blue-800 mr-2'/>
-                </div>
+                </Link>
                         )
                     })
                 }

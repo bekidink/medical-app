@@ -1,15 +1,8 @@
 "use client"
-import { BioDataFormProps, LoginInputProps, RegisterInputProps, StepFormProps } from '@/types/types'
-import { Span } from 'next/dist/trace'
+import { BioDataFormProps,  StepFormProps } from '@/types/types'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import TextInput from '../shared/Forms/TextInput'
-import SubmitButton from '../shared/Forms/SubmitButton'
-import { createUser } from '@/Actions/users'
-import { UserRole } from '@prisma/client'
-import toast from 'react-hot-toast'
-import Link from "next/link"
-import Image from "next/image"
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -22,46 +15,57 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useRouter } from "next/navigation";
 import { DatePickerInput } from '../shared/Forms/DatePickerInput'
-import { TextAreaInput } from '../shared/Forms/TextAreaInput'
 import { ToggleGroupInput } from '../shared/Forms/ToggleGroup'
-import ImageInput from '../shared/Forms/ImageInput'
+import { generateTrackingNumber } from '@/lib/utils'
+import { useOnboardingContext } from '@/context/onboarding'
 
-export default function BioData({page,title,description}:StepFormProps) {
+export default function BioData({page,title,description,userId,nextPage}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
-    const[imageUrl,setImageUrl]=useState("")
   const {register,handleSubmit,reset,formState:{errors}}=useForm<BioDataFormProps>()
   const router = useRouter();
   const [dob, setDob] = React.useState<Date>()
-  const [expiry, setExpiry] = React.useState<Date>()
-  async function onSubmit(data:BioDataFormProps){
-    if(!dob){
-        toast.error("Please select your date of birth")
-        return;
-    }
-    if(!expiry){
-        toast.error("Please select your medical license expiry")
-    }
-    setLoading(true)
-    data.dob=dob;
-    data.medicalLicenseExpiry=expiry;
-    data.page=page
-    // data.role=role
+  const trackingNumber = generateTrackingNumber();
+  const radioOptions=[
+    {
+        label:"Male",
+        value:"male"
+    },
+    {
+        label:"Female",
+        value:"female"
+    },
 
-    // try {
-  
-//  const user= await createUser(data);
-//  if(user && user.status===200){
-//   toast.success("User Created Successfully")
-//   router.push(`/verify-account/${user.data?.id}`)
-//  }else{
-//   // toast.error(${user.error})
-//  }
-//   reset()
-//   setLoading(false)
-// } catch (error) {
-//   setLoading(false)
-// }
+]
+const{trackingNumber:truckingNmber,doctorProfileId,setTrackingNumber,setDoctorProfileId}=useOnboardingContext()
+
+const onSubmit = async (data:BioDataFormProps) => {
+  // e.preventDefault();
+  const nextPage="profile"
+      data.userId=userId;
+    data.dob=dob;
+    data.page=nextPage
+    data.trackingNumber=trackingNumber
+  try {
+      const response = await fetch('/api/doctors', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        setTrackingNumber(result.data?.trackingNumber??"")
+  setDoctorProfileId(result.data?.id??"")
+          console.log('Profile created successfully:', result.data);
+          router.push(`/onboarding/${userId}?page=${nextPage}`)
+      } else {
+          console.error('Error creating profile:', result.error);
+      }
+  } catch (error) {
+      console.error('Request failed:', error);
   }
+};
   return (
     <div className="w-full mx-auto px-4 py-3     bg-blue-50 ">
     <Card className="mx-auto  min-h-screen bg-white text-slate-800">
@@ -97,8 +101,8 @@ export default function BioData({page,title,description}:StepFormProps) {
            {errors.lastName && <span className='text-red-600 text-sm'>Last Name is required</span>}
         </div>
         <div className="grid gap-2">
-          <Label htmlFor="middle-name">Middle Name</Label>
-          <Input id="middle-name" type="text"  {...register("middleName",{required:true})}
+          <Label htmlFor="middle-name">Middle Name (Optional)</Label>
+          <Input  id="middle-name" type="text"  {...register("middleName",{required:false})}
           className='bg-white'
           placeholder="Dink"
           />
@@ -114,7 +118,7 @@ export default function BioData({page,title,description}:StepFormProps) {
           <DatePickerInput date={dob} setDate={setDob} className=''/>
           {/* {errors.dob && <span className='text-red-600 text-sm'>Password is required</span>} */}
         </div>
-        <ToggleGroupInput title='Gender' name='gender' register={register} errors={errors}/>
+        <ToggleGroupInput options={radioOptions} title='Gender' name='gender' register={register} errors={errors}/>
       
         
         

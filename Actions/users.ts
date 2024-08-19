@@ -92,3 +92,33 @@ export async function updateUserById(id:string){
     }
   }
 }
+export async function retrieveByTrackingNo(id:string){
+  if(id){
+    try {
+      const user=await prismaClient.doctorProfile.findUnique({
+        where:{
+          trackingNumber:id,
+          
+        }
+      })
+      if(!user){
+        return {data:null,
+          error:null,
+          status:404
+
+     };
+      }
+      return {data:user,
+           error:null,
+           status:200
+
+      };
+    } catch (error) {
+    return  {data:null,
+        error:"something went wrong",
+        status:500
+
+   };
+    }
+  }
+}

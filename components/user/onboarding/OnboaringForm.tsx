@@ -9,35 +9,38 @@ import ProfileForm from './ProfileForm'
 import EducationalForm from './EducationalForm'
 import PracticeForm from './PracticeForm'
 import AdditionalInfoForm from './AdditionalInfoForm'
+import Availability from './Availability'
+import { useOnboardingContext } from '@/context/onboarding'
 
 export default function OnboaringForm({id}:{id:string}) {
     const params=useSearchParams()
     const page=params.get("page") ?? "bio"
+    const{trackingNumber:truckingNmber,doctorProfileId}=useOnboardingContext()
     const steps=[
         {
             title:"Bio Data",
             page:"bio",
-            component:<BioData page={page} title="Bio Data" description="Please fill in your Bio Data Info" />
+            component:<BioData nextPage='profile' formId={doctorProfileId} trackingNo={truckingNmber} userId={id} page={page} title="Bio Data" description="Please fill in your Bio Data Info" />
         },
         {
             title:"Profile Information",
             page:"profile",
-            component:<ProfileForm page={page} title="Profile Info" description="Please fill in your Profile Info"/>
+            component:<ProfileForm nextPage='contact' formId={doctorProfileId} trackingNo={truckingNmber} userId={id} page={page} title="Profile Info" description="Please fill in your Profile Info"/>
         },
         {
             title:"Contact Information",
             page:"contact",
-            component:<ContactInfo page={page} title="Contact Information" description="Please fill in your contact Info"/>
+            component:<ContactInfo nextPage='educational' userId={id} formId={doctorProfileId} trackingNo={truckingNmber} page={page} title="Contact Information" description="Please fill in your contact Info"/>
         },
         {
             title:"Educational Information",
             page:"educational",
-            component:<EducationalForm page={page} title="Education Info" description="Please fill in your education Info"/>
+            component:<EducationalForm nextPage='practice' userId={id} formId={doctorProfileId} trackingNo={truckingNmber}  page={page} title="Education Info" description="Please fill in your education Info"/>
         },
         {
             title:"Practice Information",
             page:"practice",
-            component:<PracticeForm page={page} title="Professional Info" description="Please fill in your Professional Info"/>
+            component:<PracticeForm nextPage='additional' userId={id} formId={doctorProfileId} trackingNo={truckingNmber} page={page} title="Professional Info" description="Please fill in your Professional Info"/>
         },
         
         
@@ -45,13 +48,13 @@ export default function OnboaringForm({id}:{id:string}) {
         {
             title:"Additional Information",
             page:"additional",
-            component:<AdditionalInfoForm page={page} title="Additional Info" description="Please fill in your Additional Info"/>
+            component:<AdditionalInfoForm nextPage='availability' userId={id} formId={doctorProfileId} trackingNo={truckingNmber}  page={page} title="Additional Info" description="Please fill in your Additional Info"/>
         },
-        {
-            title:"Availability",
-            page:"availability",
-            component:<></>
-        }
+        // {
+        //     title:"Availability",
+        //     page:"availability",
+        //     component:<Availability nextPage='completed' userId={id} formId={doctorProfileId} trackingNo={truckingNmber}  page={page} title="Availability Info" description="Please fill in your available time"/>
+        // }
     ]
 const currentStep=steps.find((step)=>step.page===page)
 console.log(currentStep)
@@ -69,7 +72,17 @@ console.log(currentStep)
 }
       
       </div>
-      <div className="col-span-full sm:col-span-10 bg-white">
+      <div className="col-span-full sm:col-span-10 bg-white p-4">
+        {truckingNmber && (
+            <p className="border-b border-gray-200 text-teal-600 pb-2">
+            Use this Trucking Number {" "} <span className="font-bold">
+                {truckingNmber}
+            </span> 
+            <span className="text-xs">
+            to Check Status or Resume application  
+            </span>
+        </p>
+        )}
      {currentStep?.component}
       </div>
     </div>

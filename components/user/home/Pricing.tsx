@@ -100,7 +100,7 @@ export default function Pricing ()  {
                                         <CustomTooltip title="" className="w-4 h-4 ms-2"  hover="Paypal/Stripe will charge their regular transaction Fee" Icon={HelpCircle}/>
                                     </div>
                                     <Button asChild>
-                                    <Link href={item.path} className='px-3 py-3 block text-center  rounded-lg w-full font-semibold text-sm duration-150 text-white dark:bg-gray-900 bg-indigo-600 dark:bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700'>
+                                    <Link href={item.path} className='px-3 py-3 block text-center  rounded-lg w-full font-semibold text-sm duration-150 text-white  bg-indigo-600 dark:bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700'>
                                         Get Started
                                     </Link>
                                     </Button>

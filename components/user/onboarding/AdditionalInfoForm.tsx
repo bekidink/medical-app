@@ -1,15 +1,10 @@
 "use client"
-import { additionalFormProps, BioDataFormProps, LoginInputProps, RegisterInputProps, StepFormProps } from '@/types/types'
-import { Span } from 'next/dist/trace'
+import { additionalFormProps,  StepFormProps } from '@/types/types'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import TextInput from '../shared/Forms/TextInput'
-import SubmitButton from '../shared/Forms/SubmitButton'
-import { createUser } from '@/Actions/users'
-import { UserRole } from '@prisma/client'
+
 import toast from 'react-hot-toast'
-import Link from "next/link"
-import Image from "next/image"
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -18,50 +13,54 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+
 import { useRouter } from "next/navigation";
-import { DatePickerInput } from '../shared/Forms/DatePickerInput'
 import { TextAreaInput } from '../shared/Forms/TextAreaInput'
-import { ToggleGroupInput } from '../shared/Forms/ToggleGroup'
-import ImageInput from '../shared/Forms/ImageInput'
+
 import MultiFileUploader, { File } from '../shared/Forms/MultiFileUploader'
+import { useOnboardingContext } from '@/context/onboarding'
 
 export default function AdditionalInfoForm({page,title,description}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
-    const[imageUrl,setImageUrl]=useState("")
-    const[docs,setDocs]=useState<File[]>([])
+    
+    const[docs,setDocs]=useState<File[]>([
+      {
+        "name":'profile',
+        "size":37,
+        "url":'https://utfs.io/f/f3fe5f08-f1da-4b23-a1c1-f25f74b047b2-mev895.pdf'
+
+      }
+    ])
   const {register,handleSubmit,reset,formState:{errors}}=useForm<additionalFormProps>()
   const router = useRouter();
-  const [dob, setDob] = React.useState<Date>()
-  const [expiry, setExpiry] = React.useState<Date>()
+  
+  const{trackingNumber:truckingNmber,doctorProfileId}=useOnboardingContext()
   async function onSubmit(data:additionalFormProps){
-    if(!dob){
-        toast.error("Please select your date of birth")
-        return;
-    }
-    if(!expiry){
-        toast.error("Please select your medical license expiry")
-    }
+    
     setLoading(true)
-  
+   data.id=doctorProfileId
+   data.additionalDocs=docs.map((file) => file.url);
     data.page=page
-    // data.role=role
-
-    // try {
-  
-//  const user= await createUser(data);
-//  if(user && user.status===200){
-//   toast.success("User Created Successfully")
-//   router.push(`/verify-account/${user.data?.id}`)
-//  }else{
-//   // toast.error(${user.error})
-//  }
-//   reset()
-//   setLoading(false)
-// } catch (error) {
-//   setLoading(false)
-// }
+    try {
+      const response = await fetch('/api/doctors/additional', {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        
+          console.log('Profile completed successfully:', result.data);
+          toast.success('Profile completed successfully')
+          router.push('/login')
+      } else {
+          console.error('Error creating profile:', result.error);
+      }
+  } catch (error) {
+      console.error('Request failed:', error);
+  }
   }
   return (
     <div className="w-full mx-auto px-4 py-3     bg-blue-50 ">

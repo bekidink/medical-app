@@ -24,7 +24,7 @@ export function DatePickerInput({date,setDate,className}:DatePickerInputProps) {
   return (
     <div className={cn("grid gap-2 bg-white dark:bg-white",className)}>
 <Popover >
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild className="bg-white">
         <Button
           variant={"outline"}
           className={cn(

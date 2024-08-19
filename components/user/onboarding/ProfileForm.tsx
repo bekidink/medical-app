@@ -1,15 +1,9 @@
 "use client"
-import { BioDataFormProps, LoginInputProps, RegisterInputProps, StepFormProps } from '@/types/types'
-import { Span } from 'next/dist/trace'
+import { profileFormProps,  StepFormProps } from '@/types/types'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import TextInput from '../shared/Forms/TextInput'
-import SubmitButton from '../shared/Forms/SubmitButton'
-import { createUser } from '@/Actions/users'
-import { UserRole } from '@prisma/client'
-import toast from 'react-hot-toast'
-import Link from "next/link"
-import Image from "next/image"
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -18,49 +12,51 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useRouter } from "next/navigation";
 import { DatePickerInput } from '../shared/Forms/DatePickerInput'
 import { TextAreaInput } from '../shared/Forms/TextAreaInput'
-import { ToggleGroupInput } from '../shared/Forms/ToggleGroup'
 import ImageInput from '../shared/Forms/ImageInput'
+import { useOnboardingContext } from '@/context/onboarding'
+import toast from 'react-hot-toast'
 
-export default function ProfileForm({page,title,description}:StepFormProps) {
+export default function ProfileForm({page,title,description,nextPage}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
-    const[imageUrl,setImageUrl]=useState("")
-  const {register,handleSubmit,reset,formState:{errors}}=useForm<BioDataFormProps>()
+    const[imageUrl,setImageUrl]=useState(" https://utfs.io/f/17390a85-7e51-405c-b8a4-8e63304cae94-jlodu7.jpg")
+  const {register,handleSubmit,reset,formState:{errors}}=useForm<profileFormProps>()
   const router = useRouter();
-  const [dob, setDob] = React.useState<Date>()
   const [expiry, setExpiry] = React.useState<Date>()
-  async function onSubmit(data:BioDataFormProps){
-    if(!dob){
-        toast.error("Please select your date of birth")
-        return;
-    }
-    if(!expiry){
-        toast.error("Please select your medical license expiry")
-    }
+  const{trackingNumber:truckingNmber,doctorProfileId,setTrackingNumber,setDoctorProfileId}=useOnboardingContext()
+console.log(truckingNmber,doctorProfileId)
+  async function onSubmit(data:profileFormProps){
     setLoading(true)
-    data.dob=dob;
-    data.medicalLicenseExpiry=expiry;
-    data.page=page
-    // data.role=role
-
-    // try {
   
-//  const user= await createUser(data);
-//  if(user && user.status===200){
-//   toast.success("User Created Successfully")
-//   router.push(`/verify-account/${user.data?.id}`)
-//  }else{
-//   // toast.error(${user.error})
-//  }
-//   reset()
-//   setLoading(false)
-// } catch (error) {
-//   setLoading(false)
-// }
+    
+    data.page=nextPage
+    data.profilePicture=imageUrl
+    data.medicalLicenseExpiry=expiry
+    data.id=doctorProfileId
+    try {
+      const response = await fetch('/api/doctors/profile', {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        setTrackingNumber(result.data?.trackingNumber??"")
+  setDoctorProfileId(result.data?.id??"")
+          toast.success('Profile Update Successfully')
+          router.push(`/onboarding/66bc55c24e6e9fe0c723d1b3?page=contact`)
+      } else {
+          console.error('Error creating profile:', result.error);
+          toast.error( result.error)
+      }
+  } catch (error) {
+      toast.error( 'Something went wrong')
+  }
   }
   return (
     <div className="w-full mx-auto px-4 py-3     bg-blue-50 ">

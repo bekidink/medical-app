@@ -27,7 +27,7 @@ export default function RootLayout({
           
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
-           <EdgeStoreProvider>{children}</EdgeStoreProvider>
+           {children}
         
         </Providers>
         </body>

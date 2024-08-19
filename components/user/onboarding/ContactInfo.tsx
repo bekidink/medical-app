@@ -1,5 +1,5 @@
 "use client"
-import { BioDataFormProps, LoginInputProps, RegisterInputProps, StepFormProps } from '@/types/types'
+import { BioDataFormProps, contactFormProps, LoginInputProps, RegisterInputProps, StepFormProps } from '@/types/types'
 import { Span } from 'next/dist/trace'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -31,51 +31,44 @@ import MultiImageInput from '../shared/Forms/MultiImageInput'
 import { MultiFileInput } from '../shared/Forms/MultiFileInput'
 import { FileState } from '../shared/Forms/MultiFileDropzone'
 import MultiFileUploader, { File } from '../shared/Forms/MultiFileUploader'
+import { useOnboardingContext } from '@/context/onboarding'
 
-export default function ContactInfo({page,title,description}:StepFormProps) {
+export default function ContactInfo({page,title,description,nextPage}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
-    const[imageUrl,setImageUrl]=useState("")
-    const[imageUrls,setImageUrls]=useState<File[]>([])
+    
     const [fileStates, setFileStates] = useState<FileState[]>([]);
-    const[items,setItems]=useState<string[]>([
-        
-
-    ])
-  const {register,handleSubmit,reset,formState:{errors}}=useForm<BioDataFormProps>()
+   
+  const {register,handleSubmit,reset,formState:{errors}}=useForm<contactFormProps>()
   const router = useRouter();
-  const [dob, setDob] = React.useState<Date>()
-  const [expiry, setExpiry] = React.useState<Date>()
+
   useEffect(()=>{
 console.log(fileStates)
   },[fileStates])
-  async function onSubmit(data:BioDataFormProps){
-    if(!dob){
-        toast.error("Please select your date of birth")
-        return;
-    }
-    if(!expiry){
-        toast.error("Please select your medical license expiry")
-    }
+  const{trackingNumber:truckingNmber,doctorProfileId,}=useOnboardingContext()
+  async function onSubmit(data:contactFormProps){
+    console.log(data)
     setLoading(true)
-    data.dob=dob;
-    data.medicalLicenseExpiry=expiry;
-    data.page=page
-    // data.role=role
-
-    // try {
-  
-//  const user= await createUser(data);
-//  if(user && user.status===200){
-//   toast.success("User Created Successfully")
-//   router.push(`/verify-account/${user.data?.id}`)
-//  }else{
-//   // toast.error(${user.error})
-//  }
-//   reset()
-//   setLoading(false)
-// } catch (error) {
-//   setLoading(false)
-// }
+    data.id=doctorProfileId
+    data.page=nextPage
+    try {
+      const response = await fetch('/api/doctors/contact', {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        
+          console.log('Profile created successfully:', result.data);
+          router.push(`/onboarding/66bc55c24e6e9fe0c723d1b3?page=${nextPage}`)
+      } else {
+          console.error('Error creating profile:', result.error);
+      }
+  } catch (error) {
+      console.error('Request failed:', error);
+  }
   }
   return (
     <div className="w-full mx-auto px-4 py-3     bg-blue-50 ">
