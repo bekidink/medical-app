@@ -59,7 +59,7 @@ export default function OnboaringForm({id}:{id:string}) {
 const currentStep=steps.find((step)=>step.page===page)
 console.log(currentStep)
   return (
-    <div className='grid grid-cols-12 mx-auto rounded-lg shadow-inner bg-blue-50 overflow-hidden border border-slate-200'>
+    <div className='grid grid-cols-12 mx-auto rounded-lg shadow-inner bg-white dark:bg-slate-900 overflow-hidden border border-slate-200'>
       <div className="col-span-full sm:col-span-2 divide-y-2 divide-gray-100">
       
 {
@@ -72,7 +72,7 @@ console.log(currentStep)
 }
       
       </div>
-      <div className="col-span-full sm:col-span-10 bg-white p-4">
+      <div className="col-span-full sm:col-span-10 bg-white dark:bg-slate-950 p-4">
         {truckingNmber && (
             <p className="border-b border-gray-200 text-teal-600 pb-2">
             Use this Trucking Number {" "} <span className="font-bold">

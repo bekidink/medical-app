@@ -21,19 +21,20 @@ import { FileState } from '../shared/Forms/MultiFileDropzone'
 import  { File } from '../shared/Forms/MultiFileUploader'
 import { SelectScrollable } from '../shared/Forms/ScrollableSelect'
 import { useOnboardingContext } from '@/context/onboarding'
+import toast from 'react-hot-toast'
 
 export default function PracticeForm({page,title,description,nextPage}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
-  
+    const{trackingNumber:truckingNmber,doctorProfileId,setTrackingNumber,setDoctorProfileId,practiceData,setPracticeData}=useOnboardingContext()
     const [fileStates, setFileStates] = useState<FileState[]>([]);
-    const[services,setServices]=useState<string[]>([
-    ])
-    const[langs,setLangs]=useState<string[]>([
-    ])
-  const {register,handleSubmit,reset,formState:{errors}}=useForm<PracticeFormProps>()
+    const[services,setServices]=useState<string[]>(practiceData.servicesOffered??[])
+    const[langs,setLangs]=useState<string[]>(practiceData.langaugesSpoken??[])
+  const {register,handleSubmit,reset,formState:{errors}}=useForm<PracticeFormProps>({
+    defaultValues:practiceData
+  })
   const router = useRouter();
 
-  const [insuranceAccepted,setInsuranceAccepted]=useState("")
+  const [insuranceAccepted,setInsuranceAccepted]=useState(practiceData.insuranceAccepted?'yes': 'no')
   const insuranceOptions=[
     {
       title:"Yes",
@@ -44,10 +45,8 @@ export default function PracticeForm({page,title,description,nextPage}:StepFormP
       value:"no"
     }
   ]
-  useEffect(()=>{
-console.log(fileStates)
-  },[fileStates])
-  const{trackingNumber:truckingNmber,doctorProfileId,setTrackingNumber,setDoctorProfileId}=useOnboardingContext()
+  
+  
   async function onSubmit(data:PracticeFormProps){
     
     setLoading(true)
@@ -56,7 +55,7 @@ console.log(fileStates)
     // data.role=role
    data.servicesOffered=services
    data.langaugesSpoken=langs
-   console.log(data)
+   data.insuranceAccepted=insuranceAccepted==="yes"?true:false
    try {
     const response = await fetch('/api/doctors/practice', {
         method: 'PUT',
@@ -68,18 +67,18 @@ console.log(fileStates)
     const result = await response.json();
     if (response.ok) {
       
-        console.log('Profile created successfully:', result.data);
+        toast.success('Practice created Successfully')
         router.push(`/onboarding/66bc55c24e6e9fe0c723d1b3?page=additional`)
     } else {
-        console.error('Error creating profile:', result.error);
+      toast.error(result.error)
     }
 } catch (error) {
-    console.error('Request failed:', error);
+    toast.error("Something went wrong")
 }
   }
   return (
-    <div className="w-full mx-auto px-4 py-3     bg-white ">
-    <Card className="mx-auto  min-h-screen bg-white text-slate-800">
+    <div className="w-full mx-auto px-4 py-3     ">
+    <Card className="mx-auto  min-h-screen dark:text-slate-50 text-slate-800">
     <CardHeader className='items-center'>
       <CardTitle className="text-xl">{title}</CardTitle>
       <CardDescription>

@@ -16,7 +16,7 @@ export function ToggleGroupInput({name,register,errors,title,options}:ToggleGrou
 
 <div className="">
    
-<h3 className="mb-4 font-normal text-gray-100 dark:text-gray-900">{title}</h3>
+<h3 className="mb-4 font-normal text-gray-900 dark:text-gray-100">{title}</h3>
 <ul className=" w-full text-sm font-medium text-gray-900 bg-gray-700 border border-gray-200 rounded-lg sm:flex dark:bg-white dark:border-gray-600 dark:text-white gap-2">
     
    {

@@ -21,9 +21,13 @@ import ItemsInput from '../shared/Forms/ItemsInput'
 import { FileState } from '../shared/Forms/MultiFileDropzone'
 import MultiFileUploader, { File } from '../shared/Forms/MultiFileUploader'
 import { useOnboardingContext } from '@/context/onboarding'
+import toast from 'react-hot-toast'
 
 export default function EducationalForm({page,title,description,nextPage}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
+    const{trackingNumber:truckingNmber,doctorProfileId,
+      educationData,setEducationData
+    }=useOnboardingContext()
     const[imageUrls,setImageUrls]=useState<File[]>([
       {
         "name":'profile',
@@ -35,14 +39,15 @@ export default function EducationalForm({page,title,description,nextPage}:StepFo
     const [fileStates, setFileStates] = useState<FileState[]>([
       
     ]);
-    const[items,setItems]=useState<string[]>([
-        
-
-    ])
-  const {register,handleSubmit,reset,formState:{errors}}=useForm<EducationFormProps>()
+    const[items,setItems]=useState<string[]>(educationData.otherSpecialties??[])
+  const {register,handleSubmit,reset,formState:{errors}}=useForm<EducationFormProps>(
+    {
+      defaultValues:educationData
+    }
+  )
   const router = useRouter();
   
-  const{trackingNumber:truckingNmber,doctorProfileId}=useOnboardingContext()
+  
   useEffect(()=>{
 console.log(fileStates)
   },[fileStates])
@@ -64,19 +69,19 @@ console.log(fileStates)
       });
       const result = await response.json();
       if (response.ok) {
-        
-          console.log('Profile created successfully:', result.data);
+          setEducationData(data)
+          toast.success("Education updated Successfully")
           router.push(`/onboarding/66bc55c24e6e9fe0c723d1b3?page=practice`)
       } else {
-          console.error('Error creating profile:', result.error);
+        toast.error(result.error)
       }
   } catch (error) {
-      console.error('Request failed:', error);
+    toast.error("Something went wrong")
   }
   }
   return (
-    <div className="w-full mx-auto px-4 py-3     bg-blue-50 ">
-    <Card className="mx-auto  min-h-screen bg-white text-slate-800">
+    <div className="w-full mx-auto px-4 py-3     ">
+    <Card className="mx-auto  min-h-screen dark:text-slate-50 text-slate-800">
     <CardHeader className='items-center'>
       <CardTitle className="text-xl">{title}</CardTitle>
       <CardDescription>
@@ -110,7 +115,7 @@ console.log(fileStates)
         
        </div>
        <ItemsInput setItems={setItems} items={items} itemTitle={' Other Specialties'} />
-        <MultiFileUploader label={'Upload your Academic Documents (max 4)'} files={imageUrls} setFiles={setImageUrls} className={''} endpoint={''}/>
+        <MultiFileUploader label={'Upload your Academic Documents (max 4)'} files={imageUrls} setFiles={setImageUrls} className={'text-slate-50 dark:text-slate-900'} endpoint={''}/>
         {/* <MultiFileInput fileStates={fileStates} setFileStates={setFileStates}/> */}
         <div className="flex justify-center items-center">
         <Button  variant={'outline'} type="submit" className=" bg-slate-900 text-center text-slate-50">

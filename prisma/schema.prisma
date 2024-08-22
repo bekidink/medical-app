@@ -57,19 +57,25 @@ model User {
   password      String
   accounts      Account[]
   sessions      Session[]
+  symptomIds    String[]
   doctorProfile DoctorProfile?
   isVerfied     Boolean        @default(false)
   token         Int
+  serviceId     String?        @db.ObjectId
+  service       Service?       @relation(fields: [serviceId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  sepecialityId String?        @db.ObjectId
+  sepeciality   Sepeciality?   @relation(fields: [sepecialityId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
+  Symptom       Symptom[]
 }
 
 model DoctorProfile {
-  id                       String    @id @default(auto()) @map("_id") @db.ObjectId
+  id                       String        @id @default(auto()) @map("_id") @db.ObjectId
   firstName                String
   lastName                 String
   middleName               String?
-  trackingNumber           String @unique
+  trackingNumber           String        @unique
   dob                      DateTime?
   gender                   String?
   profilePicture           String?
@@ -78,9 +84,9 @@ model DoctorProfile {
   medicalLicenseExpiry     DateTime?
   email                    String?
   phone                    String?
-  country                String?
-  city                    String?
-  state                   String?
+  country                  String?
+  city                     String?
+  state                    String?
   medicalSchool            String?
   graduationYear           String?
   primarySpecialization    String?
@@ -98,11 +104,61 @@ model DoctorProfile {
   educationHistory         String?
   research                 String?
   acoomplisments           String?
-  page           String?
-  additionalDocs           String []
-  userId                   String    @unique @db.ObjectId
-  user                     User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  
-  createdAt                DateTime  @default(now())
-  updatedAt                DateTime  @updatedAt
+  page                     String?
+  additionalDocs           String[]
+  availability             Availability?
+  userId                   String        @unique @db.ObjectId
+  user                     User          @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Availability {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  doctorId      String        @unique @db.ObjectId
+  doctorProfile DoctorProfile @relation(fields: [doctorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  monday        String[]
+  tuesDay       String[]
+  wednesday     String[]
+  thursday      String[]
+  friday        String[]
+  saturday      String[]
+  sunday        String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Service {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  users    User[]
+  title    String
+  slug     String @unique
+  imageUrl String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Sepeciality {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  doctors  User[]
+  title    String
+  slug     String @unique
+  imageUrl String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Symptom {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  slug  String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?  @db.ObjectId
 }

@@ -11,7 +11,7 @@ type TextInputProps={
 export default function TextInput({name,register,label,errors,type="text",required=true}:TextInputProps) {
   return (
     <div>
-    <label htmlFor={`${name}`} className="block text-sm font-medium leading-6 text-gray-900">
+    <label htmlFor={`${name}`} className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-50">
       {label} {!required && ("(Optional)")}
     </label>
     <div className="mt-2">

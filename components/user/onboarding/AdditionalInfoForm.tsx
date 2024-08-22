@@ -22,7 +22,7 @@ import { useOnboardingContext } from '@/context/onboarding'
 
 export default function AdditionalInfoForm({page,title,description}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
-    
+    const{trackingNumber:truckingNmber,doctorProfileId,additionalData,setAdditionalData}=useOnboardingContext()
     const[docs,setDocs]=useState<File[]>([
       {
         "name":'profile',
@@ -31,10 +31,14 @@ export default function AdditionalInfoForm({page,title,description}:StepFormProp
 
       }
     ])
-  const {register,handleSubmit,reset,formState:{errors}}=useForm<additionalFormProps>()
+  const {register,handleSubmit,reset,formState:{errors}}=useForm<additionalFormProps>(
+    {
+      defaultValues:additionalData
+    }
+  )
   const router = useRouter();
   
-  const{trackingNumber:truckingNmber,doctorProfileId}=useOnboardingContext()
+  
   async function onSubmit(data:additionalFormProps){
     
     setLoading(true)
@@ -51,20 +55,20 @@ export default function AdditionalInfoForm({page,title,description}:StepFormProp
       });
       const result = await response.json();
       if (response.ok) {
-        
-          console.log('Profile completed successfully:', result.data);
+        setAdditionalData(data)
+          
           toast.success('Profile completed successfully')
           router.push('/login')
       } else {
-          console.error('Error creating profile:', result.error);
+      toast.error("Something went wrong")
       }
   } catch (error) {
-      console.error('Request failed:', error);
+    toast.error("Something went wrong")
   }
   }
   return (
-    <div className="w-full mx-auto px-4 py-3     bg-blue-50 ">
-    <Card className="mx-auto  min-h-screen bg-white text-slate-800">
+    <div className="w-full mx-auto px-4 py-3">
+    <Card className="mx-auto  min-h-screen dark:text-slate-50  text-slate-800">
     <CardHeader className='items-center'>
       <CardTitle className="text-xl">{title}</CardTitle>
       <CardDescription>

@@ -76,18 +76,11 @@ export default function TrackingForm({
         toast.error("Something went wrong");
       }
       
-      // if(role==="DOCTOR"){
-      //   // router.push(`/onboarding/${id}`)
-        
-      // }else{
-      //   router.push("/login");
-      // }
-      // router.push("/login");
+    
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      toast.error("Something went wrong")
     }
-    console.log(data);
   }
  
   return (

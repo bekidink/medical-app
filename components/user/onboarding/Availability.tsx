@@ -74,8 +74,8 @@ export default function Availability({page,title,description}:StepFormProps) {
 // }
   }
   return (
-    <div className="w-full mx-auto px-4 py-3     bg-blue-50 ">
-    <Card className="mx-auto  min-h-screen bg-white text-slate-800">
+    <div className="w-full mx-auto px-4 py-3   ">
+    <Card className="mx-auto  min-h-screen  text-slate-800">
     <CardHeader className='items-center'>
       <CardTitle className="text-xl">{title}</CardTitle>
       <CardDescription>

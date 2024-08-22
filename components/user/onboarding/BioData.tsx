@@ -18,12 +18,18 @@ import { DatePickerInput } from '../shared/Forms/DatePickerInput'
 import { ToggleGroupInput } from '../shared/Forms/ToggleGroup'
 import { generateTrackingNumber } from '@/lib/utils'
 import { useOnboardingContext } from '@/context/onboarding'
+import toast from 'react-hot-toast'
 
 export default function BioData({page,title,description,userId,nextPage}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
-  const {register,handleSubmit,reset,formState:{errors}}=useForm<BioDataFormProps>()
+    const{trackingNumber:truckingNmber,doctorProfileId,bioData,setBioData,setTrackingNumber,setDoctorProfileId}=useOnboardingContext()
+  const {register,handleSubmit,reset,formState:{errors}}=useForm<BioDataFormProps>(
+    {
+      defaultValues:bioData
+    }
+  )
   const router = useRouter();
-  const [dob, setDob] = React.useState<Date>()
+  const [dob, setDob] = React.useState<Date>(bioData.dob)
   const trackingNumber = generateTrackingNumber();
   const radioOptions=[
     {
@@ -36,7 +42,7 @@ export default function BioData({page,title,description,userId,nextPage}:StepFor
     },
 
 ]
-const{trackingNumber:truckingNmber,doctorProfileId,setTrackingNumber,setDoctorProfileId}=useOnboardingContext()
+
 
 const onSubmit = async (data:BioDataFormProps) => {
   // e.preventDefault();
@@ -55,20 +61,21 @@ const onSubmit = async (data:BioDataFormProps) => {
       });
       const result = await response.json();
       if (response.ok) {
+        setBioData(data)
         setTrackingNumber(result.data?.trackingNumber??"")
   setDoctorProfileId(result.data?.id??"")
-          console.log('Profile created successfully:', result.data);
+          toast.success("Onboarding Created successfully")
           router.push(`/onboarding/${userId}?page=${nextPage}`)
       } else {
-          console.error('Error creating profile:', result.error);
+        toast.error(result.error)
       }
   } catch (error) {
-      console.error('Request failed:', error);
+    toast.error("Something went wrong")
   }
 };
   return (
-    <div className="w-full mx-auto px-4 py-3     bg-blue-50 ">
-    <Card className="mx-auto  min-h-screen bg-white text-slate-800">
+    <div className="w-full mx-auto px-4 py-3  ">
+    <Card className="mx-auto  min-h-screen dark:text-slate-50 text-slate-800">
     <CardHeader className='items-center'>
       <CardTitle className="text-xl">{title}</CardTitle>
       <CardDescription>

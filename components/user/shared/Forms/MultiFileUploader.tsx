@@ -32,7 +32,7 @@ export default function MultiFileUploader({
       <div className="flex justify-between items-center mb-4">
         <label
           htmlFor="course-image"
-          className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-900"
+          className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100"
         >
           {label}
         </label>

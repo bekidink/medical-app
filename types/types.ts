@@ -31,26 +31,26 @@ export type ToolTip={
 export type BioDataFormProps={
     firstName:string;
     lastName:string;
-    middleName?:string;
-    dob?:Date | undefined;
+    middleName:string;
+    dob:any;
     gender:string;
     userId:string;
     page:string;
     trackingNumber:string;
 }
 export type profileFormProps={
-    profilePicture?:string;
+    profilePicture:string;
     bio:string;
     medicalLicense:string;
-    medicalLicenseExpiry?:Date;
+    medicalLicenseExpiry:any;
     page:string; 
     id:string; 
 }
 export type contactFormProps={
-    email?:string;
+    email:string;
     phone:string;
     country:string;
-    city?:string;
+    city:string;
     state:string;
     page:string; 
     id:string; 
@@ -64,12 +64,13 @@ export type StepFormProps={
     formId:string;
     trackingNo:string
 }
+
 export type EducationFormProps={
     medicalSchool:string;
     graduationYear:string;
     primarySpecialization:string;
-    otherSpecialties:string[];
-    boardCertificates:string[];
+    otherSpecialties:any;
+    boardCertificates:any;
     id:string;
     page:string;
 }
@@ -78,19 +79,19 @@ export type PracticeFormProps={
     hospitalAddress:string;
     hospitalContactNumber:string;
     hospitalEmailAddress:string;
-    hospitalWebsite?:string;
+    hospitalWebsite:string;
     hospitalHoursOfOperation:string;
-    servicesOffered:string[];
+    servicesOffered:any;
     insuranceAccepted:boolean;
-    langaugesSpoken:string[];
+    langaugesSpoken:any;
     id:string;
     page:string;
 }
 export type additionalFormProps={
     educationHistory:string;
     research:string;
-    acoomplisments:string;
-    additionalDocs:string[];
+    accomplishments:string;
+    additionalDocs:any;
     id:string;
     page:string;
 }

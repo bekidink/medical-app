@@ -10,13 +10,12 @@ type requestTypeProps={
     reset?:any,
     redirect? :any 
 }
-export async function makePostRequest(
- { setLoading, endpoint, data, resourceName, reset, redirect }: requestTypeProps) {
+export async function makePostRequest( { setLoading, endpoint, data, resourceName, reset, redirect }: requestTypeProps) {
   try {
-    console.log(data)
+    console.log(endpoint)
     setLoading(true);
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    const response = await fetch(`http://localhost:3000/${endpoint}`, {
+    const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -69,7 +68,7 @@ export async function makePutRequest(
   try {
     setLoading(true);
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    const response = await fetch(`${baseUrl}/${endpoint}`, {
+    const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +79,7 @@ export async function makePutRequest(
       console.log(response);
       setLoading(false);
       toast.success(`${resourceName} Updated Successfully`);
-     redirect()
+    //  redirect()
       
     } else {
       setLoading(false);

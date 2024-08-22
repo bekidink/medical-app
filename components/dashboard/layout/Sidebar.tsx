@@ -1,5 +1,5 @@
 "use client"
-import { Badge, BarChart, Bell, Folder, Globe, Grid2X2, Home, LineChart, Package, Package2, Plus, Settings, ShoppingCart, Users } from "lucide-react";
+import { AlarmClock, Bell,  Grid2X2, Home,  Mail, Package2,  Settings, Users } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
@@ -7,45 +7,145 @@ import { CardHeader, CardTitle, CardDescription, CardContent } from "@/component
 import { Card } from "flowbite-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-// import LogoutButton from "./LogoutButton";
-// import { getCategories } from "@/actions/categories";
- 
-export default async function Sidebar() {
+import { UserRole } from "@prisma/client";
+
+export default async function Sidebar({role}:{role:UserRole}) {
 //   const categories = (await getCategories()) || [];
 const pathname=usePathname()
-const sideBarLinks=[
-  {
-    name:"Dashboard",
-    path:"/dashboard",
-    icon:Home
-  },
-  {
-    name:"Patients",
-    path:"/dashboard/patients",
-    icon:Folder
-  },
-  {
-    name:"Appointments",
-    path:"/dashboard/appointments",
-    icon:Grid2X2
-  },
-  {
-    name:"Reports",
-    path:"/dashboard/reports",
-    icon:LineChart
-  },
-  {
-    name:"Settings",
-    path:"/dashboard/settings",
-    icon:Settings
-  },
-  {
-    name:"Online",
-    path:"/",
-    icon:Globe
-  },
 
-]
+const roles={
+  USER:[
+    {
+      name:"Dashboard",
+      path:"/dashboard",
+      icon:Home
+    },
+    {
+      name:"My Appointments",
+      path:"/dashboard/user/appointments",
+      icon:AlarmClock
+    },
+    {
+      name:"Settings",
+      path:"/dashboard/user/settings",
+      icon:Home
+    },
+  ],
+  ADMIN:[
+    {
+      name:"Dashboard",
+      path:"/dashboard",
+      icon:Home
+    },
+    {
+      name:"Services",
+      path:"/dashboard/services",
+      icon:Users
+    },
+    {
+      name:"Specialities",
+      path:"/dashboard/specialities",
+      icon:Users
+    },
+    {
+      name:"Symptoms",
+      path:"/dashboard/symptoms",
+      icon:Users
+    },
+    {
+      name:"Doctors",
+      path:"/dashboard/doctors",
+      icon:Users
+    },
+    {
+      name:"Patients",
+      path:"/dashboard/patients",
+      icon:Users
+    },
+    {
+      name:"Appointments",
+      path:"/dashboard/appointments",
+      icon:Grid2X2
+    },
+    
+    {
+      name:"Settings",
+      path:"/dashboard/settings",
+      icon:Settings
+    },
+    
+  
+  ],
+  DOCTOR:[
+    {
+      name:"Dashboard",
+      path:"/dashboard",
+      icon:Home
+    },
+    {
+      name:"Appointments",
+      path:"/dashboard/doctor/appointments",
+      icon:AlarmClock
+    },
+    {
+      name:"Patients",
+      path:"/dashboard/doctor/patients",
+      icon:Users
+    },
+    {
+      name:"Tasks",
+      path:"/dashboard/doctor/tasks",
+      icon:Grid2X2
+    },
+    {
+      name:"Inbox",
+      path:"/dashboard/doctor/inbox",
+      icon:Mail
+    },
+    {
+      name:"Settings",
+      path:"/dashboard/doctor/settings",
+      icon:Settings
+    },
+    
+  
+  ],
+}
+// const sideBarLinks=
+// [
+//   {
+//     name:"Dashboard",
+//     path:"/dashboard",
+//     icon:Home
+//   },
+//   {
+//     name:"Patients",
+//     path:"/dashboard/patients",
+//     icon:Folder
+//   },
+//   {
+//     name:"Appointments",
+//     path:"/dashboard/appointments",
+//     icon:Grid2X2
+//   },
+//   {
+//     name:"Reports",
+//     path:"/dashboard/reports",
+//     icon:LineChart
+//   },
+//   {
+//     name:"Settings",
+//     path:"/dashboard/settings",
+//     icon:Settings
+//   },
+//   {
+//     name:"Online",
+//     path:"/",
+//     icon:Globe
+//   },
+
+// ]
+let sideBarLinks=role? roles[role] : []
 return (
     <div className="hidden border-r bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">

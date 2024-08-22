@@ -35,18 +35,16 @@ import { useOnboardingContext } from '@/context/onboarding'
 
 export default function ContactInfo({page,title,description,nextPage}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
-    
+    const{trackingNumber:truckingNmber,doctorProfileId,contactData,setContactData}=useOnboardingContext()
     const [fileStates, setFileStates] = useState<FileState[]>([]);
    
-  const {register,handleSubmit,reset,formState:{errors}}=useForm<contactFormProps>()
+  const {register,handleSubmit,reset,formState:{errors}}=useForm<contactFormProps>({
+    defaultValues:contactData
+  })
   const router = useRouter();
 
-  useEffect(()=>{
-console.log(fileStates)
-  },[fileStates])
-  const{trackingNumber:truckingNmber,doctorProfileId,}=useOnboardingContext()
+
   async function onSubmit(data:contactFormProps){
-    console.log(data)
     setLoading(true)
     data.id=doctorProfileId
     data.page=nextPage
@@ -60,19 +58,19 @@ console.log(fileStates)
       });
       const result = await response.json();
       if (response.ok) {
-        
-          console.log('Profile created successfully:', result.data);
+          setContactData(data)
+          toast.success("Contact updated Successfully")
           router.push(`/onboarding/66bc55c24e6e9fe0c723d1b3?page=${nextPage}`)
       } else {
-          console.error('Error creating profile:', result.error);
+        toast.error(result.error)
       }
   } catch (error) {
-      console.error('Request failed:', error);
+    toast.error("Something went wrong")
   }
   }
   return (
-    <div className="w-full mx-auto px-4 py-3     bg-blue-50 ">
-    <Card className="mx-auto  min-h-screen bg-white text-slate-800">
+    <div className="w-full mx-auto px-4 py-3    ">
+    <Card className="mx-auto  min-h-screen dark:text-slate-100 text-slate-800">
     <CardHeader className='items-center'>
       <CardTitle className="text-xl">{title}</CardTitle>
       <CardDescription>

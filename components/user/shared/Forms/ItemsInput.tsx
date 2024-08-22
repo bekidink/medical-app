@@ -40,7 +40,7 @@ const ItemsInput = ({ setItems, items, itemTitle }:ItemsInputProps) => {
           <button
             onClick={addItem}
             type="button"
-            className="inline-flex items-center py-2.5 px-3 ms-2 text-sm font-medium text-white bg-slate-900 rounded-lg border border-slate-800 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-600 dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"
+            className="inline-flex items-center py-2.5 px-3 ms-2 text-sm font-medium dark:text-slate-50 text-slate-900 bg-slate-900 rounded-lg border border-slate-800 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-600 dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"
           >
             <Plus className="w-4 h-4 me-2" />
             Add 
@@ -55,7 +55,7 @@ const ItemsInput = ({ setItems, items, itemTitle }:ItemsInputProps) => {
       ) : (
         <button
           onClick={() => setShowItemForm(true)}
-          className="flex items-center space-x-2 text-slate-800 dark:text-slate-800"
+          className="flex items-center space-x-2 text-slate-800 dark:text-slate-50"
         >
           <Plus />
           <span>Add {itemTitle}</span>
