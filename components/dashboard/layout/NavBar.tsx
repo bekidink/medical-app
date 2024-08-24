@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link"
 import {
   Bell,
@@ -35,14 +36,16 @@ import {
 import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import ModeToggle from "@/components/ModeToggle"
+import { useRouter } from "next/navigation"
+import { signOut } from "next-auth/react"
 
 
 export default function Navbar() {
-//   const router = useRouter();
-//   async function handleLogout() {
-//     await signOut();
-//     router.push("/");
-//   }
+  const router = useRouter();
+  async function handleLogout() {
+    await signOut();
+    router.push("/");
+  }
 const sideBarLinks=[
   {
     name:"Dashboard",
@@ -161,7 +164,7 @@ const sideBarLinks=[
         <DropdownMenuItem>Settings</DropdownMenuItem>
         <DropdownMenuItem>Support</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Logout</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   </header>

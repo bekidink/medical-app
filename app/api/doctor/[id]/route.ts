@@ -45,26 +45,28 @@ export async function GET(request:Request,{params:{id}}:{params:{id:string}}){
 //         return NextResponse.json({message:"Failed to delete Category",error},{status:500})
 //     }
 // }
-// export async function PUT(request,{params:{id}}){
-//     try {
-//         const {title,link,imageUrl,isActive}=await request.json()
-//         const existingbanner =await prismaClient.doctorProfile.findUnique({
-//             where:{
-//                 id
-//             }
-//         })
-//         if(!existingbanner){
-//             return NextResponse.json({
-//                 data:null,
-//                 message:"Not Found"
-//             },{status:404})
-//         }
-//         const updatedBanner=await prismaClient.doctorProfile.update({
-//             where:{id},
-//             data:{title,link,imageUrl,isActive}
-//         })
-//         return NextResponse.json(updatedBanner)
-//     } catch (error) {
-        
-//     }
-// }
+export async function PUT(request:Request,{params:{id}}:{params:{id:string}}){
+    try {
+        const data=await request.json()
+        console.log(data)
+        const existingbanner =await prismaClient.doctorProfile.findUnique({
+            where:{
+                id,
+            }
+        })
+        if(!existingbanner){
+            return NextResponse.json({
+                data:null,
+                message:"Not Found"
+            },{status:404})
+        }
+        const updatedBanner=await prismaClient.doctorProfile.update({
+            where:{id},
+            data:data
+        })
+        return NextResponse.json({data:updatedBanner},{status:200})
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json({message:"Failed to fetch Categories",error},{status:500})
+    }
+}

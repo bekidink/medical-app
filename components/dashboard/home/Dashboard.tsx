@@ -2,9 +2,11 @@ import Link from "next/link"
 import {
   Activity,
   ArrowUpRight,
+  Calendar,
   CircleUser,
   CreditCard,
   DollarSign,
+  LayoutGrid,
   Menu,
   Package2,
   Search,
@@ -43,14 +45,48 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { statsResponse } from "@/types/types"
+import { getData } from "@/lib/utils"
+import StatCard from "./StatCard"
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const response=await getData("admin/stats")
+  const stats:statsResponse=response.data
+  const statCards=[
+    {
+      title:" Doctors",
+      icon:Users,
+      count:stats.doctros,
+      href:"/dashboard/doctors"
+    },
+    {
+      title:"Patients",
+      icon:Users,
+      count:stats.patients,
+       href:"/dashboard/patients"
+    },
+    {
+      title:"Appointments",
+      icon:Calendar,
+      count:stats.appointments,
+       href:"/dashboard/appointments"
+    },
+    {
+      title:"Services",
+      icon:LayoutGrid,
+      count:stats.services,
+       href:"/dashboard/services"
+    }
+  ]
   return (
     <div className="flex min-h-screen w-full flex-col">
      
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-          <Card x-chunk="dashboard-01-chunk-0">
+          {statCards.map((item,i)=>{
+            return <StatCard title={item.title} count={item.count} href={item.href} icon={item.icon}/>
+          })}
+          {/* <Card x-chunk="dashboard-01-chunk-0">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Total Revenue
@@ -101,7 +137,7 @@ export default function Dashboard() {
                 +201 since last hour
               </p>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
           <Card

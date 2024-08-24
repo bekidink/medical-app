@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { UserRole } from "@prisma/client";
 
-export default async function Sidebar({role}:{role:UserRole}) {
+export default  function Sidebar({role}:{role:UserRole}) {
 //   const categories = (await getCategories()) || [];
 const pathname=usePathname()
 

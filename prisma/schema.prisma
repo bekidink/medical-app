@@ -68,6 +68,7 @@ model User {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   Symptom       Symptom[]
+  DoctorService DoctorService?
 }
 
 model DoctorProfile {
@@ -109,6 +110,20 @@ model DoctorProfile {
   availability             Availability?
   userId                   String        @unique @db.ObjectId
   user                     User          @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  serviceId                String?       @unique @db.ObjectId
+  service                  Service?      @relation(fields: [serviceId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  sepecialityId            String?       @unique @db.ObjectId
+  sepeciality              Sepeciality?  @relation(fields: [sepecialityId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  symptomIds               String[]      @db.ObjectId
+  createdAt                DateTime      @default(now())
+  updatedAt                DateTime      @updatedAt
+}
+
+model DoctorService {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  userId String @unique @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -137,19 +152,20 @@ model Service {
   slug     String @unique
   imageUrl String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  DoctorProfile DoctorProfile?
 }
 
 model Sepeciality {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  doctors  User[]
-  title    String
-  slug     String @unique
-  imageUrl String
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  doctors User[]
+  title   String
+  slug    String @unique
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  DoctorProfile DoctorProfile?
 }
 
 model Symptom {

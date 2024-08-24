@@ -95,3 +95,50 @@ export type additionalFormProps={
     id:string;
     page:string;
 }
+export type serviceFormProps={
+    title:string;
+    slug:string;
+    imageUrl:string;
+}
+export type serviceResponse={
+    id:string;
+    title:string;
+    slug:string;
+    imageUrl:string;
+}
+export type specialityFormProps={
+    title:string;
+    slug:string;
+}
+export type specialityResponse={
+    id:string;
+    title:string;
+    slug:string;
+}
+export type symptomFormProps={
+    title:string;
+    slug:string;
+}
+export type symptomResponse={
+    id:string;
+    title:string;
+    slug:string;
+}
+
+export type statsResponse={
+    doctros:string;
+    patients:string;
+    appointments:string;
+    services:string;
+}
+export type statCardProps={
+    title:string;
+    icon:any;
+    count:string;
+    href:string;
+}
+export type TabItemsProps={
+    services:serviceResponse[],
+    specialities:specialityResponse[],
+    symptoms:symptomResponse[]
+}

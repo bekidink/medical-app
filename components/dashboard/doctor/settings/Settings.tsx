@@ -19,10 +19,12 @@ import AvailabilitySettings from "./AvailabilitySettings"
 import { authOptions } from '@/lib/auth'
 import { getData } from '@/lib/utils'
 import { getServerSession } from 'next-auth'
+import ServiceSettings from "./ServiceSettings"
 export default async function Settings() {
   const session =await getServerSession(authOptions)
   const user=session?.user
   const doc=await getData(`doctor/${user?.id}`)
+  
     const tabs=[
         {
             label:"Availability Settings",
@@ -32,7 +34,7 @@ export default async function Settings() {
         {
             label:"Account Settings",
             value:"account-settings",
-            component:<></>
+            component:<ServiceSettings profileId={doc.id}/>
         },
         
     ]
@@ -43,11 +45,11 @@ export default async function Settings() {
         <div className="mx-auto grid w-full max-w-6xl gap-2">
           <h1 className="text-3xl font-semibold">Settings</h1>
         </div>
-        <div className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
+        <div className="mx-auto grid w-full min-w-5xl ">
         
 
           <div className="">
-          <Tabs defaultValue="availability" >
+          <Tabs defaultValue="availability" className="w-full">
           <div className="flex items-center justify-between">
   <TabsList>
     {

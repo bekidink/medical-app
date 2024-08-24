@@ -1,29 +1,24 @@
+import { specialityResponse } from '@/types/types';
 import Link from 'next/link'
 import React from 'react'
-
-export default function LinkCards({className}:{className:string}) {
+type LinkProps={
+  title:string;
+  slug:string;
+}
+export default function LinkCards({className,specialities}:{className:string,specialities:specialityResponse[]}) {
+  
   return (
     <div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6'>
- <Link href={''} className={`rounded-md py-3 px-6 bg-slate-800 text-slate-50 flex gap-4 ${className}`}>
-    <h2>Anxiety</h2>
+{specialities.map((item,i)=>{
+  return (
+    <Link key={i} href={''} className={`rounded-md py-3 px-6 bg-slate-800 text-slate-50 flex gap-4 ${className}`}>
+    <h2>{item.title}</h2>
     <span aria-hidden="true">&rarr;</span>
     </Link>
-    <Link href={''} className={`rounded-md py-3 px-6 bg-slate-800 text-slate-50 flex gap-4 ${className}`}>
-    <h2>Anxiety</h2>
-    <span aria-hidden="true">&rarr;</span>
-    </Link>
-    <Link href={''} className={`rounded-md py-3 px-6 bg-slate-800 text-slate-50 flex gap-4 ${className}`}>
-    <h2>Anxiety</h2>
-    <span aria-hidden="true">&rarr;</span>
-    </Link>
-    <Link href={''} className={`rounded-md py-3 px-6 bg-slate-800 text-slate-50 flex gap-4 ${className}`}>
-    <h2>Anxiety</h2>
-    <span aria-hidden="true">&rarr;</span>
-    </Link>
-    <Link href={''} className={`rounded-md py-3 px-6 bg-slate-800 text-slate-50 flex gap-4 ${className}`}>
-    <h2>Anxiety</h2>
-    <span aria-hidden="true">&rarr;</span>
-    </Link>
+  )
+})}
+
+   
     </div>
    
   )
