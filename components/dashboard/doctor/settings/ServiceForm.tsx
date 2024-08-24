@@ -34,6 +34,9 @@ export default function ServiceForm({services,specialities,symptoms,profileId}:S
     )
     const [selectedServiceId,setSelectedServiceId]=useState<String>("")
     const [selectedSpeciality,setSelectedSpeciality]=useState("")
+    const [isServiceLoading,setServiceLoading]=useState(false)
+    const [isSpecialityLoading,setSpecialityLoading]=useState(false)
+    const [isSymptomsLoading,setSymptomsLoading]=useState(false)
     const {data:session,status}=useSession()
     const user=session?.user
     const [selected,setSelected]=useState<String[]>([])
@@ -43,9 +46,7 @@ export default function ServiceForm({services,specialities,symptoms,profileId}:S
           <span>Loading a User...</span>
         </div>
     }
-    const [isServiceLoading,setServiceLoading]=useState(false)
-    const [isSpecialityLoading,setSpecialityLoading]=useState(false)
-    const [isSymptomsLoading,setSymptomsLoading]=useState(false)
+    
     // async function onSubmit(data:any){
     //     const resourceName=" Settings"
     //     // const endpoint="admin/symptoms"

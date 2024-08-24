@@ -14,8 +14,8 @@ export default async function SpecialityPanel({specialities}:any) {
     return (
        
         <ScrollArea className="h-96 w-full ">
-           {specialities.data && specialities.data.map((tag:specialityResponse) => (
-             <SpecialityCard title={tag.title} slug={tag.slug} id={tag.id}/>
+           {specialities.data && specialities.data.map((tag:specialityResponse,i:any) => (
+             <SpecialityCard key={i} title={tag.title} slug={tag.slug} id={tag.id}/>
                
               
             ))}
