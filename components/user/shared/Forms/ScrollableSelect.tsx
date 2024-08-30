@@ -22,7 +22,7 @@ type SelectsProps={
 }
 export function SelectScrollable({title,options,selectedOption}:SelectsProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 text-gray-800">
         <Label htmlFor="terms">{title}</Label>
     <Select >
       <SelectTrigger className="w-[280px]">

@@ -37,11 +37,15 @@ import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import ModeToggle from "@/components/ModeToggle"
 import { useRouter } from "next/navigation"
-import { signOut } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
+import { generateInitials } from "@/lib/utils"
 
 
 export default function Navbar() {
   const router = useRouter();
+  const {data:session,status}=useSession()
+  const user=session?.user;
+  const initials = generateInitials(user?.name??'User');
   async function handleLogout() {
     await signOut();
     router.push("/");
@@ -159,10 +163,11 @@ const sideBarLinks=[
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel >
+          <Link href={'/'}>Online</Link>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Settings</DropdownMenuItem>
-        <DropdownMenuItem>Support</DropdownMenuItem>
+
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
       </DropdownMenuContent>

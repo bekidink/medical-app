@@ -19,6 +19,7 @@ import { TextAreaInput } from '../shared/Forms/TextAreaInput'
 
 import MultiFileUploader, { File } from '../shared/Forms/MultiFileUploader'
 import { useOnboardingContext } from '@/context/onboarding'
+import { Loader } from 'lucide-react'
 
 export default function AdditionalInfoForm({page,title,description}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
@@ -78,14 +79,22 @@ export default function AdditionalInfoForm({page,title,description}:StepFormProp
     <CardContent>
       <div className="grid gap-4">
       <form onSubmit={handleSubmit(onSubmit)}  className="space-y-6">
-      <TextAreaInput name='educationHistory' label='Education History' placeholder='Enter your education History' register={register} errors={errors} />
+      <TextAreaInput  name='educationHistory' label='Education History' placeholder='Enter your education History' register={register} errors={errors} />
       <TextAreaInput name='research' label='Published Work or Research' placeholder='Enter your Published Work or Research' register={register} errors={errors} />
       <TextAreaInput name='acoomplisments' label='Any Special Acoomplisments or Awards' placeholder='Enter your Acoomplisments or Awards' register={register} errors={errors} />
       <MultiFileUploader label={'Upload your Academic Documents (max 4)'} files={docs} setFiles={setDocs} className={''} endpoint={''}/>
         <div className="flex justify-center items-center">
-        <Button  variant={'outline'} type="submit" className=" bg-slate-900 text-center text-slate-50">
+          {isloading?(
+            <Button  variant={'outline'} disabled className=" bg-slate-900 text-center text-slate-50">
+              <Loader className='w-4 h-4 animate-spin'/>
+            Saving please wait...
+          </Button>
+          ):(
+            <Button  variant={'outline'} type="submit" className=" bg-slate-900 text-center text-slate-50">
           Save and Continue
         </Button>
+          )}
+        
         </div>
         
         </form>

@@ -9,7 +9,9 @@ export async function GET(request:Request,{params:{id}}:{params:{id:string}}){
              userId:  id,
             },
             include:{
-                availability:true
+                availability:true,
+                sepeciality:true,
+                service:true
             }
         })
         return NextResponse.json(category)

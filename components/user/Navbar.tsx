@@ -44,7 +44,7 @@ import { Session } from "next-auth"
 import { usePathname, useRouter } from "next/navigation"
 import { signOut, useSession } from "next-auth/react"
 import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
+import { cn, generateInitials } from "@/lib/utils"
 // const products = [
 //   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
 //   { name: 'Engagement', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
@@ -61,6 +61,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const {data:session,status}=useSession()
   const user=session?.user;
+  const initials = generateInitials(user?.name??'User');
   const router=useRouter()
   const pathname=usePathname()
   async function handleLogout(){
@@ -192,7 +193,7 @@ export default function Navbar() {
                 {user?.image?(
                   <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn"/>
                 ):(
-                  <AvatarFallback>BD</AvatarFallback>
+                  <AvatarFallback>{initials}</AvatarFallback>
                 )}
               </Avatar>
               

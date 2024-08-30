@@ -62,7 +62,8 @@ export type StepFormProps={
     userId:string;
     nextPage:string;
     formId:string;
-    trackingNo:string
+    trackingNo:string;
+    specialities?:specialityResponse[]
 }
 
 export type EducationFormProps={
@@ -142,3 +143,198 @@ export type TabItemsProps={
     specialities:specialityResponse[],
     symptoms:symptomResponse[]
 }
+export type AvailabilityTimes = {
+  
+    monday: string[];
+    tuesDay: string[];
+    wednesday: string[];
+    thursday: string[];
+    friday: string[];
+    saturday: string[];
+    sunday: string[];
+    createdAt: string;
+    updatedAt: string;
+  };
+type Availability = {
+    id: string;
+    doctorId: string;
+    monday: string[];
+    tuesDay: string[];
+    wednesday: string[];
+    thursday: string[];
+    friday: string[];
+    saturday: string[];
+    sunday: string[];
+    createdAt: string;
+    updatedAt: string;
+  };
+export  type DoctorProfileAvailability = {
+    id: string;
+    doctorId: string;
+    monday: string[];
+    tuesDay: string[];
+    wednesday: string[];
+    thursday: string[];
+    friday: string[];
+    saturday: string[];
+    sunday: string[];
+    createdAt: string;
+    updatedAt: string;
+  };
+ export type DoctorProfile = {
+    id: string;
+    firstName: string;
+    lastName: string;
+    middleName: string;
+    trackingNumber: string;
+    dob: string;
+    gender: string | null;
+    profilePicture: string;
+    bio: string;
+    medicalLicense: string;
+    medicalLicenseExpiry: string;
+    email: string;
+    phone: string;
+    country: string;
+    city: string;
+    state: string;
+    medicalSchool: string;
+    graduationYear: string;
+    primarySpecialization: string;
+    otherSpecialties: string[];
+    boardCertificates: string[];
+    hospitalName: string;
+    hospitalAddress: string;
+    hospitalContactNumber: string;
+    hospitalEmailAddress: string;
+    hospitalWebsite: string;
+    hospitalHoursOfOperation: string;
+    servicesOffered: string[];
+    insuranceAccepted: boolean | null;
+    langaugesSpoken: string[];
+    educationHistory: string;
+    research: string;
+    acoomplisments: string;
+    page: string;
+    additionalDocs: string[];
+    operationMode: string;
+    userId: string;
+    serviceId: string;
+    sepecialityId: string;
+    symptomIds: string[];
+    createdAt: string;
+    updatedAt: string;
+    availability: Availability;
+  };
+  
+  
+  
+ export type Speciality = {
+    id: string;
+    title: string;
+    slug: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+  
+ export type Service = {
+    id: string;
+    title: string;
+    slug: string;
+    imageUrl: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+  
+ export type DoctorDetail = {
+    id: string;
+    firstName: string;
+    lastName: string;
+    middleName: string;
+    trackingNumber: string;
+    dob: string;
+    gender: string | null;
+    profilePicture: string;
+    bio: string;
+    hourlyWage:number;
+    medicalLicense: string;
+    medicalLicenseExpiry: string;
+    email: string;
+    phone: string;
+    country: string;
+    city: string;
+    state: string;
+    medicalSchool: string;
+    graduationYear: string;
+    primarySpecialization: string;
+    otherSpecialties: string[];
+    boardCertificates: string[];
+    hospitalName: string;
+    hospitalAddress: string;
+    hospitalContactNumber: string;
+    hospitalEmailAddress: string;
+    hospitalWebsite: string;
+    hospitalHoursOfOperation: string;
+    servicesOffered: string[];
+    insuranceAccepted: boolean | null;
+    langaugesSpoken: string[];
+    educationHistory: string;
+    research: string;
+    acoomplisments: string;
+    page: string;
+    additionalDocs: string[];
+    operationMode: string;
+    userId: string;
+    serviceId: string;
+    sepecialityId: string;
+    symptomIds: string[];
+    createdAt: string;
+    updatedAt: string;
+    availability: Availability;
+    sepeciality: Speciality;
+    service: Service;
+  };
+  
+  export type AppointmentsProps={
+    appointmentDate:string;
+    userId:string;
+    doctorId:string;
+    charge:number;
+    appointmentTime:string;
+    fullName:string;
+    gender:string;
+    phoneNumber:string;
+    email:string;
+    dob:any;
+    address:string;
+    reason:string;
+    medicdoc:string[];
+    occupation:string;
+  }
+  export type  Appointment = {
+    id: string;
+    appointmentDate: Date;
+    doctorId: string;
+    charge: number;
+    appointmentTime: string;
+    fullName: string;
+    gender: string;
+    phoneNumber: string;
+    email: string;
+    dob: Date;
+    address: string;
+    reason: string;
+    medicdoc: string[];
+    occupation: string;
+    userId: string;
+    createdAt: string;
+    updatedAt: string;
+    status  :        boolean  ;   
+  meetingLink  :   string ;       
+  meetingProvider: string ;
+  };
+  export type updateAppointment={
+    status  :        boolean  ;   
+  meetingLink  :   string ;       
+  meetingProvider: string ;       
+  }

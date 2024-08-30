@@ -19,6 +19,7 @@ import { ToggleGroupInput } from '../shared/Forms/ToggleGroup'
 import { generateTrackingNumber } from '@/lib/utils'
 import { useOnboardingContext } from '@/context/onboarding'
 import toast from 'react-hot-toast'
+import { Loader2 } from 'lucide-react'
 
 export default function BioData({page,title,description,userId,nextPage}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
@@ -52,6 +53,7 @@ const onSubmit = async (data:BioDataFormProps) => {
     data.page=nextPage
     data.trackingNumber=trackingNumber
   try {
+    setLoading(true)
       const response = await fetch('/api/doctors', {
           method: 'POST',
           headers: {
@@ -66,10 +68,14 @@ const onSubmit = async (data:BioDataFormProps) => {
   setDoctorProfileId(result.data?.id??"")
           toast.success("Onboarding Created successfully")
           router.push(`/onboarding/${userId}?page=${nextPage}`)
+          setLoading(false)
       } else {
+        setLoading(false)
         toast.error(result.error)
+        
       }
   } catch (error) {
+    setLoading(false)
     toast.error("Something went wrong")
   }
 };
@@ -88,7 +94,7 @@ const onSubmit = async (data:BioDataFormProps) => {
        <div className="grid grid-cols-2 gap-2">
        <div className="grid gap-2">
             <Label htmlFor="first-name">First Name</Label>
-            <Input id="first-name" type='text' placeholder="Max"   {...register("firstName",{required:true})} className='bg-white' />
+            <Input id="first-name" type='text' placeholder="Max"   {...register("firstName",{required:true})} className='bg-white text-gray-900' />
             {errors.firstName && <span className='text-red-600 text-sm'>Name is required</span>}
           </div>
           {/* <div className="grid gap-2">
@@ -103,14 +109,14 @@ const onSubmit = async (data:BioDataFormProps) => {
             type="text"
             placeholder="Bekele"
             {...register("lastName",{required:true})}
-            className='bg-white'
+            className='bg-white text-gray-900'
           />
            {errors.lastName && <span className='text-red-600 text-sm'>Last Name is required</span>}
         </div>
         <div className="grid gap-2">
           <Label htmlFor="middle-name">Middle Name (Optional)</Label>
           <Input  id="middle-name" type="text"  {...register("middleName",{required:false})}
-          className='bg-white'
+          className='bg-white text-gray-900'
           placeholder="Dink"
           />
           {errors.middleName && <span className='text-red-600 text-sm'>Middle Name is required</span>}
@@ -122,7 +128,7 @@ const onSubmit = async (data:BioDataFormProps) => {
           className='bg-white'
           placeholder="m@example.com"
           /> */}
-          <DatePickerInput date={dob} setDate={setDob} className=''/>
+          <DatePickerInput date={dob} setDate={setDob} className='text-gray-900'/>
           {/* {errors.dob && <span className='text-red-600 text-sm'>Password is required</span>} */}
         </div>
         <ToggleGroupInput options={radioOptions} title='Gender' name='gender' register={register} errors={errors}/>
@@ -131,9 +137,16 @@ const onSubmit = async (data:BioDataFormProps) => {
         
        </div>
         <div className="flex justify-center items-center">
-        <Button  variant={'outline'} type="submit" className=" bg-slate-900 text-center text-slate-50">
+          {isloading?(
+            <Button  variant={'outline'} disabled type="submit" className=" bg-slate-900 text-center text-slate-50">
+            <Loader2 className='w-4 h-4 animate-spin'/>saving please wait...
+          </Button>
+          ):(
+            <Button  variant={'outline'} type="submit" className=" bg-slate-900 text-center text-slate-50">
           Save and Continue
         </Button>
+          )}
+        
         </div>
         
         </form>

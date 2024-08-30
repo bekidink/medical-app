@@ -11,6 +11,7 @@ import { signIn } from "next-auth/react"
 import { useRouter } from 'next/navigation'
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { Loader } from "lucide-react"
 
 export default function LoginForm() {
   const[isloading,setIsLoading]=useState(false)
@@ -78,9 +79,16 @@ export default function LoginForm() {
               </div>
               <Input id="password" type="password" required {...register("password",{required:true})} />
             </div>
-            <Button type="submit" className="w-full">
-              Login
+            {isloading?(
+              <Button type="submit" disabled className="w-full">
+              <Loader className="w-4 h-4 animate-spin"/> logining please wait...
             </Button>
+            ):(
+<Button type="submit" className="w-full">
+Login
+</Button>
+            )}
+            
             </form>
             <Button variant="outline" className="w-full">
               Login with Google

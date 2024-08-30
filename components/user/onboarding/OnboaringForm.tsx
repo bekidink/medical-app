@@ -1,4 +1,4 @@
-
+"use client"
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
@@ -11,8 +11,9 @@ import PracticeForm from './PracticeForm'
 import AdditionalInfoForm from './AdditionalInfoForm'
 import Availability from './Availability'
 import { useOnboardingContext } from '@/context/onboarding'
+import { specialityResponse } from '@/types/types'
 
-export default function OnboaringForm({id}:{id:string}) {
+export default function OnboaringForm({id,specialities}:{id:string,specialities:specialityResponse[]}) {
     const params=useSearchParams()
     const page=params.get("page") ?? "bio"
     const{trackingNumber:truckingNmber,doctorProfileId}=useOnboardingContext()
@@ -35,7 +36,7 @@ export default function OnboaringForm({id}:{id:string}) {
         {
             title:"Educational Information",
             page:"educational",
-            component:<EducationalForm nextPage='practice' userId={id} formId={doctorProfileId} trackingNo={truckingNmber}  page={page} title="Education Info" description="Please fill in your education Info"/>
+            component:<EducationalForm specialities={specialities} nextPage='practice' userId={id} formId={doctorProfileId} trackingNo={truckingNmber}  page={page} title="Education Info" description="Please fill in your education Info"/>
         },
         {
             title:"Practice Information",

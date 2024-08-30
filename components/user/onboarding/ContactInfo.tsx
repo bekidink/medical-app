@@ -32,18 +32,31 @@ import { MultiFileInput } from '../shared/Forms/MultiFileInput'
 import { FileState } from '../shared/Forms/MultiFileDropzone'
 import MultiFileUploader, { File } from '../shared/Forms/MultiFileUploader'
 import { useOnboardingContext } from '@/context/onboarding'
-
+import { Country, State, City } from 'country-state-city';
+import { Loader } from 'lucide-react'
 export default function ContactInfo({page,title,description,nextPage}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
     const{trackingNumber:truckingNmber,doctorProfileId,contactData,setContactData}=useOnboardingContext()
     const [fileStates, setFileStates] = useState<FileState[]>([]);
-   
+    const [selectedCountry, setSelectedCountry] = useState('');
+    const [selectedState, setSelectedState] = useState('');
+  
+    const countries = Country.getAllCountries();
+    const states = selectedCountry ? State.getStatesOfCountry(selectedCountry) : [];
+    const cities = selectedState ? City.getCitiesOfState(selectedCountry,selectedState) : [];
   const {register,handleSubmit,reset,formState:{errors}}=useForm<contactFormProps>({
     defaultValues:contactData
   })
   const router = useRouter();
 
+  const handleCountryChange = (event:any) => {
+    setSelectedCountry(event.target.value);
+    setSelectedState(''); // Reset state when country changes
+  };
 
+  const handleStateChange = (event:any) => {
+    setSelectedState(event.target.value);
+  };
   async function onSubmit(data:contactFormProps){
     setLoading(true)
     data.id=doctorProfileId
@@ -84,19 +97,78 @@ export default function ContactInfo({page,title,description,nextPage}:StepFormPr
        <div className="grid grid-cols-2 gap-2">
        <TextInput type='tel' name={'phone'} register={register} label={'Phone'} errors={errors}/>
        {/* <TextAreaInput name='medicalLicense' label='Medical-License' placeholder='Enter Medical License' register={register} errors={errors} /> */}
-       <TextInput  name={'country'} register={register} label={'Country'} errors={errors}/>
-       <TextInput  name={'city'} register={register} label={'City'} errors={errors}/>
-       <TextInput   name={'state'} register={register} label={'State'} errors={errors}/>
+       {/* <TextInput  name={'country'} register={register} label={'Country'} errors={errors}/> */}
+       <div className='rounded-md'>
+        <label htmlFor="country">Country</label>
+        <select
+        className='text-gray-800'
+          id="country"
+          {...register('country', { required: 'Country is required' })}
+          onChange={handleCountryChange}
+        >
+          <option value="">Select Country</option>
+          {countries.map((country) => (
+            <option key={country.isoCode} value={country.isoCode}>
+              {country.name}
+            </option>
+          ))}
+        </select>
+        {errors.country && <p>{errors.country.message}</p>}
+      </div>
+       {/* <TextInput  name={'city'} register={register} label={'City'} errors={errors}/> */}
+       <div className='overflow-hidden rounded-md'>
+        <label htmlFor="state">State</label>
+        <select
+        className='text-gray-800 '
+          id="state"
+          {...register('state', { required: 'State is required' })}
+          onChange={handleStateChange}
+          disabled={!selectedCountry}
+        >
+          <option value="">Select State</option>
+          {states.map((state) => (
+            <option key={state.isoCode} value={state.isoCode}>
+              {state.name}
+            </option>
+          ))}
+        </select>
+        {errors.state && <p>{errors.state.message}</p>}
+      </div>
+       {/* <TextInput   name={'state'} register={register} label={'State'} errors={errors}/> */}
         
-        
+       <div className='overflow-hidden flex flex-col rounded-md'>
+        <label htmlFor="city">City</label>
+        <select
+          id="city"
+          {...register('city', { required: 'City is required' })}
+          disabled={!selectedState}
+          className='text-gray-800'
+        >
+          <option value="">Select City</option>
+          {cities.map((city) => (
+            <option key={city.name} value={city.name}>
+              {city.name}
+            </option>
+          ))}
+        </select>
+        {errors.city && <p>{errors.city.message}</p>}
+      </div>
         
         
        </div>
        
         <div className="flex justify-center items-center">
-        <Button  variant={'outline'} type="submit" className=" bg-slate-900 text-center text-slate-50">
+          {isloading?(
+            <Button  variant={'outline'} disabled className=" bg-slate-900 text-center text-slate-50">
+              <Loader className='w-4 h-4 animate-spin'/>
+            Saving please wait...
+          </Button>
+          ):(
+            <Button  variant={'outline'} type="submit" className=" bg-slate-900 text-center text-slate-50">
           Save and Continue
         </Button>
+          )}
+        
         </div>
         
         </form>

@@ -16,39 +16,39 @@ export default function AvailabilityForm({profile,title}:{profile:any,title:stri
  const [isLoading,setLoading]=useState(false)
  useEffect(()=>{
 if(title==="MonDay"){
-   if(profile.availability.monday.length>0
+   if(profile?.availability?.monday.length>0
    ) {
-    setSelectedTimes(profile.availability.monday)
+    setSelectedTimes(profile?.availability?.monday)
    }
 }else if(title==="TuesDay"){
-    if(profile.availability.tuesDay.length>0
+    if(profile?.availability?.tuesDay.length>0
     ) {
-     setSelectedTimes(profile.availability.tuesDay)
+     setSelectedTimes(profile?.availability?.tuesDay)
     }
 }else  if(title==="WednesDay"){
-    if(profile.availability.wednesday.length>0
+    if(profile?.availability?.wednesday.length>0
     ) {
-     setSelectedTimes(profile.availability.wednesday)
+     setSelectedTimes(profile?.availability?.wednesday)
     }
 } else  if(title==="ThursDay"){
-    if(profile.availability.thursday.length>0
+    if(profile?.availability?.thursday.length>0
     ) {
-     setSelectedTimes(profile.availability.thursday)
+     setSelectedTimes(profile?.availability?.thursday)
     }
 } else  if(title==="FriDay"){
-    if(profile.availability.friday.length>0
+    if(profile?.availability?.friday.length>0
     ) {
-     setSelectedTimes(profile.availability.friday)
+     setSelectedTimes(profile?.availability?.friday)
     }
 }else  if(title==="SaturDay"){
-    if(profile.availability.saturday.length>0
+    if(profile?.availability?.saturday.length>0
     ) {
-     setSelectedTimes(profile.availability.saturday)
+     setSelectedTimes(profile?.availability?.saturday)
     }
 } else  if(title==="SunDay"){
-    if(profile.availability.sunday.length>0
+    if(profile?.availability?.sunday.length>0
     ) {
-     setSelectedTimes(profile.availability.sunday)
+     setSelectedTimes(profile?.availability?.sunday)
     }
 } 
  },[title])

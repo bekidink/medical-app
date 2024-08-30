@@ -106,7 +106,7 @@ export default function PracticeForm({page,title,description,nextPage}:StepFormP
        </div>
        <ItemsInput setItems={setServices} items={services} itemTitle={' Your Services'} />
        <ItemsInput setItems={setLangs} items={langs} itemTitle={' Languages You Spoke'} />
-       <SelectScrollable title={'Insurance Acceptable'} options={insuranceOptions} selectedOption={insuranceAccepted} setSelectedOption={setInsuranceAccepted}/>
+       <SelectScrollable  title={'Insurance Acceptable'} options={insuranceOptions} selectedOption={insuranceAccepted} setSelectedOption={setInsuranceAccepted}/>
         <div className="flex justify-center items-center">
         <Button  variant={'outline'} type="submit" className=" bg-slate-900 text-center text-slate-50">
           Save and Continue

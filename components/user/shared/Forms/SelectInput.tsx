@@ -15,7 +15,7 @@ export default function SelectInput({
   label,
   name,
   register,
-  className = "sm:col-span-2",
+  className = "sm:col-span-2 text-gray-900 dark:text-gray-100",
   options = [],
   multiple=false
 }:SelectInputProps) {
@@ -23,7 +23,7 @@ export default function SelectInput({
     <div className={className}>
       <label
         htmlFor={name}
-        className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-900"
+        className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100"
       >
         {label}
       </label>

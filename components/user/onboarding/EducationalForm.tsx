@@ -22,9 +22,11 @@ import { FileState } from '../shared/Forms/MultiFileDropzone'
 import MultiFileUploader, { File } from '../shared/Forms/MultiFileUploader'
 import { useOnboardingContext } from '@/context/onboarding'
 import toast from 'react-hot-toast'
+import { Loader } from 'lucide-react'
 
-export default function EducationalForm({page,title,description,nextPage}:StepFormProps) {
+export default function EducationalForm({page,title,description,nextPage,specialities}:StepFormProps) {
     const[isloading,setLoading]=useState(false)
+    
     const{trackingNumber:truckingNmber,doctorProfileId,
       educationData,setEducationData
     }=useOnboardingContext()
@@ -94,20 +96,7 @@ console.log(fileStates)
       <TextInput name={'medicalSchool'} register={register} label={'Medical School'} errors={errors}/>
        <div className="grid grid-cols-2 gap-2">
        <TextInput type='tel' name={'graduationYear'} register={register} label={'Graduation Year'} errors={errors}/>
-     <SelectInput label={'Select Your Primary Specializations'} name={'primarySpecialization'} register={register} className={''} options={[
-        {
-            title:'medic',
-            id:'1'
-        },
-        {
-            title:'medical',
-            id:'2'
-        },
-        {
-            title:'general',
-            id:'3'
-        }
-     ]} multiple={false} />
+     <SelectInput  label={'Select Your Primary Specializations'} name={'primarySpecialization'} register={register} className={''} options={specialities??[]} multiple={false} />
         
         
         
@@ -118,9 +107,17 @@ console.log(fileStates)
         <MultiFileUploader label={'Upload your Academic Documents (max 4)'} files={imageUrls} setFiles={setImageUrls} className={'text-slate-50 dark:text-slate-900'} endpoint={''}/>
         {/* <MultiFileInput fileStates={fileStates} setFileStates={setFileStates}/> */}
         <div className="flex justify-center items-center">
-        <Button  variant={'outline'} type="submit" className=" bg-slate-900 text-center text-slate-50">
-          Save and Continue
-        </Button>
+          {isloading?(
+            <Button  variant={'outline'} disabled className=" bg-slate-900 text-center text-slate-50">
+              <Loader className='w-4 h-4 animate-spin'/>
+            Saving please wait...
+          </Button>
+          ):(
+            <Button  variant={'outline'} type="submit" className=" bg-slate-900 text-center text-slate-50">
+            Save and Continue
+          </Button>
+          )}
+        
         </div>
         
         </form>

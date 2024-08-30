@@ -6,9 +6,13 @@ import DoctorCard from './DoctorCard'
 import { ArrowUpRight, Map } from 'lucide-react'
 import DoctorsCarousel from './DoctorsCarousel'
 import { Button } from '@/components/ui/button'
+import { getData } from '@/lib/utils'
+import { DoctorProfile } from '@/types/types'
 
-export default function DoctorsList({title,isInPerson=false,className='bg-pink-100 px-10 py-8 lg:py-24 dark:bg-slate-900'}:{title:string,isInPerson:boolean,className?:string}) {
- const doctros=[
+export default async function DoctorsList({title,isInPerson=false,className='bg-pink-100 px-10 py-8 lg:py-24 dark:bg-slate-900',doctors}:{title:string,isInPerson:boolean,className?:string,doctors:DoctorProfile[]}) {
+    // const alldoctors=await (await getData("doctors")).data
+    // console.log(alldoctors)
+    const doctros=[
     {
         name:"james,john",
         description:"",
@@ -63,7 +67,7 @@ export default function DoctorsList({title,isInPerson=false,className='bg-pink-1
 
       </div>
       <div className="py-6">
-    <DoctorsCarousel doctros={doctros} isInPerson={isInPerson}/>
+    <DoctorsCarousel doctros={doctors} isInPerson={isInPerson}/>
 </div>
     </div>
   )

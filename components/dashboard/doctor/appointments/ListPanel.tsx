@@ -1,37 +1,54 @@
+"use client"
 import React from 'react'
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import Link from 'next/link'
-import { Briefcase, Dot } from 'lucide-react'
+import { Briefcase, Calendar, Check, Dot, History } from 'lucide-react'
+import { Appointment } from '@/types/types'
+import { cn, formatAppointment, timeAgo } from '@/lib/utils'
+import { usePathname } from 'next/navigation'
  
-const tags = Array.from({ length: 50 },(_,i)=>({
-    id:i+1,
-    name:`name-${i+1}`
-}))
-export default function ListPanel() {
-  
+
+export default function ListPanel({appointments,link='/dashboard/doctor/appointments/view',title=''}:{appointments:Appointment[],link?:string,title?:string}) {
+  const pathname=usePathname()
     return (
-        <ScrollArea className="h-72 w-full ">
-           {tags.map((tag,i) => (
-             
-                <Link key={i} href={'#'} className='border mb-2  text-xs   py-3 px-2 w-full rounded-md'>
+        <ScrollArea className="h-96  w-full  ">
+           {appointments.map((tag,i) => {
+            const time=timeAgo(new Date(tag.createdAt))
+            const date = new Date(tag.appointmentDate);
+            return (
+                <Link key={i} href={ title===''?  `${link}/${tag.id}`:`${link}/${tag.userId}`} className={cn('border mb-2 border-gray-300 shadow-sm text-xs  py-1 px-2 inline-block w-full rounded-md dark:text-slate-100 gap-4',pathname===`/dashboard/doctor/appointments/view/${tag.id}`&& ' border-blue-800 border-2 dark:border-blue-100')}>
                 <div className="flex items-center justify-between">
-                    <h2>William Larsen</h2>
-                    <span>4:00pm</span>
+                    <h2 className='capitalize'>{tag.fullName}</h2>
+                    <div className="flex items-center">
+                        <History className='w-4 h-4 flex-shrink-0'/>
+                    <span>{time}</span>
+                    </div>
+                   
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between gap-4">
                      <div className="flex items-center">
-                    <Dot className='w-4 h-4 flex-shrink-0'/>
-                    <span>Follow Up</span>
+                    <Calendar className='w-4 h-4 flex-shrink-0'/>
+                    <span>{formatAppointment(date)}</span>
                     </div>
                     <div className="flex items-center">
-                    <Briefcase className='w-4 h-4 flex-shrink-0'/>
-                    <span>Exam</span>
+                    <History className='w-4 h-4 flex-shrink-0'/>
+                    <span>{tag.appointmentTime}</span>
                     </div>
                 </div>
+                {tag.status &&                 <div className="flex items-center justfy-end">
+                    <Check className='w-4 h-4 flex-shrink-0'/>
+                    Approved
+                     
+                </div>}
+
                 </Link>
+            )
+           }
+             
+                
               
-            ))}
+            )}
         </ScrollArea>
   )
 }

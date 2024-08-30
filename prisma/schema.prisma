@@ -40,6 +40,32 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model Appointment {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  appointmentDate String
+
+  doctorId        String        @db.ObjectId
+  charge          Int
+  appointmentTime String
+  fullName        String
+  gender          String
+  phoneNumber     String
+  email           String
+  dob             DateTime
+  address         String
+  reason          String
+  medicdoc        String[]
+  occupation      String
+  status          Boolean       @default(false)
+  meetingLink     String        @default("#")
+  meetingProvider String        @default("#")
+  userId          String        @db.ObjectId
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  doctor          DoctorProfile @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
 enum UserRole {
   USER
   ADMIN
@@ -69,6 +95,8 @@ model User {
   updatedAt     DateTime       @updatedAt
   Symptom       Symptom[]
   DoctorService DoctorService?
+
+  Appointment Appointment[]
 }
 
 model DoctorProfile {
@@ -108,6 +136,8 @@ model DoctorProfile {
   page                     String?
   additionalDocs           String[]
   availability             Availability?
+  operationMode            String?
+  hourlyWage               Int           @default(100)
   userId                   String        @unique @db.ObjectId
   user                     User          @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   serviceId                String?       @unique @db.ObjectId
@@ -117,6 +147,7 @@ model DoctorProfile {
   symptomIds               String[]      @db.ObjectId
   createdAt                DateTime      @default(now())
   updatedAt                DateTime      @updatedAt
+  Appointment              Appointment[]
 }
 
 model DoctorService {
