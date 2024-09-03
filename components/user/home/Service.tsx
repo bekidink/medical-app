@@ -12,8 +12,8 @@ const symptoms:symptomResponse[]=allsymptoms
 const services:serviceResponse[]=allservices
 const specialities:specialityResponse[]=allspecialities 
   return (
-    <section className="pb-12 pt-20 dark:bg-slate-950 lg:pb-[90px] lg:py-[60px]">
-      <div className="container mx-auto">
+    <section className="pb-12 pt-20 dark:bg-slate-950 lg:pb-[90px] lg:py-[60px] ">
+      <div className=" mx-auto max-w-6xl">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="mx-auto mb-12 max-w-[510px] text-center lg:mb-20">

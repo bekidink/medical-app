@@ -26,12 +26,15 @@ export async function makePostRequest( { setLoading, endpoint, data, resourceNam
     if (response.ok) {
       setLoading(false);
       toast.success(`New ${resourceName} Created Successfully`);
-      return   {
-        data:response.body,
-        status:200,
-        error:null
-    }
+      
+      redirect()
+    //   return   {
+    //     data:response.body,
+    //     status:200,
+    //     error:null
+    // }
     //   reset();
+    
     //   redirect()
     } else {
       setLoading(false);
@@ -79,7 +82,7 @@ export async function makePutRequest(
       console.log(response);
       setLoading(false);
       toast.success(`${resourceName} Updated Successfully`);
-    //  redirect()
+     redirect()
       
     } else {
       setLoading(false);

@@ -10,7 +10,12 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-
+export type links=  {
+  title: string
+  label?: string
+  icon: LucideIcon
+  variant: "default" | "ghost"
+}[]
 interface NavProps {
   isCollapsed: boolean
   links: {

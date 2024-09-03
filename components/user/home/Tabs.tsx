@@ -25,7 +25,7 @@ export default function HomeTabs({services,specialities,symptoms}:TabItemsProps)
         {
             title:"Symptoms",
             icon:Syringe,
-            component:<LinkCards specialities={symptoms} className={""}/>,
+            component:<LinkCards title="Symptoms" specialities={symptoms} className={""}/>,
             content:[]
         }
     ]

@@ -7,14 +7,13 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 
 import { Mail } from "../data"
-import { useMail } from "../use-mail"
+import { Message } from "@/types/types"
 
 interface MailListProps {
-  items: Mail[]
+  items: Message[]
 }
 
 export function MailList({ items }: MailListProps) {
-  const [mail, setMail] = useMail()
 
   return (
     <ScrollArea className="h-screen">
@@ -24,29 +23,29 @@ export function MailList({ items }: MailListProps) {
             key={item.id}
             className={cn(
               "flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent",
-              mail.selected === item.id && "bg-muted"
+              // mail.selected === item.id && "bg-muted"
             )}
-            onClick={() =>
-              setMail({
-                ...mail,
-                selected: item.id,
-              })
-            }
+            // onClick={() =>
+            //   setMail({
+            //     ...mail,
+            //     selected: item.id,
+            //   })
+            // }
           >
             <div className="flex w-full flex-col gap-1">
               <div className="flex items-center">
                 <div className="flex items-center gap-2">
-                  <div className="font-semibold">{item.name}</div>
-                  {!item.read && (
+                  <div className="font-semibold">{item.senderName}</div>
+                  {/* {!item.read && (
                     <span className="flex h-2 w-2 rounded-full bg-blue-600" />
-                  )}
+                  )} */}
                 </div>
                 <div
                   className={cn(
                     "ml-auto text-xs",
-                    mail.selected === item.id
-                      ? "text-foreground"
-                      : "text-muted-foreground"
+                    // mail.selected === item.id
+                    //   ? "text-foreground"
+                    //   : "text-muted-foreground"
                   )}
                 >
                   {/* {formatDistanceToNow(new Date(item.date), {
@@ -57,9 +56,9 @@ export function MailList({ items }: MailListProps) {
               <div className="text-xs font-medium">{item.subject}</div>
             </div>
             <div className="line-clamp-2 text-xs text-muted-foreground">
-              {item.text.substring(0, 300)}
+              {item.body.substring(0, 300)}
             </div>
-            {item.labels.length ? (
+            {/* {item.labels.length ? (
               <div className="flex items-center gap-2">
                 {item.labels.map((label) => (
                   <Badge key={label} variant={getBadgeVariantFromLabel(label)}>
@@ -67,7 +66,7 @@ export function MailList({ items }: MailListProps) {
                   </Badge>
                 ))}
               </div>
-            ) : null}
+            ) : null} */}
           </button>
         ))}
       </div>

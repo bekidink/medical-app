@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { getData } from '@/lib/utils'
 import { DoctorProfile } from '@/types/types'
 
-export default async function DoctorsList({title,isInPerson=false,className='bg-pink-100 px-10 py-8 lg:py-24 dark:bg-slate-900',doctors}:{title:string,isInPerson:boolean,className?:string,doctors:DoctorProfile[]}) {
+export default async function DoctorsList({title,isInPerson=false,className='  px-10 py-8 lg:py-24 dark:bg-slate-900',doctors}:{title:string,isInPerson:boolean,className?:string,doctors:DoctorProfile[]}) {
     // const alldoctors=await (await getData("doctors")).data
     // console.log(alldoctors)
     const doctros=[
@@ -45,9 +45,10 @@ export default async function DoctorsList({title,isInPerson=false,className='bg-
     }
  ]
     return (
-    <div className={className}>
+   <div className={className}>
+     <div className="mx-auto max-w-6xl shadow-lg">
       <SectionHeading title={title}/>
-      <div className="py-4 flex items-center justify-between">
+      <div className="py-4 flex items-center  justify-between">
        {isInPerson?(
 <Link href={''} className='bg-blue-500 text-sm flex items-center font-semibold'>
 <Map className='mr-2 flex-shrink-0 w-4 h-4' />
@@ -59,7 +60,7 @@ export default async function DoctorsList({title,isInPerson=false,className='bg-
         <Toggle title='2 hours'/>
        )}
       <Button asChild>
-      <Link href="">See All
+      <Link href={isInPerson?`/category?mode=Tele-health visit`:`/category?mode=In-person doctor visit`}>See All
       <ArrowUpRight className='h-4 w-4 ms-2'/>
       </Link>
       </Button>
@@ -70,5 +71,6 @@ export default async function DoctorsList({title,isInPerson=false,className='bg-
     <DoctorsCarousel doctros={doctors} isInPerson={isInPerson}/>
 </div>
     </div>
+   </div>
   )
 }

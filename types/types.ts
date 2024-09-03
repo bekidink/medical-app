@@ -46,6 +46,14 @@ export type profileFormProps={
     page:string; 
     id:string; 
 }
+export type profileUpdateProps={
+  profilePicture:string;
+  bio:string;
+  medicalLicense:string;
+  medicalLicenseExpiry:any;
+  page:string; 
+   
+}
 export type contactFormProps={
     email:string;
     phone:string;
@@ -55,6 +63,14 @@ export type contactFormProps={
     page:string; 
     id:string; 
 }
+export type contactUpdateProps={
+  email:string;
+  phone:string;
+  country:string;
+  city:string;
+  state:string;
+  page:string; 
+}
 export type StepFormProps={
     title:string;
     page:string;
@@ -63,7 +79,8 @@ export type StepFormProps={
     nextPage:string;
     formId:string;
     trackingNo:string;
-    specialities?:specialityResponse[]
+    specialities?:specialityResponse[],
+    data?:DoctorDetail
 }
 
 export type EducationFormProps={
@@ -74,6 +91,14 @@ export type EducationFormProps={
     boardCertificates:any;
     id:string;
     page:string;
+}
+export type EducationUpdateProps={
+  medicalSchool:string;
+  graduationYear:string;
+  primarySpecialization:string;
+  otherSpecialties:any;
+  boardCertificates:any;
+ 
 }
 export type PracticeFormProps={
     hospitalName:string;
@@ -88,13 +113,34 @@ export type PracticeFormProps={
     id:string;
     page:string;
 }
+export type PracticeUpdateProps={
+  hospitalName:string;
+  hospitalAddress:string;
+  hospitalContactNumber:string;
+  hospitalEmailAddress:string;
+  hospitalWebsite:string;
+  hospitalHoursOfOperation:string;
+  servicesOffered:any;
+  insuranceAccepted:boolean;
+  langaugesSpoken:any;
+  // id:string;
+  page:string;
+}
 export type additionalFormProps={
     educationHistory:string;
     research:string;
     accomplishments:string;
     additionalDocs:any;
-    id:string;
+   id:string;
     page:string;
+}
+export type additionalUpdateProps={
+  educationHistory:string;
+  research:string;
+  acoomplisments:string;
+  additionalDocs:any;
+  
+  page:string;
 }
 export type serviceFormProps={
     title:string;
@@ -106,7 +152,18 @@ export type serviceResponse={
     title:string;
     slug:string;
     imageUrl:string;
+    
 }
+export type ServiceData = {
+    id: string;
+    title: string;
+    slug: string;
+    imageUrl: string;
+    _count: {
+      DoctorProfiles: number;
+    };
+  };
+  
 export type specialityFormProps={
     title:string;
     slug:string;
@@ -242,6 +299,7 @@ export  type DoctorProfileAvailability = {
     title: string;
     slug: string;
     imageUrl: string;
+    count?:number;
     createdAt: string;
     updatedAt: string;
   };
@@ -338,3 +396,42 @@ export  type DoctorProfileAvailability = {
   meetingLink  :   string ;       
   meetingProvider: string ;       
   }
+  export type Message = {
+    id: string;
+    recieverId: string;
+    senderId: string;
+    senderName: string;
+    senderEmail: string;
+    subject: string;
+    body: string;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+  export type InboxProps = {
+    
+    recieverId: string;
+    senderId: string;
+    senderName: string;
+    senderEmail: string;
+    subject: string;
+    body: string;
+
+  };
+  export type UserResponse = {
+    id: string;
+    name: string;
+    phone: string;
+    email: string;
+    emailVerified: string | null;
+    image: string | null;
+    role: 'DOCTOR' | 'PATIENT' | 'ADMIN'; // Adjust roles as necessary
+    password: string;
+    symptomIds: string[]; // Assuming symptom IDs are strings
+    isVerified: boolean;
+    token: number;
+    serviceId: string | null;
+    specialityId: string | null;
+    createdAt: string; // ISO date string
+    updatedAt: string; // ISO date string
+  };
+  

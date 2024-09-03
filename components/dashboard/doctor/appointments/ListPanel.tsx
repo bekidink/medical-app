@@ -17,8 +17,8 @@ export default function ListPanel({appointments,link='/dashboard/doctor/appointm
             const time=timeAgo(new Date(tag.createdAt))
             const date = new Date(tag.appointmentDate);
             return (
-                <Link key={i} href={ title===''?  `${link}/${tag.id}`:`${link}/${tag.userId}`} className={cn('border mb-2 border-gray-300 shadow-sm text-xs  py-1 px-2 inline-block w-full rounded-md dark:text-slate-100 gap-4',pathname===`/dashboard/doctor/appointments/view/${tag.id}`&& ' border-blue-800 border-2 dark:border-blue-100')}>
-                <div className="flex items-center justify-between">
+                <Link key={i} href={ title===''?  `${link}/${tag.id}`:`${link}/${tag.userId}`} className={cn('border mb-2 border-gray-300 shadow-sm text-xs  py-4 px-2 inline-block w-full rounded-md dark:text-slate-100 gap-4',pathname===`/dashboard/doctor/appointments/view/${tag.id}`&& ' border-blue-800 border-2 dark:border-blue-100')}>
+                <div className="flex items-center py-1 justify-between">
                     <h2 className='capitalize'>{tag.fullName}</h2>
                     <div className="flex items-center">
                         <History className='w-4 h-4 flex-shrink-0'/>
@@ -26,7 +26,7 @@ export default function ListPanel({appointments,link='/dashboard/doctor/appointm
                     </div>
                    
                 </div>
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center py-1 justify-between gap-4">
                      <div className="flex items-center">
                     <Calendar className='w-4 h-4 flex-shrink-0'/>
                     <span>{formatAppointment(date)}</span>

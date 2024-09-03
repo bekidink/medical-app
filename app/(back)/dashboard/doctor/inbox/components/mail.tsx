@@ -12,6 +12,7 @@ import {
   Send,
   ShoppingCart,
   Trash2,
+  User,
   Users2,
 } from "lucide-react"
 
@@ -33,9 +34,9 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { AccountSwitcher } from "./account-switcher"
 import { MailDisplay } from "./mail-display"
 import { MailList } from "./mail-list"
-import { Nav } from "./nav"
+import { links, Nav } from "./nav"
 import { type Mail } from "../data"
-import { useMail } from "../use-mail"
+import { Appointment, Message } from "@/types/types"
 
 interface MailProps {
   accounts: {
@@ -43,10 +44,11 @@ interface MailProps {
     email: string
     icon: React.ReactNode
   }[]
-  mails: Mail[]
+  mails: Message[]
   defaultLayout: number[] | undefined
   defaultCollapsed?: boolean
   navCollapsedSize: number
+  users:Appointment[]
 }
 
 export function Mail({
@@ -55,9 +57,19 @@ export function Mail({
   defaultLayout = [20, 32, 48],
   defaultCollapsed = false,
   navCollapsedSize,
+  users
 }: MailProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed)
-  const [mail] = useMail()
+  
+ const patients:links=users.map((item,i)=>{
+  return {
+    title:item.fullName,
+    label:'',
+    icon:User,
+    variant:"default"
+    
+  }
+ })
 
   return (
     <TooltipProvider delayDuration={0}>
@@ -70,7 +82,7 @@ export function Mail({
         }}
         className="h-full max-h-[800px] items-stretch"
       >
-        <ResizablePanel
+         <ResizablePanel
           defaultSize={defaultLayout[0]}
           collapsedSize={navCollapsedSize}
           collapsible={true}
@@ -104,44 +116,7 @@ export function Mail({
           <Separator />
           <Nav
             isCollapsed={isCollapsed}
-            links={[
-              {
-                title: "Inbox",
-                label: "128",
-                icon: Inbox,
-                variant: "default",
-              },
-              {
-                title: "Drafts",
-                label: "9",
-                icon: File,
-                variant: "ghost",
-              },
-              {
-                title: "Sent",
-                label: "",
-                icon: Send,
-                variant: "ghost",
-              },
-              {
-                title: "Junk",
-                label: "23",
-                icon: ArchiveX,
-                variant: "ghost",
-              },
-              {
-                title: "Trash",
-                label: "",
-                icon: Trash2,
-                variant: "ghost",
-              },
-              {
-                title: "Archive",
-                label: "",
-                icon: Archive,
-                variant: "ghost",
-              },
-            ]}
+            links={patients}
           />
           <Separator />
           <Nav
@@ -181,7 +156,7 @@ export function Mail({
           />
         </ResizablePanel>
         <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
+        <ResizablePanel defaultSize={defaultLayout[0]} minSize={30}>
           <Tabs defaultValue="all">
             <div className="flex items-center px-4 py-2">
               <h1 className="text-xl font-bold">Inbox</h1>
@@ -209,19 +184,19 @@ export function Mail({
                 </div>
               </form>
             </div>
-            <TabsContent value="all" className="m-0">
+            {/* <TabsContent value="all" className="m-0">
               <MailList items={mails} />
-            </TabsContent>
-            <TabsContent value="unread" className="m-0">
-              <MailList items={mails.filter((item) => !item.read)} />
-            </TabsContent>
+            </TabsContent> */}
+            {/* <TabsContent value="unread" className="m-0">
+              <MailList items={mails} />
+            </TabsContent> */}
           </Tabs>
         </ResizablePanel>
         <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={defaultLayout[2]} minSize={30}>
-          <MailDisplay
+        <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
+          {/* <MailDisplay
             mail={mails.find((item) => item.id === mail.selected) || null}
-          />
+          /> */}
         </ResizablePanel>
       </ResizablePanelGroup>
     </TooltipProvider>

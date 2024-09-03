@@ -5,7 +5,10 @@ export async function GET(request:Request,{params:{id}}:{params:{id:string}}) {
     try {
         const appointment = await prismaClient.appointment.findMany({
            
-            where:{doctorId:id}
+            where:{doctorId:id,
+
+
+            }
         });
         if(!appointment){
             return NextResponse.json({ data: null})

@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 export async function GET(request:Request,{params:{id}}:{params:{id:string}}) {
     const doctorId=id
     try {
-        const profiles = await prismaClient.appointment.findUnique({
-            where:{doctorId}
+        const profiles = await prismaClient.appointment.findMany({
+            where:{doctorId:id}
         });
         return NextResponse.json({ data: profiles });
     } catch (error) {

@@ -45,6 +45,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { signOut, useSession } from "next-auth/react"
 import { siteConfig } from "@/config/site"
 import { cn, generateInitials } from "@/lib/utils"
+import SearchBar from "./SearchBar"
 // const products = [
 //   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
 //   { name: 'Engagement', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
@@ -81,12 +82,12 @@ export default function Navbar() {
     },
     {
       name:"Telehealth ",
-      path:'/tele-health',
+      path:'/category?mode=Tele-health visit',
 
     },
     {
       name:"Inperson ",
-      path:'/inperson',
+      path:'/category?mode=In-person doctor visit',
 
     },
     
@@ -175,16 +176,7 @@ export default function Navbar() {
           </SheetContent>
         </Sheet>
         <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-          <form className="ml-auto flex-1 sm:flex-initial">
-            <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search products..."
-                className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-              />
-            </div>
-          </form>
+          <SearchBar/>
           <ModeToggle/>
           {session && user && user?.email ? (
             <DropdownMenu>

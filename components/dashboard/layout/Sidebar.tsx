@@ -1,5 +1,5 @@
 "use client"
-import { AlarmClock, Bell,  Grid2X2, Home,  Mail, Package2,  Settings, Users } from "lucide-react";
+import { AlarmClock, Bell,  Grid2X2, Home,  Mail, Package2,  Settings, User2, Users } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
@@ -8,9 +8,12 @@ import { Card } from "flowbite-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { UserRole } from "@prisma/client";
+import { useSession } from "next-auth/react";
 
 export default  function Sidebar({role}:{role:UserRole}) {
 //   const categories = (await getCategories()) || [];
+const session=useSession()
+const user=session.data?.user
 const pathname=usePathname()
 
 const roles={
@@ -26,10 +29,15 @@ const roles={
       icon:AlarmClock
     },
     {
-      name:"Settings",
-      path:"/dashboard/user/settings",
-      icon:Home
+      name:"Inbox",
+      path:"/dashboard/user/inbox",
+      icon:Mail
     },
+    // {
+    //   name:"Settings",
+    //   path:"/dashboard/user/settings",
+    //   icon:Home
+    // },
   ],
   ADMIN:[
     {
@@ -62,17 +70,17 @@ const roles={
       path:"/dashboard/patients",
       icon:Users
     },
-    {
-      name:"Appointments",
-      path:"/dashboard/appointments",
-      icon:Grid2X2
-    },
+    // {
+    //   name:"Appointments",
+    //   path:"/dashboard/appointments",
+    //   icon:Grid2X2
+    // },
     
-    {
-      name:"Settings",
-      path:"/dashboard/settings",
-      icon:Settings
-    },
+    // {
+    //   name:"Settings",
+    //   path:"/dashboard/settings",
+    //   icon:Settings
+    // },
     
   
   ],
@@ -92,15 +100,16 @@ const roles={
       path:"/dashboard/doctor/patients",
       icon:Users
     },
-    {
-      name:"Tasks",
-      path:"/dashboard/doctor/tasks",
-      icon:Grid2X2
-    },
+   
     {
       name:"Inbox",
       path:"/dashboard/doctor/inbox",
       icon:Mail
+    },
+    {
+      name:"Profile",
+      path:`/dashboard/doctor/profile/${user?.id}`,
+      icon:User2
     },
     {
       name:"Settings",

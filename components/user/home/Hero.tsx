@@ -6,8 +6,8 @@ import { Pill } from "lucide-react";
 const Hero = () => {
     const TEXTS=['Acupucture','Massage','Chiropractor','Dental','Cosmetic','Dietitian','Speech Therapist','Occupational','Therapist','Acupuncturist']
   return (
-    <div className="bg-blue-950 dark:bg-slate-950">
-        <div className="relative bg-blue-950 dark:bg-slate-950 pb-[110px] pt-[50px] dark:bg-dark lg:pt-[50px] max-w-6xl mx-auto">
+    <div className=" dark:bg-slate-950">
+        <div className="relative  dark:bg-slate-950 pb-[110px] pt-[50px] dark:bg-dark lg:pt-[50px] max-w-6xl mx-auto">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 lg:w-5/12">
@@ -45,7 +45,7 @@ const Hero = () => {
                     </a>
                   </li>
                 </ul>
-                <div className="py-4 flex gap-4">
+                <div className="py-4 flex gap-4 dark:text-gray-100 text-slate-800">
                     <div className="flex flex-col items-center justify-center">
                         <span className="font-bold text-ggray-50">100</span>
                         <span className="text-sm text-gray-300">Active Specialists</span>

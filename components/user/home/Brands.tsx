@@ -35,9 +35,9 @@ const brandsData = [
 
 export default function Brands() {
   return (
-    <section className="bg-slate-100 text-slate-800 dark:text-slate-200 dark:bg-slate-800 py-10 lg:py-[120px] dark:bg-dark">
+    <section className="">
      <h2 className="text-center pb-6">Trusted By</h2>
-      <div className="container mx-auto">
+      <div className="relative  dark:bg-slate-950 pb-[110px] pt-[50px] dark:bg-dark lg:pt-[50px] max-w-6xl mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="flex flex-wrap items-center justify-center">

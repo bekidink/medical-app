@@ -11,7 +11,7 @@ export default async function page() {
   const role=user?.role
   return (
     <div>
-      {role==="DOCTOR"?<DoctorDashboard/>:role==="ADMIN"?<Dashboard/>:<UserDashboard/>}
+      {role==="DOCTOR"?<DoctorDashboard session={session!}/>:role==="ADMIN"?<Dashboard/>:<UserDashboard session={session!}/>}
       {/* <Dashboard/> */}
     </div>
   )

@@ -8,8 +8,8 @@ import React from 'react'
 
 export default async function page({params:{id}}:{params:{id:string}}) {
   const appointment:Appointment=await ( await getData(`appointments/${id}`)).data
-  console.log(appointment.fullName)
-  const formattedDate=formatDate(appointment.appointmentDate)
+  
+  const formattedDate=formatDate(new Date(appointment.appointmentDate))
   return (
     <div>
     <div className="flex items-center justify-between px-4 py-4 border-b">
@@ -45,7 +45,7 @@ export default async function page({params:{id}}:{params:{id:string}}) {
       </div>
       <div className="flex divide-x-2 px-4 py-3 divide-gray-900 dark:divide-gray-50 border-b">
 <p className="px-3 text-sm font-semibold">Date of Birth</p>
-<p className="px-3">{formatDate(appointment.dob)}</p>
+<p className="px-3">{formatDate(new Date(appointment.dob))}</p>
       </div>
       <div className="flex divide-x-2 px-4 py-3 divide-gray-900 dark:divide-gray-50 border-b">
 <p className="px-3 text-sm font-semibold">Email</p>

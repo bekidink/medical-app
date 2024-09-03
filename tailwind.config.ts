@@ -8,8 +8,9 @@ export default withUt({
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-    
+     "./node_modules/react-tailwindcss-select/dist/index.esm.js",
     'node_modules/flowbite-react/lib/esm/**/*.js'
+
 	],
   prefix: "",
   theme: {
@@ -77,7 +78,7 @@ export default withUt({
       },
     },
   },
-  plugins: [require("tailwindcss-animate"),require('@tailwindcss/forms'),require('flowbite/plugin'),],
+  plugins: [require("tailwindcss-animate"),require('@tailwindcss/forms'),require('flowbite/plugin'),require('@tailwindcss/typography'),],
 });
 // const config =
 //  {
