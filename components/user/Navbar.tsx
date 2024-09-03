@@ -75,11 +75,7 @@ export default function Navbar() {
       path:'/',
 
     },
-    {
-      name:"Find",
-      path:'/find-doctor',
-
-    },
+    
     {
       name:"Telehealth ",
       path:'/category?mode=Tele-health visit',

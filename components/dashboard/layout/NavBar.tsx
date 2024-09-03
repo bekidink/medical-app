@@ -1,18 +1,21 @@
 "use client"
 import Link from "next/link"
 import {
+  AlarmClock,
   Bell,
   CircleUser,
   Folder,
   Grid2X2,
   Home,
   LineChart,
+  Mail,
   Menu,
   Package,
   Package2,
   Search,
   Settings,
   ShoppingCart,
+  User2,
   Users,
 } from "lucide-react"
 
@@ -39,9 +42,10 @@ import ModeToggle from "@/components/ModeToggle"
 import { useRouter } from "next/navigation"
 import { signOut, useSession } from "next-auth/react"
 import { generateInitials } from "@/lib/utils"
+import { UserRole } from "@prisma/client"
 
 
-export default function Navbar() {
+export default function Navbar({role}:{role:UserRole}) {
   const router = useRouter();
   const {data:session,status}=useSession()
   const user=session?.user;
@@ -50,39 +54,111 @@ export default function Navbar() {
     await signOut();
     router.push("/");
   }
-const sideBarLinks=[
-  {
-    name:"Dashboard",
-    path:"/dashboard",
-    icon:Home
-  },
-  {
-    name:"Patients",
-    path:"/patients",
-    icon:Folder
-  },
-  {
-    name:"Appointments",
-    path:"/appointments",
-    icon:Grid2X2
-  },
-  {
-    name:"Reports",
-    path:"/reports",
-    icon:LineChart
-  },
-  {
-    name:"Settings",
-    path:"/settings",
-    icon:Settings
-  },
-  {
-    name:"Logout",
-    path:"/logout",
-    icon:Bell
-  },
-
-]
+  const roles={
+    USER:[
+      {
+        name:"Dashboard",
+        path:"/dashboard",
+        icon:Home
+      },
+      {
+        name:"My Appointments",
+        path:"/dashboard/user/appointments",
+        icon:AlarmClock
+      },
+      {
+        name:"Inbox",
+        path:"/dashboard/user/inbox",
+        icon:Mail
+      },
+      // {
+      //   name:"Settings",
+      //   path:"/dashboard/user/settings",
+      //   icon:Home
+      // },
+    ],
+    ADMIN:[
+      {
+        name:"Dashboard",
+        path:"/dashboard",
+        icon:Home
+      },
+      {
+        name:"Services",
+        path:"/dashboard/services",
+        icon:Users
+      },
+      {
+        name:"Specialities",
+        path:"/dashboard/specialities",
+        icon:Users
+      },
+      {
+        name:"Symptoms",
+        path:"/dashboard/symptoms",
+        icon:Users
+      },
+      {
+        name:"Doctors",
+        path:"/dashboard/doctors",
+        icon:Users
+      },
+      {
+        name:"Patients",
+        path:"/dashboard/patients",
+        icon:Users
+      },
+      // {
+      //   name:"Appointments",
+      //   path:"/dashboard/appointments",
+      //   icon:Grid2X2
+      // },
+      
+      // {
+      //   name:"Settings",
+      //   path:"/dashboard/settings",
+      //   icon:Settings
+      // },
+      
+    
+    ],
+    DOCTOR:[
+      {
+        name:"Dashboard",
+        path:"/dashboard",
+        icon:Home
+      },
+      {
+        name:"Appointments",
+        path:"/dashboard/doctor/appointments",
+        icon:AlarmClock
+      },
+      {
+        name:"Patients",
+        path:"/dashboard/doctor/patients",
+        icon:Users
+      },
+     
+      {
+        name:"Inbox",
+        path:"/dashboard/doctor/inbox",
+        icon:Mail
+      },
+      {
+        name:"Profile",
+        path:`/dashboard/doctor/profile/${user?.id}`,
+        icon:User2
+      },
+      {
+        name:"Settings",
+        path:"/dashboard/doctor/settings",
+        icon:Settings
+      },
+      
+    
+    ],
+  }
+  let sideBarLinks=role? roles[role] : []
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
     <Sheet>
@@ -105,7 +181,7 @@ const sideBarLinks=[
             <Package2 className="h-6 w-6" />
             <span className="sr-only">Acme Inc</span>
           </Link>
-        {sideBarLinks.map((item,i)=>{
+        {sideBarLinks.map((item:any,i:any)=>{
           const Icon=item.icon
           return (
             <Link
