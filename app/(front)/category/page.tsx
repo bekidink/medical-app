@@ -39,9 +39,9 @@ const alldoctors:DoctorProfile[]=await (await getData("home/doctors")).data
   doctors.length>0?(
     <div className=" grid grid-cols-2 gap-6">
       {
-        doctors.map((doctor)=>{
+        doctors.map((doctor,i)=>{
           return (
-            <DoctorCard isInPerson={doctor.operationMode==='In-person doctor visit'?true:false} doctor={doctor}/>
+            <DoctorCard key={i} isInPerson={doctor.operationMode==='In-person doctor visit'?true:false} doctor={doctor}/>
           )
         })
       }

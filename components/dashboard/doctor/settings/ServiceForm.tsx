@@ -165,9 +165,9 @@ export default function ServiceForm({services,specialities,symptoms,profileId}:S
     </div>
     <div className="grid grid-cols-5 flex-wrap gap-2 w-full">
           {
-            services.map((item:serviceResponse)=>{
+            services.map((item:serviceResponse,i)=>{
 return (
-  <button  onClick={()=>setSelectedServiceId(item.id)} className={cn("flex flex-col items-center justify-between py-2 px-3 rounded-md cursor-pointer",selectedServiceId===item.id?"border border-gray-900 dark:border-gray-100":"")}>
+  <button key={i}  onClick={()=>setSelectedServiceId(item.id)} className={cn("flex flex-col items-center justify-between py-2 px-3 rounded-md cursor-pointer",selectedServiceId===item.id?"border border-gray-900 dark:border-gray-100":"")}>
 <Image src={item.imageUrl} alt='' width={100} height={100} className='w-14 h-14' />
 <p className="text-xs">{item.title}</p>
   </button>
@@ -220,9 +220,9 @@ return (
     </div>
     <div className="grid grid-cols-4 gap-2 w-full">
           {
-            specialities.map((item:specialityResponse)=>{
+            specialities.map((item:specialityResponse,i)=>{
 return (
-  <button onClick={()=>setSelectedSpeciality(item.id)} className={cn('flex flex-col items-center justify-between py-2 px-3 rounded-md cursor-pointer',selectedSpeciality===item.id?"border border-gray-900 dark:border-gray-200":"")}>
+  <button key={i} onClick={()=>setSelectedSpeciality(item.id)} className={cn('flex flex-col items-center justify-between py-2 px-3 rounded-md cursor-pointer',selectedSpeciality===item.id?"border border-gray-900 dark:border-gray-200":"")}>
 <p className="text-xs">{item.title}</p>
   </button>
 )
@@ -247,9 +247,9 @@ return (
     </div>
     <div className="grid grid-cols-4 gap-2 w-full">
           {
-            symptoms.map((item:symptomResponse)=>{
+            symptoms.map((item:symptomResponse,i)=>{
 return (
-  <button onClick={()=>setSelected((prev)=>[...prev,item.id])} className={cn('flex flex-col items-center justify-between py-2 px-3 rounded-md cursor-pointer',selected.includes(item.id)?"border border-gray-900 dark:border-gray-200":"")}>
+  <button key={i} onClick={()=>setSelected((prev)=>[...prev,item.id])} className={cn('flex flex-col items-center justify-between py-2 px-3 rounded-md cursor-pointer',selected.includes(item.id)?"border border-gray-900 dark:border-gray-200":"")}>
 <p className="text-xs">{item.title}</p>
   </button>
 )
