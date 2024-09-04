@@ -32,9 +32,7 @@ export async function getData(endpoint:string) {
     const response = await fetch(`https://medical-app-peach.vercel.app/api/${endpoint}`, {
       cache: "force-cache",
     });
-    if (!response.ok) {
-      throw new Error(`Failed to fetch data from ${endpoint}: ${response.statusText}`);
-    }
+   
 
     const data = await response.json();
     return data;
