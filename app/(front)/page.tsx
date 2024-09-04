@@ -2,7 +2,6 @@ import Brands from "@/components/user/home/Brands";
 import DoctorsList from "@/components/user/home/doctors/DoctorsList";
 import Hero from "@/components/user/home/Hero";
 import Service from "@/components/user/home/Service";
-import { authOptions } from "@/lib/auth";
 import { getData } from "@/lib/utils";
 import { DoctorProfile } from "@/types/types";
 
