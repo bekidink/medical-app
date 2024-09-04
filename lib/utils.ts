@@ -30,8 +30,12 @@ export async function getData(endpoint:string) {
   try {
     const baseUrl = process.env.NEXTAUTH_URL;
     const response = await fetch(`https://medical-app-peach.vercel.app/api/${endpoint}`, {
-      cache: "no-store",
+      cache: "default",
     });
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data from ${endpoint}: ${response.statusText}`);
+    }
+
     const data = await response.json();
     return data;
   } catch (error) {
