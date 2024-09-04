@@ -8,7 +8,7 @@ import HomeDisplay from "@/components/dashboard/doctor/appointments/HomeDisplay"
 export default async function MailPage() {
 
 
-  const messages:Message[]= await getData("doctor/inbox")
+  const messages:Message[]= await getData("doctor/inbox")||[]
   const count=messages.length
   return (
     <div className="">
