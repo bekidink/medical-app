@@ -6,7 +6,7 @@ import React from 'react'
 
 export default async function page({params:{id}}:{params:{id:string}}) {
     const services=await getData(`admin/symptoms/${id}`)
-  const data:symptomResponse=services.data
+  const data:symptomResponse=services
   return (
     <div>
       <SymptomForm title='Symptom' description='Please fill symptom form' isEdit={true} data={data}/>

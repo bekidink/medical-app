@@ -5,7 +5,7 @@ import React from 'react'
 
 export default async function page({params:{id}}:{params:{id:string}}) {
   const services=await getData(`admin/services/${id}`)
-  const data:serviceResponse=services.data
+  const data:serviceResponse=services
   return (
     <div>
        {data && <ServiceForm title={'Update Services'} description={'Please update  service Info'} isEdit={true} data={data} />}

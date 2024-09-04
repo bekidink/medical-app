@@ -5,7 +5,7 @@ import React from 'react'
 
 export default async function page({params:{id}}:{params:{id:string}}) {
     const services=await getData(`admin/specialities/${id}`)
-  const data:specialityResponse=services.data
+  const data:specialityResponse=services
   return (
     <div>
       <SpecialityForm title='Speciality' description='Please fill speciality form' isEdit={true} data={data}/>
