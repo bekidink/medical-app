@@ -5,10 +5,10 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Card } from "flowbite-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { UserRole } from "@prisma/client";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 export default  function Sidebar({role}:{role:UserRole}) {
 //   const categories = (await getCategories()) || [];
@@ -120,41 +120,12 @@ const roles={
   
   ],
 }
-// const sideBarLinks=
-// [
-//   {
-//     name:"Dashboard",
-//     path:"/dashboard",
-//     icon:Home
-//   },
-//   {
-//     name:"Patients",
-//     path:"/dashboard/patients",
-//     icon:Folder
-//   },
-//   {
-//     name:"Appointments",
-//     path:"/dashboard/appointments",
-//     icon:Grid2X2
-//   },
-//   {
-//     name:"Reports",
-//     path:"/dashboard/reports",
-//     icon:LineChart
-//   },
-//   {
-//     name:"Settings",
-//     path:"/dashboard/settings",
-//     icon:Settings
-//   },
-//   {
-//     name:"Online",
-//     path:"/",
-//     icon:Globe
-//   },
-
-// ]
+const router = useRouter();
 let sideBarLinks=role? roles[role] : []
+async function handleLogout() {
+  await signOut();
+  router.push("/");
+}
 return (
     <div className="hidden border-r bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">

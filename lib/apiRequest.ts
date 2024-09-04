@@ -15,7 +15,7 @@ export async function makePostRequest( { setLoading, endpoint, data, resourceNam
     console.log(endpoint)
     setLoading(true);
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
+    const response = await fetch(`https://medical-app-peach.vercel.app/api/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export async function makePutRequest(
   try {
     setLoading(true);
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
+    const response = await fetch(`https://medical-app-peach.vercel.app/api/${endpoint}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -99,7 +99,7 @@ export async function makeDeleteRequest(
   try {
     setLoading(true);
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
+    const response = await fetch(`https://medical-app-peach.vercel.app/api/${endpoint}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
