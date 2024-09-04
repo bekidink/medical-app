@@ -29,7 +29,7 @@ export function generateTrackingNumber(): string {
 export async function getData(endpoint:string) {
   try {
     const baseUrl = process.env.NEXTAUTH_URL;
-    const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
+    const response = await fetch(`https://medical-app-peach.vercel.app/api/${endpoint}`, {
       cache: "no-store",
     });
     const data = await response.json();
