@@ -8,7 +8,7 @@ import { useSearchParams } from 'next/navigation'
 import React from 'react'
 
 export default async function page({params:{id}}:{params:{id:string}}) {
-  const allspecialities:specialityResponse[]= await(await getData("admin/specialities")).data
+  const allspecialities:specialityResponse[]= await getData("admin/specialities")
   const session =await getServerSession(authOptions)
   const user=session?.user
   if(!user){

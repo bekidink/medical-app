@@ -9,7 +9,7 @@ export async function GET() {
                 }
             }
         );
-        return NextResponse.json({ data: profiles });
+        return NextResponse.json( profiles );
     } catch (error) {
         console.error("Error fetching profiles:", error);
         return NextResponse.json({ error: "Something went wrong" }, { status: 500 });

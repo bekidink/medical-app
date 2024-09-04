@@ -9,7 +9,7 @@ export default async function page({params:{slug},searchParams}:{
   searchParams:{[key:string]:string | string[] | undefined}
 }) {
   const title=slug.split("-").join(" ")
-  const data=await(await getData(`services/${slug}`)).data
+  const data=await getData(`services/${slug}`)
   const doctors:DoctorDetail[]=data.doctors
   const services:serviceResponse[]=data.services
  

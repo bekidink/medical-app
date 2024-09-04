@@ -78,6 +78,6 @@ export async function GET(request: Request, { params: { query } }: { params: { q
       doctors
     };
   
-    return NextResponse.json({ data });
+    return NextResponse.json( data );
   }
   

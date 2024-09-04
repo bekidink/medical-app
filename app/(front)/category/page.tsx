@@ -13,7 +13,7 @@ const {mode}=searchParams
 //   const data=await(await getData(`specialities/${slug}`)).data
 //   const doctors:DoctorDetail[]=data.doctors
 //   const services:specialityResponse[]=data.specialities
-const alldoctors:DoctorProfile[]=await (await getData("home/doctors")).data
+const alldoctors:DoctorProfile[]=await getData("home/doctors")
   const doctors=alldoctors.filter((doctor)=>doctor.operationMode===mode)
 
  return (

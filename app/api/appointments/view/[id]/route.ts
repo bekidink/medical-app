@@ -23,7 +23,7 @@ export async function GET(request:Request,{params:{id}}:{params:{id:string}}) {
         const profiles = await prismaClient.appointment.findUnique({
             where:{id:id}
         });
-        return NextResponse.json({ data: profiles });
+        return NextResponse.json( profiles );
     } catch (error) {
         console.error("Error fetching profiles:", error);
         return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
@@ -48,7 +48,7 @@ export async function PUT(request:Request,{params:{id}}:{params:{id:string}}){
             where:{id},
             data:data
         })
-        return NextResponse.json({data:updatedBanner},{status:200})
+        return NextResponse.json(updatedBanner)
     } catch (error) {
         console.log(error)
         return NextResponse.json({message:"Failed to fetch Categories",error},{status:500})

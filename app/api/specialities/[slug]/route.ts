@@ -30,7 +30,7 @@ export async function GET(request:Request,{params:{slug}}:{params:{slug:string}}
         doctors,
         specialities
        }
-        return NextResponse.json({data:data})
+        return NextResponse.json(data)
     } catch (error) {
         return NextResponse.json({message:"Failed to fetch Categories",error},{status:500})
     }

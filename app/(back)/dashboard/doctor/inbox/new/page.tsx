@@ -12,7 +12,7 @@ export default async function page() {
     const doc:DoctorDetail=await getData(`doctor/${user?.id}`)
     let appointments:Appointment[]= []
     if(user && doc){
-      appointments=  await(await getData(`doctor/appointments/${doc.id}`)).data
+      appointments=  await getData(`doctor/appointments/${doc.id}`)
     }
       const uniqueUserAppointments = Array.from(
           new Map(appointments.map(item => [item.userId, item])).values()

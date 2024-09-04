@@ -30,7 +30,7 @@ export async function GET() {
             appointments:appointments.length.toString().padStart(2,"0"),
             services:services.toString().padStart(2,"0")
         }
-        return NextResponse.json({ data: stats },{status:201});
+        return NextResponse.json( stats );
     } catch (error) {
         return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
     }

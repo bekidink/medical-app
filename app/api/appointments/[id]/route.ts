@@ -12,7 +12,7 @@ export async function POST(req: Request) {
             data:data
         });
 
-        return NextResponse.json({ data: newProfile }, { status: 201 });
+        return NextResponse.json(newProfile );
     } catch (error) {
         console.error("Error creating profile:", error);
         return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
@@ -23,7 +23,7 @@ export async function GET(request:Request,{params:{id}}:{params:{id:string}}) {
         const profiles = await prismaClient.appointment.findUnique({
             where:{id:id}
         });
-        return NextResponse.json({ data: profiles });
+        return NextResponse.json(profiles );
     } catch (error) {
         console.error("Error fetching profiles:", error);
         return NextResponse.json({ error: "Something went wrong" }, { status: 500 });

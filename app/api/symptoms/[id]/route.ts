@@ -33,7 +33,7 @@ doctors,
 symptom,
 symptoms
         }
-        return NextResponse.json({data:data})
+        return NextResponse.json(data)
     } catch (error) {
         return NextResponse.json({message:"Failed to fetch Categories",error},{status:500})
     }

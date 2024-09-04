@@ -19,7 +19,7 @@ export async function PUT(req: Request) {
             },
         });
 
-        return NextResponse.json({ data: updatedProfile }, { status: 200 });
+        return NextResponse.json(updatedProfile );
     } catch (error) {
         console.error("Error updating profile:", error);
         return NextResponse.json({ error: "Something went wrong" }, { status: 500 });

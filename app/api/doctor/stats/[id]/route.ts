@@ -36,7 +36,7 @@ export async function GET(request:Request,{params:{id}}:{params:{id:string}}) {
             appointments:appointments.length.toString().padStart(2,"0"),
             inboxes:"00"
         }
-        return NextResponse.json({ data: stats },{status:201});
+        return NextResponse.json( stats );
     } catch (error) {
         return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
     }

@@ -9,7 +9,7 @@ import { Calendar } from 'lucide-react'
 import React from 'react'
 
 export default async function page() {
-  const appointments:Appointment[]= await(await getData("appointments")).data
+  const appointments:Appointment[]= await getData("appointments")
   const count=appointments.length
   return (
     

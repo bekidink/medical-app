@@ -17,7 +17,7 @@ export async function POST(req: Request) {
             data:data,
         });
 
-        return NextResponse.json({ data: newProfile }, { status: 201 });
+        return NextResponse.json(newProfile );
     } catch (error) {
         return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
     }
@@ -31,7 +31,7 @@ export async function GET() {
                 createdAt:'desc'
             }
         });
-        return NextResponse.json({ data: services },{status:201});
+        return NextResponse.json(services );
     } catch (error) {
         return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
     }

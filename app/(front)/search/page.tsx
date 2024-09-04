@@ -15,13 +15,13 @@ const {query}=searchParams
 //   const data=await(await getData(`specialities/${slug}`)).data
 //   const doctors:DoctorDetail[]=data.doctors
 //   const services:specialityResponse[]=data.specialities
-const data=await (await getData(`search/${query}`)).data
+const data=await getData(`search/${query}`)
 console.log(data)  
 const doctors:DoctorProfile[]=data.doctors
   const services:ServiceData[]=data.services
   const symptoms:symptomResponse[]=data.symptoms
   const specialities:specialityResponse[]=data.specialities
-  const allServices:ServiceData[]=await (await getData(`services`)).data
+  const allServices:ServiceData[]=await getData(`services`)
   const serviceList:ServiceData[]=services.length>0?services:allServices
  return (
 <div className='container p-8'>

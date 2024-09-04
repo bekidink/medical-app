@@ -7,7 +7,7 @@ import Link from 'next/link'
 import React from 'react'
 
 export default async function page({params:{id}}:{params:{id:string}}) {
-  const appointment:DoctorDetail=await ( await getData(`doctor/${id}`))
+  const appointment:DoctorDetail= await getData(`doctor/${id}`)
 //   const date = new Date(appointment.appointmentDate);
 //   const formattedDate=formatDate(date)
   return (

@@ -16,7 +16,7 @@ export default async function layout({children}:{children:ReactNode}) {
   const user=session?.user
   let appointments:DoctorDetail[]= []
   if(user){
-    appointments=  await(await getData(`doctors`)).data
+    appointments= await getData(`doctors`)
   }
 
   return (

@@ -31,7 +31,7 @@ export async function POST(req: Request) {
 export async function GET() {
     try {
         const profiles = await prismaClient.doctorProfile.findMany();
-        return NextResponse.json({ data: profiles });
+        return NextResponse.json( profiles );
     } catch (error) {
         console.error("Error fetching profiles:", error);
         return NextResponse.json({ error: "Something went wrong" }, { status: 500 });

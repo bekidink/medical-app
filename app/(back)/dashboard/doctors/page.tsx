@@ -13,7 +13,7 @@ import React from 'react'
 export default async function page() {
   const session =await getServerSession(authOptions)
   const user=session?.user
-  let appointments:DoctorDetail[]=await(await getData(`doctors`)).data
+  let appointments:DoctorDetail[]=await getData(`doctors`)
   
   
   const count=appointments.length

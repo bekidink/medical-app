@@ -8,7 +8,7 @@ import { Calendar } from 'lucide-react'
 import React, { ReactNode } from 'react'
 
 export default async function layout({children}:{children:ReactNode}) {
-    const appointments:Appointment[]= await(await getData("appointments")).data
+    const appointments:Appointment[]= await getData("appointments")
   return (
     <div>
      

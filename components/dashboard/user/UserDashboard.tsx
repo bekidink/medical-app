@@ -6,7 +6,7 @@ import React from 'react'
 
 export default async  function UserDashboard({session}:{session:Session}) {
   const user=session.user
-  const stats=await(await getData(`user/stats/${user.id}`)).data
+  const stats=await getData(`user/stats/${user.id}`)
   return (
     <div className='px-8 py-4'>
     <h1 className="scroll-m-20 mb-3 text-4xl font-extrabold tracking-tight lg:text-5xl">

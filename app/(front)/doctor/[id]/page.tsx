@@ -13,7 +13,7 @@ export default async function page({params:{id}}:{params:{id:string}}) {
   const session =await getServerSession(authOptions)
   const user=session?.user
   
-  const appointment:Appointment= await(await getData(`appointments/patients/${id}`)).data
+  const appointment:Appointment= await getData(`appointments/patients/${id}`)
   return (
     <>
     {

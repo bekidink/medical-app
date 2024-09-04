@@ -15,7 +15,7 @@ export default async function page() {
   const user=session?.user
   let appointments:Appointment[]= []
   if(user){
-    appointments=  await(await getData(`doctor/appointments/${user.id}`)).data
+    appointments=  await getData(`doctor/appointments/${user.id}`)
   }
     const uniqueUserAppointments = Array.from(
         new Map(appointments.map(item => [item.userId, item])).values()

@@ -22,7 +22,7 @@ export async function DELETE(request:Request,{params:{id}}:{params:{id:string}})
             },
            
         })
-        return NextResponse.json({ data: deletedService }, { status: 201 })
+        return NextResponse.json( deletedService )
     } catch (error) {
         return NextResponse.json({message:"Failed to delete Category",error},{status:500})
     }

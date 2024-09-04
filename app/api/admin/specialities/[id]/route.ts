@@ -22,7 +22,7 @@ export async function DELETE(request:Request,{params:{id}}:{params:{id:string}})
             },
            
         })
-        return NextResponse.json({ data: deletedSpeciality }, { status: 201 })
+        return NextResponse.json( deletedSpeciality)
     } catch (error) {
         return NextResponse.json({message:"Failed to delete Category",error},{status:500})
     }
@@ -63,7 +63,7 @@ export async function GET(request:Request,{params:{id}}:{params:{id:string}}){
             },
             
         })
-        return NextResponse.json({ data: service },{status:201});
+        return NextResponse.json(service);
     } catch (error) {
         return NextResponse.json({message:"Failed to fetch Categories",error},{status:500})
     }
