@@ -11,7 +11,7 @@ import React from 'react'
 
 export default async function page() {
     const services= await getData("admin/services")
-    console.log(services.data)
+    
   return (
     <div>
      

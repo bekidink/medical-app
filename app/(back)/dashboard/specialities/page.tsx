@@ -12,7 +12,7 @@ import React from 'react'
 
 export default async function page() {
     const specialities= await getData("admin/specialities")
-    console.log(specialities.data)
+  
   return (
     <div>
      
