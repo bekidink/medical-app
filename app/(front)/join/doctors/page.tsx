@@ -22,7 +22,7 @@ export default function page() {
             title:"Begin Your Journey",
             description:'Start a new application to join our network of healthcare providers.',
 
-            link:"/",
+            link:"/register?role=DOCTOR&plan=free",
             linkTitle:'Start a new application'
         },
         {
@@ -85,7 +85,7 @@ export default function page() {
                <p>
                EthioMedic is a full-service platform to help you build and run your practice and care for patients for virtual care,in-person care,or both.
                </p>
-               <CustomButton title='List your Service' href='#' className='bg-blue-600 dark:bg-slate-200 hover:bg-blue-800'/>
+               <CustomButton title='List your Service' href='/register?role=DOCTOR&plan=free' className='bg-blue-600 dark:bg-slate-200 hover:bg-blue-800'/>
               
               <p className="py-6">
               {features.map((item,i)=>{

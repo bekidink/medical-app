@@ -87,14 +87,10 @@ export default function Navbar() {
 
     },
     
+    
     {
-      name:"About",
-      path:'/about',
-      
-    },
-    {
-      name:"Services",
-      path:'/services',
+      name:"Drs",
+      path:'/join/doctors',
       
     },
     
