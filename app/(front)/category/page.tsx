@@ -15,7 +15,7 @@ const {mode}=searchParams
 //   const services:specialityResponse[]=data.specialities
 const alldoctors:DoctorProfile[]=await getData("home/doctors")
   const doctors=alldoctors.filter((doctor)=>doctor.operationMode===mode)
-
+  const allservices:serviceResponse[]=await getData("admin/services")
  return (
 <div className='container p-8'>
        <h1 className="capitalize scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-5xl">
@@ -25,11 +25,11 @@ const alldoctors:DoctorProfile[]=await getData("home/doctors")
         <div className="col-span-4 shadow border border-gray-200/50 rounded-sm p-6">
 <h2 className=' capitalize font-semibold'>Other Specialities</h2>
 <div className="py-3 flex flex-col text-sm space-y-2">
-  {/* {services.map((item,i)=>{
+  {allservices.map((item,i)=>{
     return (
 <Link key={i} href={'#'} className='hover:to-blue-600'>{item.title}</Link>
     )
-  })} */}
+  })}
   
 
 </div>
