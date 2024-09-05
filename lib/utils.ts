@@ -35,16 +35,18 @@ export async function getData(endpoint: string) {
 
     if (!response.ok) {
       console.error(`Error: Received status ${response.status} for ${endpoint}`);
-      return null;
+      // Return empty data in case of a 404 or other errors
+      return [];
     }
 
     const data = await response.json();
     return data;
   } catch (error) {
     console.error(`Error fetching data from ${endpoint}:`, error);
-    return null;
+    return []; // Return empty array or object to prevent further errors
   }
 }
+
 
 export function generateSlug(title:string) {
   return title
