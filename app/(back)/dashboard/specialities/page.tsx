@@ -11,8 +11,10 @@ import { Anvil, LayoutGrid } from 'lucide-react'
 import React from 'react'
 
 export default async function page() {
-    const specialities= await getData("admin/specialities")
-  
+    const specialities= await getData("admin/specialities") || []
+    if(!specialities){
+      return <p>No specialities</p>
+    }
   return (
     <div>
      

@@ -11,7 +11,10 @@ import { LayoutGrid } from 'lucide-react'
 import React from 'react'
 
 export default async function page() {
-    const symptoms= await getData("admin/symptoms")
+    const symptoms= await getData("admin/symptoms")||[]
+    if(!symptoms){
+      return <p>no Symptoms</p>
+    }
   return (
     <div>
      

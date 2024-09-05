@@ -34,7 +34,7 @@ export async function getData(endpoint: string) {
     });
 
     if (!response.ok) {
-      console.error(`Error: Received status ${response.status} for ${endpoint}`);
+      // console.error(`Error: Received status ${response.status} for ${endpoint}`);
       // Return empty data in case of a 404 or other errors
       return [];
     }
