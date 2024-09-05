@@ -4,9 +4,9 @@ import { getData } from "@/lib/utils";
 import { serviceResponse, specialityResponse, symptomResponse } from "@/types/types";
 
 export default async function Service() {
-  const allservices=await (await getData("admin/services")).data
-    const allspecialities= await(await getData("admin/specialities")).data
-    const allsymptoms=await (await getData("admin/symptoms")).data
+  const allservices=await getData("admin/services")
+    const allspecialities= await getData("admin/specialities")
+    const allsymptoms=await getData("admin/symptoms")
     
 const symptoms:symptomResponse[]=allsymptoms 
 const services:serviceResponse[]=allservices

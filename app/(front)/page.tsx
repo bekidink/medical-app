@@ -3,13 +3,13 @@ import DoctorsList from "@/components/user/home/doctors/DoctorsList";
 import Hero from "@/components/user/home/Hero";
 import Service from "@/components/user/home/Service";
 import { getData } from "@/lib/utils";
-import { DoctorProfile } from "@/types/types";
+import { DoctorDetail, DoctorProfile } from "@/types/types";
 
 
 
 export default async function Home() {
   // const session=await getServerSession(authOptions)
-  const alldoctors:DoctorProfile[]=await getData("home/doctors")||[]
+  const alldoctors:DoctorDetail[]=await getData("home/doctors")||[]
   if (!alldoctors || alldoctors.length === 0) {
     return <p>No Doctors found</p>;
   }
