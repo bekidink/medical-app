@@ -52,7 +52,7 @@ import StatCard from "./StatCard"
 export default async function Dashboard() {
   const response=await getData("admin/stats")
   let doctors:DoctorDetail[]=await getData(`doctors`)
-  const stats:statsResponse=response.data
+  const stats:statsResponse=response
   const statCards=[
     {
       title:" Doctors",

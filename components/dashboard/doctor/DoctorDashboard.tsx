@@ -4,13 +4,13 @@ import { Calendar, DollarSign, MessageCircle, Users } from 'lucide-react'
 import { Session } from 'next-auth'
 import React from 'react'
 
-export default async function DoctorDashboard({session}:{session:Session}) {
-  const user=session.user
-  const stats=await getData(`doctor/stats/${user.id}`)
+export default async function DoctorDashboard({session}:{session:Session | null}) {
+  const user=session?.user
+  const stats=await getData(`doctor/stats/${user?.id}`)
   return (
     <div className='px-8 py-4'>
       <h1 className="scroll-m-20 mb-3 text-4xl font-extrabold tracking-tight lg:text-5xl">
-      Welcome Dr. <span className='capitalize'>{user.name}</span>
+      Welcome Dr. <span className='capitalize'>{user?.name}</span>
     </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 <Card>
