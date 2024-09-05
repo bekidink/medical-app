@@ -15,7 +15,7 @@ export default async function SymptomPanel({symptoms}:any) {
     return (
        
         <ScrollArea className="h-96 w-full ">
-           {symptoms.data && symptoms.data.map((tag:symptomResponse,i:any) => (
+           {symptoms && symptoms.map((tag:symptomResponse,i:any) => (
              <SymptomCard key={i} title={tag.title} slug={tag.slug} id={tag.id}/>
                
               

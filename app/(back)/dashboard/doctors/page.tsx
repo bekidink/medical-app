@@ -24,7 +24,7 @@ export default async function page() {
         <div className="">
           <div className="flex items-center py-2 border-b border-gray-200 justify-end">
             <div className="flex items-center gap-4">
-              <NewButton title='New Doctor' href=''/>
+              {/* <NewButton title='New Doctor' href=''/> */}
             </div>
           </div>
           <HomeDisplay title='Registered Doctors' count={count} link=''/>

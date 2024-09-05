@@ -38,7 +38,7 @@ export default async function page() {
       <div className=" gap-2 py-2 px-6 text-center border border-gray-100 shadow-md rounded-md flex flex-col items-center">
       <LayoutGrid/>
       <p>You have {(specialities.length).toString().padStart(2,"0")}  available specialities.</p>
-      <NewButton title='New Speciality' href='/dashboard/services/new'/>
+      <NewButton title='New Speciality' href='/dashboard/specialities/new'/>
       </div>
     </div>
         </div>

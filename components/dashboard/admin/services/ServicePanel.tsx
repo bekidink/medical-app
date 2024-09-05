@@ -14,7 +14,7 @@ export default async function ServicePanel({services}:any) {
     return (
        
         <ScrollArea className="h-96 w-full ">
-           {services.data && services.data.map((tag:serviceResponse,i:any) => (
+           {services && services.map((tag:serviceResponse,i:any) => (
              <ServiceCard key={i} title={tag.title} slug={tag.slug} imageUrl={tag.imageUrl} id={tag.id}/>
                
               

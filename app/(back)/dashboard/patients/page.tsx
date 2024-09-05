@@ -1,11 +1,39 @@
-import Patients from '@/components/dashboard/patients/Patients'
+import DisplayPanel from '@/components/dashboard/doctor/appointments/DisplayPanel'
+import HomeDisplay from '@/components/dashboard/doctor/appointments/HomeDisplay'
+import ListPanel from '@/components/dashboard/doctor/appointments/ListPanel'
+import PanelHeader from '@/components/dashboard/doctor/appointments/PanelHeader'
+import NewButton from '@/components/dashboard/shared/NewButton'
+import { authOptions } from '@/lib/auth'
+import { getData } from '@/lib/utils'
+import { Appointment } from '@/types/types'
+import { Calendar } from 'lucide-react'
+import { getServerSession } from 'next-auth/next'
 import React from 'react'
 
-export default function page() {
+export default async function page() {
+  const session =await getServerSession(authOptions)
+  const user=session?.user
+  let appointments:Appointment[]= []
+  if(user){
+    appointments=  await getData(`appointments`)
+  }
+    const uniqueUserAppointments = Array.from(
+        new Map(appointments.map(item => [item.userId, item])).values()
+      );
+  const count=uniqueUserAppointments.length
   return (
-    <div>
-      <Patients/>
-    </div>
+    
+     
+      
+        <div className="">
+          <div className="flex items-center py-2 border-b border-gray-200 justify-end">
+            <div className="flex items-center gap-4">
+              <NewButton title='New Appointment' href=''/>
+            </div>
+          </div>
+          <HomeDisplay count={count} title='Patients'/>
+        </div>
+     
+    
   )
 }
-
