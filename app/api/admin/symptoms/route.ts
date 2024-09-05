@@ -11,7 +11,7 @@ export async function POST(req: Request) {
             }
         })
         if(existingService){
-            return NextResponse.json({ data: null }, { status: 409 });
+            return NextResponse.json( null );
         }
         const newProfile = await prismaClient.symptom.create({
             data:data,

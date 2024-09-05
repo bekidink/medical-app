@@ -20,7 +20,7 @@ export default async function page() {
      
       <div className="grid grid-cols-12">
         <div className="col-span-4 px-3 py-2 border-r border-gray-100">
-        <PanelHeader title={"Speciality"} desc={(specialities.data.length).toString().padStart(2,"0")} icon={Anvil} />
+        <PanelHeader title={"Speciality"} desc={(specialities.length).toString().padStart(2,"0")} icon={Anvil} />
         <div className="py-3">
         {/* <ListPanel/> */}
         <SpecialityPanel specialities={specialities}/>
@@ -37,7 +37,7 @@ export default async function page() {
          <div className='flex py-3 px-2 h-1/2 items-center justify-center'>
       <div className=" gap-2 py-2 px-6 text-center border border-gray-100 shadow-md rounded-md flex flex-col items-center">
       <LayoutGrid/>
-      <p>You have {(specialities.data.length).toString().padStart(2,"0")}  available specialities.</p>
+      <p>You have {(specialities.length).toString().padStart(2,"0")}  available specialities.</p>
       <NewButton title='New Speciality' href='/dashboard/services/new'/>
       </div>
     </div>

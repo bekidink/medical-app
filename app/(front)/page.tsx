@@ -10,11 +10,11 @@ import { DoctorProfile } from "@/types/types";
 export default async function Home() {
   // const session=await getServerSession(authOptions)
   const alldoctors:DoctorProfile[]=await getData("home/doctors")||[]
-  if(!alldoctors){
+  if (!alldoctors || alldoctors.length === 0) {
     return <p>No Doctors found</p>;
   }
-  const telehealths=alldoctors.filter((doctor)=>doctor.operationMode==="Tele-health visit")
-  const inPersons=alldoctors.filter((doctor)=>doctor.operationMode==="In-person doctor visit")
+  const telehealths=alldoctors.filter((doctor)=>doctor.operationMode==="Tele-health visit")||[]
+  const inPersons=alldoctors.filter((doctor)=>doctor.operationMode==="In-person doctor visit")||[]
   
   return (
     <section className=" ">

@@ -53,7 +53,7 @@ export async function PUT(request:Request,{params:{id}}:{params:{id:string}}){
                 imageUrl
             }
         })
-        return NextResponse.json({ data: updatedservice }, { status: 201 })
+        return NextResponse.json( updatedservice )
     } catch (error) {
         return NextResponse.json({message:"Failed to delete Category",error},{status:500})
     }
@@ -67,7 +67,7 @@ export async function GET(request:Request,{params:{id}}:{params:{id:string}}){
             },
             
         })
-        return NextResponse.json({ data: service },{status:201});
+        return NextResponse.json( service );
     } catch (error) {
         return NextResponse.json({message:"Failed to fetch Categories",error},{status:500})
     }
