@@ -11,7 +11,7 @@ export async function GET(request:Request,{params:{id}}:{params:{id:string}}) {
             }
         });
         if(!appointment){
-            return NextResponse.json({ data: null})
+            return NextResponse.json( null)
         }
         return NextResponse.json( appointment );
     } catch (error) {

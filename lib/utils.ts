@@ -26,20 +26,26 @@ export function generateTrackingNumber(): string {
   return trackingNumber;
 }
 
-export async function getData(endpoint:string) {
+export async function getData(endpoint: string) {
   try {
-    const baseUrl = process.env.NEXTAUTH_URL;
-    const response = await fetch(`https://medical-app-peach.vercel.app/api/${endpoint}`, {
-      cache: "force-cache",
+    const baseUrl = process.env.NEXTAUTH_URL || 'https://medical-app-peach.vercel.app';
+    const response = await fetch(`${baseUrl}/api/${endpoint}`, {
+      cache: 'force-cache',
     });
-   
+
+    if (!response.ok) {
+      console.error(`Error: Received status ${response.status} for ${endpoint}`);
+      return null;
+    }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(`Error fetching data from ${endpoint}:`, error);
+    return null;
   }
 }
+
 export function generateSlug(title:string) {
   return title
     .toLowerCase()                   
