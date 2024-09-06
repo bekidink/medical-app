@@ -19,9 +19,7 @@ const Hero = () => {
                 
                 </h1>
                 <p className="mb-8 max-w-[480px] text-base text-body-color dark:text-dark-6">
-                  With TailGrids, business and students thrive together.
-                  Business can perfectly match their staffing to changing demand
-                  throughout the dayed.
+                EthioMedic is a full-service platform to help you build and run your practice and care for patients for virtual care,in-person care,or both.
                 </p>
                 <SearchBar/>
                 <ul className="flex flex-wrap items-center mt-6">
