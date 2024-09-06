@@ -68,9 +68,12 @@ export default function DoctorCard({isInPerson=false,doctor}:{isInPerson:boolean
             <Stethoscope className='w-4 h-4 mr-2 flex-shrink-0' />
             <span>{doctor.operationMode}</span>
         </p>
-        <p className='bg-green-200 dark:bg-slate-900 py-3 px-6 uppercase'>
-            Available Today
-        </p>
+        {times.length>0 && (
+             <p className='bg-green-200 dark:bg-slate-900 py-3 px-6 uppercase'>
+             Available Today
+         </p>
+        )}
+       
     </div>
     </div>
         </Link>
