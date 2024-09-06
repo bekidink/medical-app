@@ -90,9 +90,7 @@ export default function RegisterForm({role="USER",plan=""}:{role?:undefined| Use
             Create an account
           </Button>
           </form>
-          <Button variant="outline" className="w-full">
-            Sign up with GitHub
-          </Button>
+          
         </div>
         <div className="mt-4 text-center text-sm">
           Already have an account?{" "}

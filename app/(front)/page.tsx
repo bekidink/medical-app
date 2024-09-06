@@ -21,7 +21,7 @@ export default async function Home() {
       
       
       <Hero/>
-<Brands/>
+{/* <Brands/> */}
 <Service/>
 <DoctorsList title="Telehealth visit" isInPerson={false} doctors={telehealths}/>
 <DoctorsList doctors={inPersons} className="bg-white px-10 py-8 lg:py-24 dark:bg-slate-950" title="In-person Doctor visit" isInPerson={true}/>

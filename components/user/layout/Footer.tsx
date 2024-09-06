@@ -1,5 +1,5 @@
 "use client"
-import { Linkedin, Youtube, Twitter, Instagram } from "lucide-react"
+import { Linkedin, Youtube, Twitter, Instagram, Microscope } from "lucide-react"
 
 export default function Footer ()  {
 
@@ -12,12 +12,12 @@ export default function Footer ()  {
                     name: 'List your Service'
                 },
                 {
-                    href: 'javascript:void()',
-                    name: 'Blog'
+                    href: '/category?mode=Tele-health visit',
+                    name: 'Tele-Health'
                 },
                 {
-                    href: 'javascript:void()',
-                    name: 'Team'
+                    href: '/category?mode=In-person doctor visit',
+                    name: 'In-Person-Visit'
                 },
                 {
                     href: 'javascript:void()',
@@ -98,9 +98,9 @@ export default function Footer ()  {
             <div className="gap-6 justify-between md:flex">
                 <div className="flex-1">
                     <div className="max-w-xs">
-                        <img src="https://www.floatui.com/logo.svg" className="w-32" />
+                    <Microscope className="h-6 w-6" />
                         <p className="leading-relaxed mt-2 text-[15px]">
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                           Ethio Medic
                         </p>
                     </div>
                     
