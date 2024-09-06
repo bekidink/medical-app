@@ -22,7 +22,7 @@ const specialities:specialityResponse[]=allspecialities
               Browse your doctors By.
               </h2>
               <p className="leading-7 [&:not(:first-child)]:mt-6 text-base text-body-color dark:text-dark-6">
-              The "Browse by Doctor" feature enables users to easily search and explore doctor profiles based on specific criteria such as specialization, location, and availability. Each profile includes key details like the doctor’s name, specialization, years of experience, services offered, and patient reviews.
+              The "Browse by Doctor" feature enables users to easily search and explore doctor profiles based on specific criteria such as specialization, location, and availability.
               </p>
             </div>
           </div>
