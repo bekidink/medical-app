@@ -15,7 +15,7 @@ export default async function page() {
   return (
     <div>
       {role==="DOCTOR"?<DoctorDashboard session={session!}/>:role==="ADMIN"?<Dashboard/>:<UserDashboard session={session!}/>}
-      {/* <Dashboard/> */}
+      
     </div>
   )
 }

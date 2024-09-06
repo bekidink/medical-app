@@ -66,7 +66,7 @@ export default async function page({params:{id}}:{params:{id:string}}) {
   ))}
 </div>
       </div>
-      {/* <UpdateAppointment appointment={appointment}/> */}
+    
     </div>
     </div>
   )
