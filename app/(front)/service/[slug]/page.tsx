@@ -18,7 +18,7 @@ export default async function page({params:{slug},searchParams}:{
        <h1 className="capitalize scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-5xl">
       {title} ({doctors.length.toString().padStart(2,"0")})
     </h1>
-      <div className="max-w-5xl mx-auto grid grid-cols-12 gap-6 lg:gap-10">
+      <div className="max-w-5xl pt-5 mx-auto grid grid-cols-12 gap-6 lg:gap-10">
         <div className="col-span-12 lg:col-span-4 shadow border border-gray-200/50 rounded-sm p-6">
 <h2 className=' capitalize font-semibold'>other services</h2>
 <div className="py-3 flex flex-col text-sm space-y-2">

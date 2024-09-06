@@ -20,7 +20,7 @@ export default async function page({params:{id},searchParams}:{
        <h1 className="capitalize scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-5xl">
       {symptom.title} ({doctors.length.toString().padStart(2,"0")})
     </h1>
-      <div className="max-w-5xl mx-auto grid grid-cols-12 gap-6 lg:gap-10">
+      <div className="max-w-5xl pt-5 mx-auto grid grid-cols-12 gap-6 lg:gap-10">
         <div className="lg:col-span-4 col-span-12 shadow border border-gray-200/50 rounded-sm p-6">
 <h2 className=' capitalize font-semibold'>Other Symptoms</h2>
 <div className="py-3 flex flex-col text-sm space-y-2">
