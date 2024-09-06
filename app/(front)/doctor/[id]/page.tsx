@@ -39,7 +39,7 @@ export default async function page({params:{id}}:{params:{id:string}}) {
   <DoctorDetails appointment={appointment} doctor={doctor} user={user}/>
   </div>
         </div>
-      <FixedBookButton/>
+      {/* <FixedBookButton/> */}
     </div>):(
       <div className="min-h-screen flex items-center justify-center">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">

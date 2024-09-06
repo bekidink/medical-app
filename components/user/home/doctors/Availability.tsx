@@ -86,7 +86,7 @@ export default function Availability({userId,doctor,setStep,date,setDate,setSele
 <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold -tracking-tight first:mt-0 " >{formattedDate}</h2>
 <div className="py-3 grid grid-cols-3 gap-4">
             {times.map((item:string,i:any)=>(
-                <Button onClick={()=>setSelectedTime(item)} className='bg-blue-800 text-gray-50 py-2 px-3' key={i} variant={selectedTime===item?"default":"outline"}>
+                <Button onClick={()=>setSelectedTime(item)} className='bg-blue-800 text-gray-50 py-2 px-3' key={i} variant={selectedTime===item?"ghost":"outline"}>
                 {item}
                 </Button>
             ))}
