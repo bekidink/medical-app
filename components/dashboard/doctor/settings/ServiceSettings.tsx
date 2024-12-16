@@ -25,9 +25,9 @@ type SelectOption={
     value:string;
 }
 export default async function ServiceSettings({profileId}:{profileId:string}) {
-    const allservices=await (await getData("admin/services")).data
-    const allspecialities= await(await getData("admin/specialities")).data
-    const allsymptoms=await (await getData("admin/symptoms")).data
+    const allservices=await (await getData("admin/services"))
+    const allspecialities= await(await getData("admin/specialities"))
+    const allsymptoms=await (await getData("admin/symptoms"))
     // const allappointments:Appointment[]=await (await getData(`appointments`)).data
 
     // const appointments:Appointment[]=allappointments.filter((item)=>item.doctorId===profileId)
