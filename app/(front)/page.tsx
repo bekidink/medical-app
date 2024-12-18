@@ -15,7 +15,6 @@ export default async function Home() {
   }
   const telehealths=alldoctors.filter((doctor)=>doctor.operationMode==="Tele-health visit")||[]
   const inPersons=alldoctors.filter((doctor)=>doctor.operationMode==="In-person doctor visit")||[]
-  
   return (
     <section className=" ">
       

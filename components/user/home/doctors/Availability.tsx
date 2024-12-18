@@ -93,7 +93,7 @@ export default function Availability({userId,doctor,setStep,date,setDate,setSele
             <Link className='bg-gray-800 text-white py-2 px-3 text-center' href={''}>More</Link>
         </div>
         
-            <Button onClick={()=>setStep((cur:number)=>cur+1)} variant={"outline"}>
+            <Button onClick={handleAppointment} variant={"outline"}>
             Book Doctor (
                 <DollarSign className="w-4 h-4"/>
                 {doctor.hourlyWage}

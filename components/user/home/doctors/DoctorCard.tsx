@@ -50,7 +50,7 @@ export default function DoctorCard({isInPerson=false,doctor}:{isInPerson:boolean
   return (
     <div  className='border border-gray-200 dark:border-gray-600 bg-white dark:bg-slate-800 inline-flex flex-col px-3 py-6 rounded-md hover:border-gray-400 transition-all'>
         <Link href={`/doctor/${doctor.userId}`}>
-        <h2 className='uppercase font-bold text-2xl tracking-widest'>{doctor.firstName},{doctor.lastName}</h2>
+        <h2 className='uppercase font-bold text-xl tracking-widest'>{doctor.firstName},{doctor.lastName}</h2>
     <p>{doctor.city},{doctor.state},{doctor.country}</p>
     <div className="flex items-center gap-4 py-6">
         <div className="relative">

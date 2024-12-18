@@ -25,7 +25,7 @@ export default function PatientForm({user,setStep,step,selectedTime,date,id,char
     {
       defaultValues:{
         email:appointment?.email??user?.email,
-        fullName: appointment?.fullName?? user.name,
+        fullName: appointment?.fullName?? user?.name,
         phoneNumber:appointment?.phoneNumber??'',
         address:appointment?.address??'',
         occupation:appointment?.occupation??'',

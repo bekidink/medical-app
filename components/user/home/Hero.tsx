@@ -7,21 +7,23 @@ const Hero = () => {
     const TEXTS=['Acupucture','Massage','Chiropractor','Dental','Cosmetic','Dietitian','Speech Therapist','Occupational','Therapist','Acupuncturist']
   return (
     <div className=" dark:bg-slate-950">
-        <div className="relative  dark:bg-slate-950 pb-[110px] pt-[50px] dark:bg-dark lg:pt-[50px] max-w-6xl mx-auto">
+      <div className="relative  dark:bg-slate-950 pb-[110px] pt-[50px] dark:bg-dark lg:pt-[50px] max-w-6xl mx-auto">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 lg:w-5/12">
               <div className="hero-content">
                 <h1 className="mb-5 text-4xl font-bold !leading-[1.208] text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl flex flex-wrap items-center gap-3">
-                <span>Book your</span> <TransitionalText TEXTS={TEXTS} className="text-blue-500"/>
-                <br/>
-                 <span>sessions now</span>
-                
+                  <span>Book your</span>{" "}
+                  <TransitionalText TEXTS={TEXTS} className="text-blue-500" />
+                  <br />
+                  <span>sessions now</span>
                 </h1>
                 <p className="mb-8 max-w-[480px] text-base text-body-color dark:text-dark-6">
-                EthioMedic is a full-service platform to help you build and run your practice and care for patients for virtual care,in-person care,or both.
+                  EthioMedic is a full-service platform to help you build and
+                  run your practice and care for patients for virtual
+                  care,in-person care,or both.
                 </p>
-                <SearchBar/>
+                <SearchBar />
                 <ul className="flex flex-wrap items-center mt-6">
                   <li>
                     <a
@@ -37,25 +39,29 @@ const Hero = () => {
                       className="inline-flex items-center justify-center px-5 py-3 text-center text-base font-medium text-[#464646] hover:text-primary dark:text-blue-600"
                     >
                       <span className="mr-2">
-                       <Pill className="flex-shrink-0 h-4 w-4 text-blue-600"/>
+                        <Pill className="flex-shrink-0 h-4 w-4 text-blue-600" />
                       </span>
                       Need a Refill
                     </a>
                   </li>
                 </ul>
                 <div className="py-4 flex gap-4 dark:text-gray-100 text-slate-800">
-                    <div className="flex flex-col items-center justify-center">
-                        <span className="font-bold text-ggray-50">100</span>
-                        <span className="text-sm text-gray-300">Active Specialists</span>
-                    </div>
-                    <div className="flex flex-col items-center justify-center">
-                        <span className="font-bold text-ggray-50">400</span>
-                        <span className="text-sm text-gray-300">Active Patients</span>
-                    </div>
-                    <div className="flex flex-col items-center justify-center">
-                        <span className="font-bold text-ggray-50">600</span>
-                        <span className="text-sm text-gray-300">Specialists</span>
-                    </div>
+                  <div className="flex flex-col items-center justify-center">
+                    <span className="font-bold text-ggray-50">100</span>
+                    <span className="text-sm text-gray-300">
+                      Active Specialists
+                    </span>
+                  </div>
+                  <div className="flex flex-col items-center justify-center">
+                    <span className="font-bold text-ggray-50">400</span>
+                    <span className="text-sm text-gray-300">
+                      Active Patients
+                    </span>
+                  </div>
+                  <div className="flex flex-col items-center justify-center">
+                    <span className="font-bold text-ggray-50">600</span>
+                    <span className="text-sm text-gray-300">Specialists</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -64,7 +70,7 @@ const Hero = () => {
               <div className="lg:ml-auto lg:text-right">
                 <div className="relative z-10 inline-block pt-11 lg:pt-0">
                   <img
-                    src="https://cdn.tailgrids.com/1.0/assets/images/hero/hero-image-01.png"
+                    src="https://utfs.io/f/cGVJLJ8lGqUjKq2rR3UAY2nONomCQ3Jba1jsklI9DWB8vXUP"
                     alt="hero"
                     className="max-w-full lg:ml-auto"
                   />
@@ -110,9 +116,6 @@ const Hero = () => {
         </div>
       </div>
     </div>
-     
-      
-    
   );
 };
 
